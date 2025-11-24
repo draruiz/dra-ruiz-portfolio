@@ -1,0 +1,270 @@
+---
+import bookText from "../assets/her_book.txt?raw";
+
+// Parse book text
+const lines = bookText.split("\n").filter((line) => line.trim() !== "");
+const title = lines[0].replace("Su Libro: ", "").replace(/“|”/g, "");
+const edition = lines[1];
+const description = lines[2];
+---
+
+<section id='books' class='books-section'>
+  <div class='container'>
+    <div class='book-showcase'>
+      <div class='book-info'>
+        <span class='section-subtitle'>Publicaciones</span>
+        <h2 class='book-title'>{title}</h2>
+        <span class='edition-badge'>{edition}</span>
+        <p class='book-description'>{description}</p>
+        <a
+          href='https://www.buscalibre.com'
+          target='_blank'
+          rel='noopener noreferrer'
+          class='btn btn-primary'
+        >
+          Adquirir Ejemplar
+        </a>
+      </div>
+
+      <div class='book-visual'>
+        <div class='spotlight'></div>
+        <div class='book-3d-wrapper'>
+          <div class='book-3d'>
+            <div class='book-cover'>
+              <img
+                src='https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/d7bac4aa-ac33-4a71-1465-90fc6cda5d00/public'
+                alt='Portada del libro'
+                class='book-cover-img'
+              />
+            </div>
+            <div class='book-spine'></div>
+            <div class='book-pages'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .books-section {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(
+      to bottom,
+      #000000 0%,
+      var(--bg-secondary) 50%,
+      #000000 100%
+    );
+    position: relative;
+    overflow: hidden;
+  }
+
+  .books-section::before {
+    content: "";
+    position: absolute;
+    bottom: -10%;
+    left: -5%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(
+      circle,
+      rgba(201, 169, 97, 0.12) 0%,
+      rgba(201, 169, 97, 0.05) 40%,
+      transparent 70%
+    );
+    filter: blur(100px);
+    animation: pulse 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .book-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+
+  .book-info {
+    order: 1;
+    z-index: 2;
+  }
+
+  .book-visual {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    perspective: 1500px;
+    position: relative;
+    min-height: 600px;
+  }
+
+  .spotlight {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(
+      circle,
+      rgba(212, 175, 55, 0.2) 0%,
+      rgba(201, 169, 97, 0.1) 40%,
+      transparent 70%
+    );
+    filter: blur(80px);
+    animation: pulse 6s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .section-subtitle {
+    display: inline-block;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold-primary);
+    margin-bottom: 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    background: linear-gradient(
+      135deg,
+      rgba(201, 169, 97, 0.1),
+      rgba(201, 169, 97, 0.05)
+    );
+    border: 1px solid rgba(201, 169, 97, 0.2);
+    border-radius: 30px;
+  }
+
+  .book-title {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    background: linear-gradient(
+      135deg,
+      var(--text-primary),
+      var(--gold-primary)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .edition-badge {
+    display: inline-block;
+    border: 1px solid var(--gold-primary);
+    color: var(--gold-primary);
+    padding: 0.5rem 1.5rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+    background: rgba(201, 169, 97, 0.05);
+    font-weight: 600;
+  }
+
+  .book-description {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    max-width: 500px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* 3D Book Effect */
+  .book-3d-wrapper {
+    transform-style: preserve-3d;
+    animation: float 8s ease-in-out infinite;
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.8))
+      drop-shadow(0 0 40px rgba(201, 169, 97, 0.3));
+  }
+
+  .book-3d {
+    width: 350px;
+    height: 500px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateY(-25deg) rotateX(5deg);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .book-3d:hover {
+    transform: rotateY(-10deg) rotateX(2deg) scale(1.08);
+    filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.9))
+      drop-shadow(0 0 60px rgba(201, 169, 97, 0.5));
+  }
+
+  .book-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 2px 4px 4px 2px;
+    transform: translateZ(25px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .book-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .book-spine {
+    position: absolute;
+    width: 50px;
+    height: 100%;
+    background: linear-gradient(to right, #e0e0e0, #f5f5f5, #e8e8e8);
+    transform: rotateY(-90deg) translateZ(25px);
+    left: -25px;
+    border-left: 1px solid #ccc;
+    box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .book-pages {
+    position: absolute;
+    width: 310px;
+    height: 470px;
+    background: #fff;
+    transform: translateZ(-20px);
+    top: 5px;
+    left: 5px;
+    background: linear-gradient(to right, #ccc 0%, #eee 10%, #fff 100%);
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .book-showcase {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+
+    .book-info {
+      order: 2;
+      text-align: center;
+    }
+
+    .book-visual {
+      order: 1;
+    }
+
+    .book-description {
+      margin: 0 auto 3rem;
+    }
+  }
+</style>

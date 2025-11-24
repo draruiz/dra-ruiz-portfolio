@@ -1,0 +1,345 @@
+---
+
+---
+
+<nav class='nav-container'>
+  <div class='nav-content'>
+    <a href='#' class='logo'>
+      <span class='logo-text'>Dra. Ruiz</span>
+    </a>
+
+    <ul class='nav-links'>
+      <li><a href='#bio'>Bio</a></li>
+      <li><a href='#books'>Libros</a></li>
+      <li><a href='#podcasts'>Podcast</a></li>
+      <li><a href='#ceo'>CEO</a></li>
+      <li><a href='#contact' class='btn-nav'>Contacto</a></li>
+    </ul>
+
+    <button class='mobile-menu-btn' aria-label='Menu'>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<style>
+  .nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.5rem 0;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: transparent;
+  }
+
+  .nav-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 10, 15, 0.95) 0%,
+      rgba(10, 10, 15, 0.7) 100%
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+  }
+
+  .nav-container.scrolled {
+    padding: 1rem 0;
+    box-shadow:
+      0 0 0 1px rgba(201, 169, 97, 0.1),
+      0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-container.scrolled::before {
+    opacity: 1;
+  }
+
+  .nav-container.scrolled::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    width: 90%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(201, 169, 97, 0.3),
+      transparent
+    );
+  }
+
+  .nav-content {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  .logo {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    font-weight: 400;
+    letter-spacing: 2px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .logo::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--gold-primary),
+      var(--gold-secondary)
+    );
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .logo:hover::after {
+    width: 100%;
+  }
+
+  .logo-text {
+    background: linear-gradient(
+      135deg,
+      var(--text-primary),
+      var(--gold-primary)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 3.5rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--text-secondary);
+    position: relative;
+    font-weight: 500;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-links a::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -15px;
+    width: 6px;
+    height: 6px;
+    background: var(--gold-primary);
+    border-radius: 50%;
+    transform: translateY(-50%) scale(0);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-links a:hover {
+    color: var(--gold-primary);
+    transform: translateX(8px);
+  }
+
+  .nav-links a:hover::before {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--gold-primary),
+      var(--gold-secondary)
+    );
+    box-shadow: 0 0 10px rgba(201, 169, 97, 0.5);
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .btn-nav {
+    padding: 0.9rem 2.2rem !important;
+    border: 1px solid rgba(201, 169, 97, 0.3) !important;
+    border-radius: var(--radius-md) !important;
+    background: linear-gradient(
+      145deg,
+      rgba(25, 25, 35, 0.4) 0%,
+      rgba(15, 15, 22, 0.6) 100%
+    ) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--gold-primary) !important;
+    opacity: 1 !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow:
+      0 0 0 1px rgba(201, 169, 97, 0.1),
+      0 4px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-nav::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(201, 169, 97, 0.1),
+      transparent
+    );
+    transition: left 0.6s;
+  }
+
+  .btn-nav:hover {
+    border-color: rgba(201, 169, 97, 0.6) !important;
+    transform: translateY(-2px) !important;
+    box-shadow:
+      0 0 0 1px rgba(201, 169, 97, 0.4),
+      0 8px 25px rgba(0, 0, 0, 0.5),
+      0 0 30px rgba(201, 169, 97, 0.2);
+  }
+
+  .btn-nav:hover::before {
+    left: 100%;
+  }
+
+  .btn-nav::after {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+  }
+
+  .mobile-menu-btn:hover {
+    background: rgba(201, 169, 97, 0.1);
+  }
+
+  .mobile-menu-btn span {
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--gold-primary),
+      var(--gold-secondary)
+    );
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 968px) {
+    .nav-links {
+      gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+
+    .mobile-menu-btn {
+      display: flex;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  // Add scrolled class on scroll - Optimizado
+  const nav = document.querySelector(".nav-container");
+
+  if (nav) {
+    // Usar IntersectionObserver es más eficiente que scroll event
+    let ticking = false;
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const currentScroll = window.scrollY;
+
+            if (currentScroll > 50) {
+              nav.classList.add("scrolled");
+            } else {
+              nav.classList.remove("scrolled");
+            }
+
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+  }
+
+  // Smooth anchor scrolling
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
+      e.preventDefault();
+      const href = anchor.getAttribute("href");
+      if (href) {
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }
+    });
+  });
+</script>

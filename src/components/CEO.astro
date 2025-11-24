@@ -1,0 +1,236 @@
+---
+import almaymenteImage from "../assets/almaymente.png";
+---
+
+<section id='ceo' class='ceo-section'>
+  <div class='container'>
+    <div class='ceo-wrapper'>
+      <div class='ceo-content'>
+        <span class='section-subtitle'>Innovación & Bienestar</span>
+        <h2 class='ceo-title'>
+          CEO de <span class='text-gradient'>Almaymente.io</span>
+        </h2>
+        <p class='lead'>
+          Revolucionando el bienestar integral a través de la tecnología.
+        </p>
+
+        <div class='ceo-description'>
+          <p>
+            Como fundadora y CEO de <strong>Almaymente.io</strong>, lidero una
+            plataforma pionera que fusiona la psicología clínica con la
+            tecnología accesible. Nuestra misión es democratizar el acceso a
+            herramientas de salud mental, ofreciendo un ecosistema digital donde
+            el bienestar integral es la prioridad.
+          </p>
+          <p>
+            Almaymente no es solo una plataforma; es un movimiento hacia una
+            vida más consciente, equilibrada y plena.
+          </p>
+        </div>
+
+        <a
+          href='https://www.almaymente.io'
+          target='_blank'
+          rel='noopener noreferrer'
+          class='btn btn-primary'
+        >
+          Explorar Plataforma
+        </a>
+      </div>
+
+      <div class='ceo-visual'>
+        <div class='glow-orb'></div>
+        <div class='device-mockup'>
+          <img
+            src={almaymenteImage.src}
+            alt='Almaymente.io Platform'
+            class='screenshot-img'
+          />
+          <div class='screen-overlay'></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ceo-section {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(
+      135deg,
+      #000000 0%,
+      var(--bg-secondary) 50%,
+      #000000 100%
+    );
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Grid background with glow */
+  .ceo-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+        rgba(201, 169, 97, 0.05) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(201, 169, 97, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .ceo-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-subtitle {
+    display: block;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .ceo-title {
+    color: var(--color-text);
+    margin-bottom: 1rem;
+  }
+
+  .text-gradient {
+    background: linear-gradient(to right, #fff, #999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .lead {
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: var(--color-text);
+  }
+
+  .ceo-description {
+    margin-bottom: 3rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .ceo-description p {
+    margin-bottom: 1.5rem;
+  }
+
+  .ceo-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .glow-orb {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(
+      circle,
+      rgba(201, 169, 97, 0.2) 0%,
+      rgba(201, 169, 97, 0.08) 40%,
+      transparent 70%
+    );
+    filter: blur(100px);
+    animation: pulse 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.2);
+    }
+  }
+
+  .device-mockup {
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(201, 169, 97, 0.2),
+      0 30px 60px rgba(0, 0, 0, 0.7),
+      0 0 80px rgba(201, 169, 97, 0.15);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+  }
+
+  .device-mockup:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow:
+      0 0 0 1px rgba(201, 169, 97, 0.4),
+      0 40px 80px rgba(0, 0, 0, 0.8),
+      0 0 120px rgba(201, 169, 97, 0.25);
+  }
+
+  .screenshot-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+
+  .screen-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(201, 169, 97, 0.05) 0%,
+      transparent 50%,
+      rgba(201, 169, 97, 0.08) 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+  }
+
+  .device-mockup:hover .screen-overlay {
+    opacity: 0.5;
+  }
+
+  @media (max-width: 900px) {
+    .ceo-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    .ceo-visual {
+      margin-top: 4rem;
+    }
+
+    .tech-circle,
+    .tech-circle-inner {
+      width: 100%;
+      height: 100%;
+      max-width: 300px;
+      max-height: 300px;
+    }
+  }
+</style>
