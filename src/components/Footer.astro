@@ -1,4 +1,5 @@
 ---
+import mainLogo from "../assets/main_logo_brain.png";
 const currentYear = new Date().getFullYear();
 ---
 
@@ -6,6 +7,7 @@ const currentYear = new Date().getFullYear();
   <div class='container'>
     <div class='footer-content'>
       <div class='footer-logo'>
+        <img src={mainLogo.src} alt='Dra. Ruiz' class='footer-logo-img' />
         <span>Dra. Ruiz</span>
       </div>
 
@@ -69,6 +71,22 @@ const currentYear = new Date().getFullYear();
     -webkit-text-fill-color: transparent;
     font-weight: 400;
     letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .footer-logo-img {
+    width: 60px;
+    height: auto;
+    filter: drop-shadow(0 0 15px rgba(201, 169, 97, 0.4));
+    transition: all 0.3s ease;
+  }
+
+  .footer-logo:hover .footer-logo-img {
+    filter: drop-shadow(0 0 25px rgba(201, 169, 97, 0.7));
+    transform: scale(1.05);
   }
 
   .footer-links {

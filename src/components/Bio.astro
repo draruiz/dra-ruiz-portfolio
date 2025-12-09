@@ -7,22 +7,24 @@ const paragraphs = bioText.split("\n").filter((line) => line.trim() !== "");
 
 <section id='bio' class='bio-section'>
   <div class='container bio-container'>
-    <div class='bio-image-wrapper'>
-      <div class='bio-image'>
-        <img
-          src='https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/db5ffc10-23fb-4d79-ba04-efe71134ca00/public'
-          alt='Dra. Maria Alejandra Ruiz'
-        />
-        <div class='image-overlay'></div>
-      </div>
-      <div class='decorative-border'></div>
-    </div>
-
-    <div class='bio-content'>
+    <div class='bio-header'>
       <span class='section-subtitle'>Sobre Mí</span>
       <h2 class='bio-title'>
         Una vida dedicada a la <span class='text-gold'>mente humana</span>
       </h2>
+    </div>
+
+    <div class='bio-main'>
+      <div class='bio-image-wrapper'>
+        <div class='bio-image'>
+          <img
+            src='https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/0cb91b17-7399-4f37-c4d3-dc20be2cf300/public'
+            alt='Dra. Maria Alejandra Ruiz'
+          />
+          <div class='image-overlay'></div>
+        </div>
+        <div class='decorative-border'></div>
+      </div>
 
       <div class='bio-text'>
         {
@@ -31,10 +33,10 @@ const paragraphs = bioText.split("\n").filter((line) => line.trim() !== "");
           ))
         }
       </div>
+    </div>
 
-      <div class='signature'>
-        <p>Maria Alejandra Ruiz</p>
-      </div>
+    <div class='signature'>
+      <p>Maria Alejandra Ruiz</p>
     </div>
   </div>
 </section>
@@ -69,15 +71,27 @@ const paragraphs = bioText.split("\n").filter((line) => line.trim() !== "");
   }
 
   .bio-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-lg);
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bio-header {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .bio-main {
+    display: block;
   }
 
   .bio-image-wrapper {
+    float: left;
+    width: 400px;
     position: relative;
     padding: 2rem;
+    margin-right: var(--spacing-md);
+    margin-bottom: 1rem;
+    shape-outside: margin-box;
   }
 
   .bio-image {
@@ -139,10 +153,6 @@ const paragraphs = bioText.split("\n").filter((line) => line.trim() !== "");
   .bio-image-wrapper:hover .decorative-border {
     border-color: rgba(201, 169, 97, 0.4);
     transform: translate(-5px, -5px);
-  }
-
-  .bio-content {
-    padding-left: var(--spacing-md);
   }
 
   .section-subtitle {
@@ -307,17 +317,26 @@ const paragraphs = bioText.split("\n").filter((line) => line.trim() !== "");
   }
 
   @media (max-width: 900px) {
-    .bio-container {
-      grid-template-columns: 1fr;
-    }
-
-    .bio-content {
-      padding-left: 0;
-      margin-top: var(--spacing-md);
-    }
-
     .bio-image-wrapper {
+      float: none;
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto var(--spacing-md) auto;
       padding: 1rem;
+    }
+
+    .bio-main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bio-text {
+      text-align: left;
+    }
+
+    .signature {
+      text-align: center;
     }
 
     .signature p {

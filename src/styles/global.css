@@ -74,6 +74,7 @@ html {
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 body {

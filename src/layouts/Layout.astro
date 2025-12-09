@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Loader from "../components/Loader.astro";
 
 interface Props {
   title: string;
@@ -32,19 +33,104 @@ const {
     <title>{title}</title>
   </head>
   <body>
+    <Loader />
+
     <div class='bg-orb orb-top-right'></div>
     <div class='bg-grid'></div>
+    <div class='film-grain-overlay'></div>
 
-    <slot />
+    <div class='page-content'>
+      <slot />
+    </div>
 
     <script>
       import { gsap } from "gsap";
       import { ScrollTrigger } from "gsap/ScrollTrigger";
 
       gsap.registerPlugin(ScrollTrigger);
+
+      // Wait for loader to finish before initializing scroll animations
+      const initScrollAnimations = () => {
+        // Cinematic section reveals
+        gsap.utils.toArray("section").forEach((section: any, i) => {
+          const elements = section.querySelectorAll(
+            ".section-subtitle, h2, .bio-text, .bio-image-wrapper, .book-showcase, .podcast-card, .ceo-wrapper, .contact-wrapper",
+          );
+
+          gsap.fromTo(
+            section,
+            {
+              opacity: 0,
+            },
+            {
+              opacity: 1,
+              duration: 1,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: section,
+                start: "top 85%",
+                end: "top 50%",
+                toggleActions: "play none none reverse",
+              },
+            },
+          );
+
+          if (elements.length) {
+            gsap.fromTo(
+              elements,
+              {
+                y: 60,
+                opacity: 0,
+              },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.15,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: section,
+                  start: "top 80%",
+                  toggleActions: "play none none reverse",
+                },
+              },
+            );
+          }
+        });
+
+        // Parallax effect for background elements
+        gsap.utils.toArray(".bg-orb").forEach((orb: any) => {
+          gsap.to(orb, {
+            y: -100,
+            ease: "none",
+            scrollTrigger: {
+              trigger: "body",
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 1,
+            },
+          });
+        });
+      };
+
+      // Initialize after loader fades out
+      setTimeout(() => {
+        initScrollAnimations();
+      }, 3200);
     </script>
 
     <style is:global>
+      .page-content {
+        opacity: 0;
+        animation: contentReveal 0.8s ease-out 3s forwards;
+      }
+
+      @keyframes contentReveal {
+        to {
+          opacity: 1;
+        }
+      }
+
       .bg-orb {
         position: fixed;
         pointer-events: none;
@@ -81,6 +167,53 @@ const {
         opacity: 0.4;
         pointer-events: none;
         z-index: 0;
+      }
+
+      .film-grain-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        opacity: 0.015;
+        pointer-events: none;
+        z-index: 9998;
+        animation: grainShift 0.5s steps(10) infinite;
+      }
+
+      @keyframes grainShift {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        10% {
+          transform: translate(-1%, -1%);
+        }
+        20% {
+          transform: translate(1%, 1%);
+        }
+        30% {
+          transform: translate(-0.5%, 0.5%);
+        }
+        40% {
+          transform: translate(0.5%, -0.5%);
+        }
+        50% {
+          transform: translate(-1%, 1%);
+        }
+        60% {
+          transform: translate(1%, -1%);
+        }
+        70% {
+          transform: translate(-0.5%, -0.5%);
+        }
+        80% {
+          transform: translate(0.5%, 0.5%);
+        }
+        90% {
+          transform: translate(-1%, -0.5%);
+        }
       }
 
       @keyframes pulse {
