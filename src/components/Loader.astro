@@ -2,14 +2,14 @@
 import mainLogo from "../assets/main_logo_brain.png";
 ---
 
-<div id='luxury-loader' class='loader'>
+<div id='luxury-loader' class='loader' role='status' aria-label='Cargando sitio'>
   <div class='loader-bg'></div>
-  <div class='film-grain'></div>
+  <div class='film-grain' aria-hidden='true'></div>
 
   <div class='loader-content'>
     <div class='loader-logo'>
       <div class='logo-image-wrapper'>
-        <img src={mainLogo.src} alt='Dra. Ruiz' class='logo-image' />
+        <img src={mainLogo.src} alt='Logo Dra. Maria Alejandra Ruiz' class='logo-image' />
       </div>
       <div class='logo-line'></div>
     </div>
@@ -328,10 +328,11 @@ import mainLogo from "../assets/main_logo_brain.png";
 </style>
 
 <script>
+  import { gsap } from "gsap";
+
   document.addEventListener("DOMContentLoaded", () => {
     const loader = document.getElementById("luxury-loader");
 
-    // Minimum display time for the loader
     const minDisplayTime = 2800;
     const startTime = Date.now();
 
@@ -341,12 +342,30 @@ import mainLogo from "../assets/main_logo_brain.png";
 
       setTimeout(() => {
         if (loader) {
-          loader.classList.add("fade-out");
+          const exitTl = gsap.timeline({
+            onComplete: () => {
+              loader.classList.add("hidden");
+              document.dispatchEvent(new CustomEvent("loaderComplete"));
+            },
+          });
 
-          // Remove from DOM after animation
-          setTimeout(() => {
-            loader.classList.add("hidden");
-          }, 800);
+          exitTl
+            .to(".loader-content", {
+              autoAlpha: 0,
+              y: -30,
+              scale: 0.95,
+              duration: 0.5,
+              ease: "power2.in",
+            })
+            .to(
+              loader,
+              {
+                autoAlpha: 0,
+                duration: 0.6,
+                ease: "power2.inOut",
+              },
+              "-=0.2",
+            );
         }
       }, remainingTime);
     };

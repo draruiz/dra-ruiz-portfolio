@@ -1,270 +1,701 @@
 ---
 import bookText from "../assets/her_book.txt?raw";
 
-// Parse book text
 const lines = bookText.split("\n").filter((line) => line.trim() !== "");
-const title = lines[0].replace("Su Libro: ", "").replace(/“|”/g, "");
+const title = lines[0].replace("Su Libro: ", "").replace(/\u201c|\u201d/g, "");
 const edition = lines[1];
 const description = lines[2];
 ---
 
-<section id='books' class='books-section'>
+<section id='books' class='books-section' aria-labelledby='books-heading'>
+  <!-- Particulas decorativas de fondo -->
+  <div class='book-particles' aria-hidden='true'>
+    <span class='particle particle--1'></span>
+    <span class='particle particle--2'></span>
+    <span class='particle particle--3'></span>
+    <span class='particle particle--4'></span>
+    <span class='particle particle--5'></span>
+  </div>
+
   <div class='container'>
+    <!-- Linea decorativa superior animada -->
+    <div class='section-divider' aria-hidden='true'>
+      <span class='divider-line'></span>
+      <span class='divider-diamond'></span>
+      <span class='divider-line'></span>
+    </div>
+
     <div class='book-showcase'>
+      <!-- Columna visual del libro -->
+      <div class='book-visual'>
+        <div class='book-glow' aria-hidden='true'></div>
+        <div class='book-image-wrapper'>
+          <img
+            src='https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/d7bac4aa-ac33-4a71-1465-90fc6cda5d00/public'
+            alt={`Portada del libro "${title}" de la Dra. Maria Alejandra Ruiz`}
+            class='book-cover-img'
+            width='340'
+            height='490'
+            loading='lazy'
+            decoding='async'
+          />
+        </div>
+        <div class='book-shadow' aria-hidden='true'></div>
+      </div>
+
+      <!-- Columna de contenido -->
       <div class='book-info'>
-        <span class='section-subtitle'>Publicaciones</span>
-        <h2 class='book-title'>{title}</h2>
-        <span class='edition-badge'>{edition}</span>
+        <span class='section-label'>Publicaciones</span>
+        <h2 id='books-heading' class='book-title'>
+          <span class='title-line'>{title}</span>
+        </h2>
+        <div class='edition-pill'>
+          <span class='pill-dot' aria-hidden='true'></span>
+          {edition}
+        </div>
         <p class='book-description'>{description}</p>
+
+        <!-- Highlights del libro -->
+        <ul class='book-highlights' role='list'>
+          <li class='highlight-item'>
+            <span class='highlight-icon' aria-hidden='true'>&#10022;</span>
+            <span>Guia practica de autodescubrimiento</span>
+          </li>
+          <li class='highlight-item'>
+            <span class='highlight-icon' aria-hidden='true'>&#10022;</span>
+            <span>Lenguaje claro y accesible</span>
+          </li>
+          <li class='highlight-item'>
+            <span class='highlight-icon' aria-hidden='true'>&#10022;</span>
+            <span>Disponible internacionalmente</span>
+          </li>
+        </ul>
+
         <a
           href='https://www.buscalibre.com'
           target='_blank'
           rel='noopener noreferrer'
-          class='btn btn-primary'
+          class='btn btn-book'
+          aria-label='Adquirir ejemplar del libro en Buscalibre (se abre en nueva pestaña)'
         >
-          Adquirir Ejemplar
+          <span class='btn-text'>Adquirir Ejemplar</span>
+          <span class='btn-arrow' aria-hidden='true'>&rarr;</span>
         </a>
-      </div>
-
-      <div class='book-visual'>
-        <div class='spotlight'></div>
-        <div class='book-3d-wrapper'>
-          <div class='book-3d'>
-            <div class='book-cover'>
-              <img
-                src='https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/d7bac4aa-ac33-4a71-1465-90fc6cda5d00/public'
-                alt='Portada del libro'
-                class='book-cover-img'
-              />
-            </div>
-            <div class='book-spine'></div>
-            <div class='book-pages'></div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </section>
 
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const mm = gsap.matchMedia();
+
+  mm.add("(prefers-reduced-motion: no-preference)", () => {
+    // Divider reveal
+    const dividerTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".books-section",
+        start: "top 85%",
+      },
+    });
+
+    dividerTl
+      .fromTo(
+        ".divider-line",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.8, ease: "power3.inOut", stagger: 0.1 },
+      )
+      .fromTo(
+        ".divider-diamond",
+        { scale: 0, rotation: 45 },
+        { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(1.7)" },
+        "-=0.4",
+      );
+
+    // Imagen del libro: entrada elegante
+    const bookEntranceTl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+      scrollTrigger: {
+        trigger: ".book-visual",
+        start: "top 80%",
+      },
+    });
+
+    bookEntranceTl
+      .fromTo(
+        ".book-glow",
+        { autoAlpha: 0, scale: 0.5 },
+        { autoAlpha: 1, scale: 1, duration: 1.2, ease: "power2.out" },
+      )
+      .fromTo(
+        ".book-image-wrapper",
+        { autoAlpha: 0, y: 60, scale: 0.9, rotation: -3 },
+        { autoAlpha: 1, y: 0, scale: 1, rotation: 0, duration: 1.2 },
+        "-=0.8",
+      )
+      .fromTo(
+        ".book-shadow",
+        { autoAlpha: 0, scaleX: 0.3 },
+        { autoAlpha: 0.6, scaleX: 1, duration: 1, ease: "power2.out" },
+        "-=0.8",
+      );
+
+    // Levitacion suave continua
+    gsap.to(".book-image-wrapper", {
+      y: -10,
+      repeat: -1,
+      yoyo: true,
+      duration: 3,
+      ease: "sine.inOut",
+    });
+
+    // Glow pulsante
+    gsap.to(".book-glow", {
+      scale: 1.15,
+      autoAlpha: 0.8,
+      repeat: -1,
+      yoyo: true,
+      duration: 4,
+      ease: "sine.inOut",
+    });
+
+    // Particulas flotantes
+    gsap.utils.toArray(".particle").forEach((particle, i) => {
+      gsap.fromTo(
+        particle as Element,
+        { autoAlpha: 0, y: 40, scale: 0 },
+        {
+          autoAlpha: 0.6,
+          y: 0,
+          scale: 1,
+          duration: 1.5,
+          delay: 0.3 + i * 0.15,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".books-section",
+            start: "top 70%",
+          },
+        },
+      );
+
+      gsap.to(particle as Element, {
+        y: "random(-30, 30)",
+        x: "random(-20, 20)",
+        rotation: "random(-15, 15)",
+        repeat: -1,
+        yoyo: true,
+        duration: "random(3, 6)",
+        ease: "sine.inOut",
+        delay: i * 0.5,
+      });
+    });
+
+    // Contenido: reveal secuencial
+    const infoTl = gsap.timeline({
+      defaults: { ease: "power3.out", duration: 0.9 },
+      scrollTrigger: {
+        trigger: ".book-info",
+        start: "top 80%",
+      },
+    });
+
+    infoTl
+      .fromTo(
+        ".section-label",
+        { autoAlpha: 0, y: 20, scale: 0.9 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.6 },
+      )
+      .fromTo(
+        ".title-line",
+        { autoAlpha: 0, y: 40, skewY: 3 },
+        { autoAlpha: 1, y: 0, skewY: 0, duration: 1 },
+        "-=0.3",
+      )
+      .fromTo(
+        ".edition-pill",
+        { autoAlpha: 0, x: -30, scale: 0.95 },
+        { autoAlpha: 1, x: 0, scale: 1, duration: 0.7 },
+        "-=0.5",
+      )
+      .fromTo(
+        ".book-description",
+        { autoAlpha: 0, y: 25 },
+        { autoAlpha: 1, y: 0, duration: 0.8 },
+        "-=0.4",
+      )
+      .fromTo(
+        ".highlight-item",
+        { autoAlpha: 0, x: -20 },
+        {
+          autoAlpha: 1,
+          x: 0,
+          duration: 0.6,
+          stagger: { amount: 0.4, from: "start" },
+        },
+        "-=0.3",
+      )
+      .fromTo(
+        ".btn-book",
+        { autoAlpha: 0, y: 20, scale: 0.95 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.7 },
+        "-=0.2",
+      );
+
+    // Parallax suave de particulas
+    gsap.fromTo(
+      ".book-particles",
+      { y: 0 },
+      {
+        y: -60,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".books-section",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.5,
+        },
+      },
+    );
+  });
+</script>
+
 <style>
+  /* ---- Seccion principal ---- */
   .books-section {
     padding: var(--spacing-xl) 0;
     background: linear-gradient(
-      to bottom,
+      180deg,
       #000000 0%,
+      #080810 15%,
       var(--bg-secondary) 50%,
+      #080810 85%,
       #000000 100%
     );
     position: relative;
     overflow: hidden;
   }
 
-  .books-section::before {
-    content: "";
-    position: absolute;
-    bottom: -10%;
-    left: -5%;
-    width: 700px;
-    height: 700px;
-    background: radial-gradient(
-      circle,
-      rgba(201, 169, 97, 0.12) 0%,
-      rgba(201, 169, 97, 0.05) 40%,
-      transparent 70%
-    );
-    filter: blur(100px);
-    animation: pulse 8s ease-in-out infinite;
-    pointer-events: none;
-  }
-
-  .book-showcase {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-xl);
-    align-items: center;
-  }
-
-  .book-info {
-    order: 1;
-    z-index: 2;
-  }
-
-  .book-visual {
-    order: 2;
+  /* ---- Divider decorativo ---- */
+  .section-divider {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    perspective: 1500px;
-    position: relative;
-    min-height: 600px;
+    gap: 1.5rem;
+    margin-bottom: 5rem;
   }
 
-  .spotlight {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 700px;
-    height: 700px;
-    background: radial-gradient(
-      circle,
-      rgba(212, 175, 55, 0.2) 0%,
-      rgba(201, 169, 97, 0.1) 40%,
-      transparent 70%
+  .divider-line {
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--gold-primary),
+      transparent
     );
-    filter: blur(80px);
-    animation: pulse 6s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  .divider-diamond {
+    width: 10px;
+    height: 10px;
+    background: var(--gold-primary);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    box-shadow: 0 0 12px var(--gold-glow);
+  }
+
+  /* ---- Particulas ---- */
+  .book-particles {
+    position: absolute;
+    inset: 0;
     pointer-events: none;
     z-index: 0;
   }
 
-  .section-subtitle {
-    display: inline-block;
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--gold-primary);
+    border-radius: 50%;
+    opacity: 0;
+  }
+
+  .particle--1 {
+    top: 15%;
+    left: 10%;
+    width: 3px;
+    height: 3px;
+  }
+  .particle--2 {
+    top: 25%;
+    right: 15%;
+    width: 5px;
+    height: 5px;
+  }
+  .particle--3 {
+    bottom: 30%;
+    left: 20%;
+    width: 4px;
+    height: 4px;
+  }
+  .particle--4 {
+    top: 60%;
+    right: 8%;
+    width: 3px;
+    height: 3px;
+  }
+  .particle--5 {
+    bottom: 15%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+  }
+
+  /* ---- Layout del showcase ---- */
+  .book-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---- Columna visual del libro ---- */
+  .book-visual {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Glow detras del libro */
+  .book-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(
+      circle,
+      rgba(201, 169, 97, 0.15) 0%,
+      rgba(212, 175, 55, 0.06) 40%,
+      transparent 70%
+    );
+    filter: blur(50px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Wrapper de la imagen */
+  .book-image-wrapper {
+    position: relative;
+    z-index: 2;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow:
+      0 25px 60px rgba(0, 0, 0, 0.5),
+      0 0 40px rgba(201, 169, 97, 0.08);
+    transition: box-shadow 0.4s ease;
+  }
+
+  .book-image-wrapper:hover {
+    box-shadow:
+      0 30px 70px rgba(0, 0, 0, 0.6),
+      0 0 60px rgba(201, 169, 97, 0.15);
+  }
+
+  .book-cover-img {
+    width: 340px;
+    height: 490px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Sombra debajo */
+  .book-shadow {
+    width: 280px;
+    height: 30px;
+    margin-top: 1.5rem;
+    background: radial-gradient(
+      ellipse,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0.15) 40%,
+      transparent 70%
+    );
+    filter: blur(12px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+  }
+
+  /* ---- Contenido del libro ---- */
+  .book-info {
+    order: 2;
+    z-index: 2;
+    padding-left: 2rem;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
     font-family: var(--font-body);
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 3.5px;
     color: var(--gold-primary);
-    margin-bottom: 1.5rem;
-    font-size: 0.8rem;
+    margin-bottom: 1.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    padding: 0.5rem 1.5rem;
+    padding: 0.6rem 1.8rem;
     background: linear-gradient(
       135deg,
-      rgba(201, 169, 97, 0.1),
-      rgba(201, 169, 97, 0.05)
+      rgba(201, 169, 97, 0.08),
+      rgba(201, 169, 97, 0.03)
     );
-    border: 1px solid rgba(201, 169, 97, 0.2);
+    border: 1px solid rgba(201, 169, 97, 0.15);
     border-radius: 30px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .book-title {
     color: var(--text-primary);
     margin-bottom: 1.5rem;
-    background: linear-gradient(
-      135deg,
-      var(--text-primary),
-      var(--gold-primary)
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .edition-badge {
-    display: inline-block;
-    border: 1px solid var(--gold-primary);
-    color: var(--gold-primary);
-    padding: 0.5rem 1.5rem;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 2rem;
-    border-radius: 20px;
-    background: rgba(201, 169, 97, 0.05);
-    font-weight: 600;
-  }
-
-  .book-description {
-    font-size: 1.15rem;
-    color: var(--text-secondary);
-    margin-bottom: 3rem;
-    max-width: 500px;
-    line-height: 1.8;
-    font-weight: 300;
-  }
-
-  /* 3D Book Effect */
-  .book-3d-wrapper {
-    transform-style: preserve-3d;
-    animation: float 8s ease-in-out infinite;
-    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.8))
-      drop-shadow(0 0 40px rgba(201, 169, 97, 0.3));
-  }
-
-  .book-3d {
-    width: 350px;
-    height: 500px;
-    position: relative;
-    transform-style: preserve-3d;
-    transform: rotateY(-25deg) rotateX(5deg);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .book-3d:hover {
-    transform: rotateY(-10deg) rotateX(2deg) scale(1.08);
-    filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.9))
-      drop-shadow(0 0 60px rgba(201, 169, 97, 0.5));
-  }
-
-  .book-cover {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #ffffff;
-    border-radius: 2px 4px 4px 2px;
-    transform: translateZ(25px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
   }
 
-  .book-cover-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .title-line {
     display: block;
+    background: linear-gradient(
+      135deg,
+      var(--text-primary) 0%,
+      var(--gold-primary) 60%,
+      var(--gold-secondary) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .book-spine {
-    position: absolute;
-    width: 50px;
-    height: 100%;
-    background: linear-gradient(to right, #e0e0e0, #f5f5f5, #e8e8e8);
-    transform: rotateY(-90deg) translateZ(25px);
-    left: -25px;
-    border-left: 1px solid #ccc;
-    box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.1);
+  .edition-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid rgba(201, 169, 97, 0.25);
+    color: var(--gold-primary);
+    padding: 0.55rem 1.6rem;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    margin-bottom: 2rem;
+    border-radius: 24px;
+    background: rgba(201, 169, 97, 0.04);
+    font-weight: 600;
   }
 
-  .book-pages {
-    position: absolute;
-    width: 310px;
-    height: 470px;
-    background: #fff;
-    transform: translateZ(-20px);
-    top: 5px;
-    left: 5px;
-    background: linear-gradient(to right, #ccc 0%, #eee 10%, #fff 100%);
+  .pill-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold-primary);
+    box-shadow: 0 0 8px var(--gold-glow);
+    animation: pill-pulse 2s ease-in-out infinite;
   }
 
-  @keyframes float {
+  @keyframes pill-pulse {
     0%,
     100% {
-      transform: translateY(0);
+      opacity: 1;
+      transform: scale(1);
     }
     50% {
-      transform: translateY(-20px);
+      opacity: 0.5;
+      transform: scale(0.7);
     }
   }
 
-  @media (max-width: 900px) {
+  .book-description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    max-width: 500px;
+    line-height: 1.85;
+    font-weight: 300;
+  }
+
+  /* ---- Highlights ---- */
+  .book-highlights {
+    list-style: none;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 400;
+  }
+
+  .highlight-icon {
+    color: var(--gold-primary);
+    font-size: 0.65rem;
+    flex-shrink: 0;
+    opacity: 0.8;
+  }
+
+  /* ---- CTA Button ---- */
+  .btn-book {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 2.8rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(201, 169, 97, 0.25);
+    color: var(--gold-primary);
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(
+      145deg,
+      rgba(25, 25, 35, 0.5),
+      rgba(15, 15, 22, 0.7)
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+      0 0 0 1px rgba(201, 169, 97, 0.12),
+      0 8px 32px rgba(0, 0, 0, 0.4);
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast),
+      border-color var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-book::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(201, 169, 97, 0.1),
+      transparent
+    );
+    transition: left 0.6s ease;
+  }
+
+  .btn-book:hover::before {
+    left: 100%;
+  }
+
+  .btn-book:hover {
+    transform: translateY(-2px);
+    border-color: rgba(201, 169, 97, 0.5);
+    box-shadow:
+      0 0 0 1px rgba(201, 169, 97, 0.3),
+      0 12px 40px rgba(0, 0, 0, 0.5),
+      0 0 30px rgba(201, 169, 97, 0.15);
+  }
+
+  .btn-book:focus-visible {
+    outline: 2px solid var(--gold-primary);
+    outline-offset: 3px;
+  }
+
+  .btn-arrow {
+    display: inline-block;
+    transition: transform var(--transition-fast);
+    font-size: 1.1rem;
+  }
+
+  .btn-book:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 1024px) {
     .book-showcase {
       grid-template-columns: 1fr;
       gap: 4rem;
-    }
-
-    .book-info {
-      order: 2;
-      text-align: center;
     }
 
     .book-visual {
       order: 1;
     }
 
+    .book-info {
+      order: 2;
+      text-align: center;
+      padding-left: 0;
+    }
+
     .book-description {
-      margin: 0 auto 3rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .book-highlights {
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .books-section {
+      padding: var(--spacing-lg) 0;
+    }
+
+    .section-divider {
+      margin-bottom: 3rem;
+    }
+
+    .divider-line {
+      width: 50px;
+    }
+
+    .book-cover-img {
+      width: 260px;
+      height: 374px;
+    }
+
+    .book-glow {
+      width: 300px;
+      height: 300px;
+    }
+
+    .book-shadow {
+      width: 200px;
+    }
+
+    .book-description {
+      font-size: 1rem;
+    }
+
+    .book-highlights {
+      align-items: flex-start;
+      text-align: left;
     }
   }
 </style>

@@ -1,20 +1,52 @@
 ---
-import almaymenteImage from "../assets/almaymente.png";
+import almaymenteImage from "../assets/almaymente_hero.png";
 ---
 
-<section id='ceo' class='ceo-section'>
-  <div class='container'>
-    <div class='ceo-wrapper'>
-      <div class='ceo-content'>
-        <span class='section-subtitle'>Innovación & Bienestar</span>
-        <h2 class='ceo-title'>
-          CEO de <span class='text-gradient'>Almaymente.io</span>
-        </h2>
-        <p class='lead'>
-          Revolucionando el bienestar integral a través de la tecnología.
-        </p>
+<section id='ceo' class='ceo-section' aria-labelledby='ceo-heading'>
+  <!-- Decorative background elements -->
+  <div class='ceo-bg-shapes' aria-hidden='true'>
+    <div class='bg-ring bg-ring--1'></div>
+    <div class='bg-ring bg-ring--2'></div>
+    <div class='bg-line bg-line--h'></div>
+    <div class='bg-line bg-line--v'></div>
+    <div class='bg-dot bg-dot--1'></div>
+    <div class='bg-dot bg-dot--2'></div>
+    <div class='bg-dot bg-dot--3'></div>
+  </div>
 
-        <div class='ceo-description'>
+  <div class='container'>
+    <!-- Header with animated golden accent line -->
+    <div class='ceo-header'>
+      <div class='accent-line' aria-hidden='true'></div>
+      <span class='section-label'>Innovación & Bienestar</span>
+      <h2 id='ceo-heading' class='ceo-title'>
+        CEO de <span class='title-highlight'>Almaymente.io</span>
+      </h2>
+      <p class='ceo-tagline'>
+        Revolucionando el bienestar integral a través de la tecnología.
+      </p>
+    </div>
+
+    <!-- Showcase: image + overlapping glass panel -->
+    <div class='ceo-showcase'>
+      <div class='ceo-image-wrapper'>
+        <div class='image-glow' aria-hidden='true'></div>
+        <div class='image-frame'>
+          <img
+            src={almaymenteImage.src}
+            alt='Captura de pantalla de la plataforma Almaymente.io de bienestar integral'
+            class='screenshot-img'
+            width='600'
+            height='400'
+            loading='lazy'
+            decoding='async'
+          />
+          <div class='image-shine' aria-hidden='true'></div>
+        </div>
+      </div>
+
+      <div class='ceo-glass-panel'>
+        <div class='glass-inner'>
           <p>
             Como fundadora y CEO de <strong>Almaymente.io</strong>, lidero una
             plataforma pionera que fusiona la psicología clínica con la
@@ -27,210 +59,731 @@ import almaymenteImage from "../assets/almaymente.png";
             vida más consciente, equilibrada y plena.
           </p>
         </div>
-
-        <a
-          href='https://www.almaymente.io'
-          target='_blank'
-          rel='noopener noreferrer'
-          class='btn btn-primary'
-        >
-          Explorar Plataforma
-        </a>
       </div>
+    </div>
 
-      <div class='ceo-visual'>
-        <div class='glow-orb'></div>
-        <div class='device-mockup'>
-          <img
-            src={almaymenteImage.src}
-            alt='Almaymente.io Platform'
-            class='screenshot-img'
-          />
-          <div class='screen-overlay'></div>
+    <!-- Feature cards -->
+    <div class='ceo-features'>
+      <div class='feature-card'>
+        <div class='feature-icon' aria-hidden='true'>
+          <svg
+            width='28'
+            height='28'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='1.5'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+          >
+            <path d='M12 2L2 7l10 5 10-5-10-5z'></path>
+            <path d='M2 17l10 5 10-5'></path>
+            <path d='M2 12l10 5 10-5'></path>
+          </svg>
         </div>
+        <h3 class='feature-title'>Plataforma Digital</h3>
+        <p class='feature-desc'>
+          Ecosistema integral de bienestar mental accesible desde cualquier
+          lugar.
+        </p>
       </div>
+      <div class='feature-card'>
+        <div class='feature-icon' aria-hidden='true'>
+          <svg
+            width='28'
+            height='28'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='1.5'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+          >
+            <circle cx='12' cy='12' r='10'></circle>
+            <path d='M8 14s1.5 2 4 2 4-2 4-2'></path>
+            <line x1='9' y1='9' x2='9.01' y2='9'></line>
+            <line x1='15' y1='9' x2='15.01' y2='9'></line>
+          </svg>
+        </div>
+        <h3 class='feature-title'>Bienestar Integral</h3>
+        <p class='feature-desc'>
+          Herramientas de salud mental respaldadas por psicología clínica.
+        </p>
+      </div>
+      <div class='feature-card'>
+        <div class='feature-icon' aria-hidden='true'>
+          <svg
+            width='28'
+            height='28'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='1.5'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+          >
+            <path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'></path>
+            <circle cx='9' cy='7' r='4'></circle>
+            <path d='M23 21v-2a4 4 0 0 0-3-3.87'></path>
+            <path d='M16 3.13a4 4 0 0 1 0 7.75'></path>
+          </svg>
+        </div>
+        <h3 class='feature-title'>Comunidad Consciente</h3>
+        <p class='feature-desc'>
+          Un movimiento hacia una vida más equilibrada y plena.
+        </p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class='ceo-cta'>
+      <a
+        href='https://www.almaymente.io'
+        target='_blank'
+        rel='noopener noreferrer'
+        class='btn btn-primary ceo-btn'
+      >
+        Explorar Plataforma
+      </a>
     </div>
   </div>
 </section>
 
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const mm = gsap.matchMedia();
+
+  mm.add("(prefers-reduced-motion: no-preference)", () => {
+    // Accent line draws from center outward
+    gsap.fromTo(
+      ".ceo-section .accent-line",
+      { scaleX: 0 },
+      {
+        scaleX: 1,
+        duration: 1.2,
+        ease: "power3.inOut",
+        scrollTrigger: {
+          trigger: ".ceo-header",
+          start: "top 85%",
+        },
+      },
+    );
+
+    // Header text sequence
+    const headerTl = gsap.timeline({
+      defaults: { ease: "power3.out", duration: 0.9 },
+      scrollTrigger: {
+        trigger: ".ceo-header",
+        start: "top 80%",
+      },
+    });
+
+    headerTl
+      .fromTo(
+        ".ceo-section .section-label",
+        { autoAlpha: 0, y: 20, xPercent: -10 },
+        { autoAlpha: 1, y: 0, xPercent: 0 },
+      )
+      .fromTo(
+        ".ceo-title",
+        { autoAlpha: 0, y: 40 },
+        { autoAlpha: 1, y: 0, duration: 1 },
+        "-=0.5",
+      )
+      .fromTo(
+        ".title-highlight",
+        { backgroundSize: "0% 100%" },
+        { backgroundSize: "100% 100%", duration: 0.8, ease: "power2.inOut" },
+        "-=0.4",
+      )
+      .fromTo(
+        ".ceo-tagline",
+        { autoAlpha: 0, y: 25 },
+        { autoAlpha: 1, y: 0 },
+        "-=0.5",
+      );
+
+    // Showcase: Image with 3D perspective reveal
+    const showcaseTl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+      scrollTrigger: {
+        trigger: ".ceo-showcase",
+        start: "top 75%",
+      },
+    });
+
+    showcaseTl
+      .fromTo(
+        ".ceo-image-wrapper",
+        {
+          autoAlpha: 0,
+          rotationY: -8,
+          rotationX: 4,
+          scale: 0.88,
+          y: 60,
+        },
+        {
+          autoAlpha: 1,
+          rotationY: 0,
+          rotationX: 0,
+          scale: 1,
+          y: 0,
+          duration: 1.4,
+          ease: "power3.out",
+        },
+      )
+      .fromTo(
+        ".image-glow",
+        { autoAlpha: 0, scale: 0.6 },
+        { autoAlpha: 1, scale: 1, duration: 1.2 },
+        "-=1",
+      )
+      .fromTo(
+        ".image-shine",
+        { xPercent: -120 },
+        { xPercent: 120, duration: 1, ease: "power2.inOut" },
+        "-=0.6",
+      );
+
+    // Glass panel slides in from right
+    gsap.fromTo(
+      ".ceo-glass-panel",
+      { autoAlpha: 0, x: 80, rotationY: 5 },
+      {
+        autoAlpha: 1,
+        x: 0,
+        rotationY: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".ceo-glass-panel",
+          start: "top 85%",
+        },
+      },
+    );
+
+    // Feature cards stagger in
+    gsap.fromTo(
+      ".feature-card",
+      { autoAlpha: 0, y: 50, scale: 0.92 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        ease: "back.out(1.4)",
+        stagger: { amount: 0.4 },
+        scrollTrigger: {
+          trigger: ".ceo-features",
+          start: "top 85%",
+        },
+      },
+    );
+
+    // CTA entrance
+    gsap.fromTo(
+      ".ceo-btn",
+      { autoAlpha: 0, y: 30 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".ceo-cta",
+          start: "top 90%",
+        },
+      },
+    );
+
+    // Background decorative elements — parallax on scroll
+    gsap.utils.toArray(".bg-ring").forEach((ring, i) => {
+      gsap.to(ring, {
+        y: (i + 1) * -80,
+        rotation: (i + 1) * 45,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".ceo-section",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.5,
+        },
+      });
+    });
+
+    gsap.utils.toArray(".bg-dot").forEach((dot, i) => {
+      gsap.to(dot, {
+        y: (i + 1) * -60,
+        x: i % 2 === 0 ? 30 : -30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".ceo-section",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 2,
+        },
+      });
+    });
+
+    // Horizontal and vertical lines draw on scroll
+    gsap.fromTo(
+      ".bg-line--h",
+      { scaleX: 0 },
+      {
+        scaleX: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".ceo-section",
+          start: "top 60%",
+          end: "center center",
+          scrub: 1,
+        },
+      },
+    );
+
+    gsap.fromTo(
+      ".bg-line--v",
+      { scaleY: 0 },
+      {
+        scaleY: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".ceo-section",
+          start: "top 50%",
+          end: "center 20%",
+          scrub: 1,
+        },
+      },
+    );
+  });
+</script>
+
 <style>
+  /* ── Section ── */
   .ceo-section {
     padding: var(--spacing-xl) 0;
     background: linear-gradient(
-      135deg,
+      160deg,
       #000000 0%,
-      var(--bg-secondary) 50%,
+      #080810 30%,
+      var(--bg-secondary) 60%,
       #000000 100%
     );
     position: relative;
     overflow: hidden;
+    perspective: 1200px;
   }
 
-  /* Grid background with glow */
+  /* Subtle grid overlay */
   .ceo-section::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(
-        rgba(201, 169, 97, 0.05) 1px,
-        transparent 1px
-      ),
-      linear-gradient(90deg, rgba(201, 169, 97, 0.05) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-  }
-
-  .ceo-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-xl);
-    align-items: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  .section-subtitle {
-    display: block;
-    font-family: var(--font-body);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--color-primary);
-    margin-bottom: 1rem;
-    font-size: 0.85rem;
-  }
-
-  .ceo-title {
-    color: var(--color-text);
-    margin-bottom: 1rem;
-  }
-
-  .text-gradient {
-    background: linear-gradient(to right, #fff, #999);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .lead {
-    font-size: 1.3rem;
-    font-weight: 300;
-    margin-bottom: 2rem;
-    color: var(--color-text);
-  }
-
-  .ceo-description {
-    margin-bottom: 3rem;
-    color: var(--color-text-muted);
-    line-height: 1.8;
-  }
-
-  .ceo-description p {
-    margin-bottom: 1.5rem;
-  }
-
-  .ceo-visual {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .glow-orb {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(
-      circle,
-      rgba(201, 169, 97, 0.2) 0%,
-      rgba(201, 169, 97, 0.08) 40%,
-      transparent 70%
-    );
-    filter: blur(100px);
-    animation: pulse 8s ease-in-out infinite;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201, 169, 97, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201, 169, 97, 0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
     pointer-events: none;
     z-index: 0;
   }
 
-  @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.6;
-      transform: scale(1.2);
-    }
+  /* ── Background decorative shapes ── */
+  .ceo-bg-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
   }
 
-  .device-mockup {
+  .bg-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 169, 97, 0.08);
+    will-change: transform;
+  }
+
+  .bg-ring--1 {
+    width: 500px;
+    height: 500px;
+    top: -10%;
+    right: -8%;
+  }
+
+  .bg-ring--2 {
+    width: 350px;
+    height: 350px;
+    bottom: 5%;
+    left: -5%;
+    border-color: rgba(201, 169, 97, 0.06);
+  }
+
+  .bg-line {
+    position: absolute;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(201, 169, 97, 0.12),
+      transparent
+    );
+  }
+
+  .bg-line--h {
     width: 100%;
-    max-width: 600px;
+    height: 1px;
+    top: 35%;
+    left: 0;
+    transform-origin: left center;
+  }
+
+  .bg-line--v {
+    width: 1px;
+    height: 60%;
+    top: 20%;
+    left: 50%;
+    transform-origin: center top;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgba(201, 169, 97, 0.1),
+      transparent
+    );
+  }
+
+  .bg-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(201, 169, 97, 0.25);
+    will-change: transform;
+  }
+
+  .bg-dot--1 {
+    top: 15%;
+    left: 20%;
+  }
+
+  .bg-dot--2 {
+    top: 60%;
+    right: 15%;
+  }
+
+  .bg-dot--3 {
+    bottom: 20%;
+    left: 40%;
+  }
+
+  /* ── Header ── */
+  .ceo-header {
+    text-align: center;
+    margin-bottom: clamp(4rem, 8vw, 7rem);
     position: relative;
-    border-radius: 20px;
+    z-index: 1;
+  }
+
+  .accent-line {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--gold-primary),
+      var(--gold-secondary),
+      var(--gold-primary),
+      transparent
+    );
+    margin: 0 auto 2rem;
+    transform-origin: center;
+  }
+
+  .section-label {
+    display: block;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold-primary);
+    margin-bottom: 1.2rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .ceo-title {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .title-highlight {
+    background: linear-gradient(
+      90deg,
+      var(--gold-primary),
+      var(--gold-secondary),
+      #fff,
+      var(--gold-primary)
+    );
+    background-size: 100% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .ceo-tagline {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── Showcase (image + glass panel) ── */
+  .ceo-showcase {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 0;
+    align-items: center;
+    margin-bottom: clamp(4rem, 8vw, 7rem);
+    position: relative;
+    z-index: 1;
+  }
+
+  .ceo-image-wrapper {
+    position: relative;
+    perspective: 1000px;
+    will-change: transform;
+  }
+
+  .image-glow {
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(201, 169, 97, 0.15) 0%,
+      rgba(201, 169, 97, 0.05) 40%,
+      transparent 70%
+    );
+    filter: blur(60px);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .image-frame {
+    position: relative;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow:
-      0 0 0 1px rgba(201, 169, 97, 0.2),
-      0 30px 60px rgba(0, 0, 0, 0.7),
-      0 0 80px rgba(201, 169, 97, 0.15);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 2;
+      0 0 0 1px rgba(201, 169, 97, 0.15),
+      0 40px 80px rgba(0, 0, 0, 0.6),
+      0 0 100px rgba(201, 169, 97, 0.1);
+    z-index: 1;
+    transition: box-shadow var(--transition-premium);
   }
 
-  .device-mockup:hover {
-    transform: translateY(-10px) scale(1.02);
+  .image-frame:hover {
     box-shadow:
-      0 0 0 1px rgba(201, 169, 97, 0.4),
-      0 40px 80px rgba(0, 0, 0, 0.8),
-      0 0 120px rgba(201, 169, 97, 0.25);
+      0 0 0 1px rgba(201, 169, 97, 0.3),
+      0 50px 100px rgba(0, 0, 0, 0.7),
+      0 0 140px rgba(201, 169, 97, 0.2);
   }
 
   .screenshot-img {
     width: 100%;
     height: auto;
     display: block;
+  }
+
+  .image-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.08) 45%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.08) 55%,
+      transparent 60%
+    );
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .ceo-glass-panel {
+    position: relative;
+    margin-left: -4rem;
+    z-index: 2;
+    will-change: transform;
+  }
+
+  .glass-inner {
+    padding: clamp(2rem, 3vw, 3rem);
+    border-radius: var(--radius-xl);
+    background: linear-gradient(
+      145deg,
+      rgba(25, 25, 35, 0.75) 0%,
+      rgba(15, 15, 22, 0.85) 100%
+    );
+    border: 1px solid rgba(201, 169, 97, 0.12);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    box-shadow:
+      0 0 0 1px rgba(201, 169, 97, 0.08),
+      0 30px 60px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    color: var(--text-secondary);
+    line-height: 1.85;
+    font-size: 1.05rem;
+  }
+
+  .glass-inner p {
+    margin-bottom: 1.2rem;
+    color: var(--text-secondary);
+  }
+
+  .glass-inner p:last-child {
+    margin-bottom: 0;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .glass-inner strong {
+    color: var(--gold-primary);
+    font-weight: 600;
+  }
+
+  /* ── Feature cards ── */
+  .ceo-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 2vw, 2rem);
+    margin-bottom: clamp(3rem, 5vw, 5rem);
     position: relative;
     z-index: 1;
   }
 
-  .screen-overlay {
+  .feature-card {
+    padding: clamp(1.8rem, 2.5vw, 2.5rem);
+    border-radius: var(--radius-md);
+    background: linear-gradient(
+      145deg,
+      rgba(25, 25, 35, 0.5) 0%,
+      rgba(15, 15, 22, 0.7) 100%
+    );
+    border: 1px solid rgba(201, 169, 97, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: all var(--transition-premium);
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+  }
+
+  .feature-card::before {
+    content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    border-radius: inherit;
     background: linear-gradient(
       135deg,
-      rgba(201, 169, 97, 0.05) 0%,
-      transparent 50%,
-      rgba(201, 169, 97, 0.08) 100%
+      rgba(201, 169, 97, 0.06) 0%,
+      transparent 60%
     );
-    pointer-events: none;
-    z-index: 2;
-    transition: opacity 0.3s ease;
+    opacity: 0;
+    transition: opacity var(--transition-smooth);
   }
 
-  .device-mockup:hover .screen-overlay {
-    opacity: 0.5;
+  .feature-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(201, 169, 97, 0.2);
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 0 60px rgba(201, 169, 97, 0.08);
   }
 
+  .feature-card:hover::before {
+    opacity: 1;
+  }
+
+  .feature-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(201, 169, 97, 0.1);
+    border: 1px solid rgba(201, 169, 97, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+    color: var(--gold-primary);
+    transition: all var(--transition-smooth);
+  }
+
+  .feature-card:hover .feature-icon {
+    background: rgba(201, 169, 97, 0.18);
+    border-color: rgba(201, 169, 97, 0.3);
+    box-shadow: 0 0 20px rgba(201, 169, 97, 0.1);
+  }
+
+  .feature-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 0.6rem;
+  }
+
+  .feature-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── CTA ── */
+  .ceo-cta {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Responsive ── */
   @media (max-width: 900px) {
-    .ceo-wrapper {
+    .ceo-showcase {
       grid-template-columns: 1fr;
+      gap: 2rem;
     }
 
-    .ceo-visual {
-      margin-top: 4rem;
+    .ceo-glass-panel {
+      margin-left: 0;
     }
 
-    .tech-circle,
-    .tech-circle-inner {
-      width: 100%;
-      height: 100%;
-      max-width: 300px;
-      max-height: 300px;
+    .ceo-features {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    .bg-ring--1 {
+      width: 300px;
+      height: 300px;
+    }
+
+    .bg-ring--2 {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  @media (min-width: 901px) and (max-width: 1100px) {
+    .ceo-showcase {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .ceo-glass-panel {
+      margin-left: -2rem;
     }
   }
 </style>

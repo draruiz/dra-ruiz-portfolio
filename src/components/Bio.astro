@@ -1,45 +1,308 @@
 ---
-import bioText from "../assets/bio.txt?raw";
-
-// Split bio text into paragraphs
-const paragraphs = bioText.split("\n").filter((line) => line.trim() !== "");
+const paragraphs = [
+  "Psicóloga clínica nacida en Medellín, Colombia, con formación de pregrado en Rutgers University y doctorado en Florida. Su experiencia abarca desde intervenciones con menores en situación de vulnerabilidad hasta entornos de máxima seguridad en Estados Unidos.",
+  "Fundadora de Healthy Mind Specialists en Tampa, Florida, hoy lidera un equipo de terapeutas hispanohablantes que ha impactado a cientos de personas en más de 20 países. Autora, conferencista y voz activa en la divulgación de la salud mental.",
+  "Actualmente prepara su nuevo libro sobre heridas de la infancia y apego emocional, y trabaja en programas de mentoría internacional para formar terapeutas en Latinoamérica.",
+];
 ---
 
-<section id='bio' class='bio-section'>
+<section id='bio' class='bio-section' aria-labelledby='bio-heading'>
   <div class='container bio-container'>
-    <div class='bio-header'>
+    <!-- Línea dorada animada vertical -->
+    <div class='bio-gold-line' aria-hidden='true'>
+      <div class='bio-gold-line-inner'></div>
+    </div>
+
+    <header class='bio-header'>
       <span class='section-subtitle'>Sobre Mí</span>
-      <h2 class='bio-title'>
+      <h2 id='bio-heading' class='bio-title'>
         Una vida dedicada a la <span class='text-gold'>mente humana</span>
       </h2>
-    </div>
+    </header>
 
     <div class='bio-main'>
-      <div class='bio-image-wrapper'>
-        <div class='bio-image'>
-          <img
-            src='https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/0cb91b17-7399-4f37-c4d3-dc20be2cf300/public'
-            alt='Dra. Maria Alejandra Ruiz'
-          />
-          <div class='image-overlay'></div>
+      <figure class='bio-image-wrapper'>
+        <div class='bio-image-reveal'>
+          <div class='bio-image'>
+            <img
+              src='https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/419fe35b-68e5-43f1-821d-872ec5796b00/public'
+              alt='Retrato profesional de la Dra. Maria Alejandra Ruiz, psicóloga clínica especializada en bienestar emocional y apego'
+              width='400'
+              height='500'
+              loading='lazy'
+              decoding='async'
+            />
+          </div>
         </div>
-        <div class='decorative-border'></div>
-      </div>
+        <div class='decorative-frame' aria-hidden='true'>
+          <span class='frame-corner frame-tl'></span>
+          <span class='frame-corner frame-tr'></span>
+          <span class='frame-corner frame-bl'></span>
+          <span class='frame-corner frame-br'></span>
+        </div>
+        <figcaption class='bio-image-caption'>
+          Dra. Maria Alejandra Ruiz — Psicóloga Clínica
+        </figcaption>
+      </figure>
 
-      <div class='bio-text'>
+      <article class='bio-text' aria-label='Biografía de la Dra. Ruiz'>
         {
-          paragraphs.map((paragraph) => (
-            <p class='bio-paragraph'>{paragraph}</p>
+          paragraphs.map((paragraph, i) => (
+            <p class='bio-paragraph' data-paragraph={i}>
+              <span class='paragraph-number' aria-hidden='true'>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span class='paragraph-content'>{paragraph}</span>
+            </p>
           ))
         }
-      </div>
+      </article>
     </div>
 
-    <div class='signature'>
-      <p>Maria Alejandra Ruiz</p>
+    <div class='bio-cta'>
+      <a href='/about' class='btn bio-cta-btn'>
+        Conocer mi historia completa
+        <span class='btn-arrow' aria-hidden='true'>→</span>
+      </a>
     </div>
+
+    <footer class='signature'>
+      <div class='signature-line' aria-hidden='true'></div>
+      <p class='signature-name'>Maria Alejandra Ruiz</p>
+      <span class='signature-title'
+        >Psicóloga Clínica · Autora · Conferencista</span
+      >
+    </footer>
   </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { SplitText } from "gsap/SplitText";
+
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  const mm = gsap.matchMedia();
+
+  mm.add(
+    {
+      isDesktop: "(min-width: 901px)",
+      isMobile: "(max-width: 900px)",
+      motionOk: "(prefers-reduced-motion: no-preference)",
+      motionReduce: "(prefers-reduced-motion: reduce)",
+    },
+    (context) => {
+      const { motionOk, motionReduce, isDesktop } =
+        context.conditions as Record<string, boolean>;
+
+      // Reduced motion: mostrar todo sin animación
+      if (motionReduce) {
+        gsap.set(
+          ".bio-header, .bio-image-wrapper, .bio-paragraph, .signature, .bio-gold-line-inner, .bio-cta",
+          { autoAlpha: 1, y: 0, x: 0, scale: 1, clipPath: "none" },
+        );
+        gsap.set(".bio-gold-line-inner", { scaleY: 1 });
+        return;
+      }
+
+      // === LÍNEA DORADA VERTICAL (scrub continuo) ===
+      gsap.fromTo(
+        ".bio-gold-line-inner",
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".bio-section",
+            start: "top 60%",
+            end: "bottom 20%",
+            scrub: 0.8,
+          },
+        },
+      );
+
+      // === HEADING con SplitText ===
+      SplitText.create(".bio-title", {
+        type: "words, chars",
+        autoSplit: true,
+        mask: "words",
+        onSplit(self) {
+          return gsap.from(self.chars, {
+            y: "100%",
+            opacity: 0,
+            stagger: 0.02,
+            duration: 0.6,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: ".bio-header",
+              start: "top 80%",
+            },
+          });
+        },
+      });
+
+      // Subtitle badge
+      gsap.fromTo(
+        ".bio-section .section-subtitle",
+        { autoAlpha: 0, y: 20, scale: 0.9 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: ".bio-header",
+            start: "top 85%",
+          },
+        },
+      );
+
+      // === IMAGEN: reveal con clip-path cinematográfico ===
+      const imgTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".bio-image-wrapper",
+          start: "top 75%",
+        },
+      });
+
+      imgTl
+        .fromTo(
+          ".bio-image-reveal",
+          { clipPath: "inset(100% 0% 0% 0%)" },
+          {
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 1.2,
+            ease: "power4.inOut",
+          },
+        )
+        .fromTo(
+          ".bio-image img",
+          { scale: 1.3 },
+          { scale: 1.05, duration: 1.4, ease: "power3.out" },
+          0,
+        )
+        .fromTo(
+          ".frame-corner",
+          { autoAlpha: 0, scale: 0 },
+          {
+            autoAlpha: 1,
+            scale: 1,
+            duration: 0.5,
+            stagger: { amount: 0.3, from: "random" },
+            ease: "back.out(2)",
+          },
+          0.6,
+        )
+        .fromTo(
+          ".bio-image-caption",
+          { autoAlpha: 0, y: 10 },
+          { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" },
+          0.9,
+        );
+
+      // === PÁRRAFOS: reveal staggereado con barra dorada ===
+      const paragraphs = gsap.utils.toArray<HTMLElement>(".bio-paragraph");
+
+      paragraphs.forEach((p, i) => {
+        const pTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: p,
+            start: "top 82%",
+          },
+        });
+
+        pTl
+          .fromTo(
+            p.querySelector(".paragraph-number"),
+            { autoAlpha: 0, x: -20 },
+            { autoAlpha: 1, x: 0, duration: 0.4, ease: "power2.out" },
+          )
+          .fromTo(
+            p,
+            { "--bar-scale": "0" },
+            { "--bar-scale": "1", duration: 0.6, ease: "power2.out" },
+            0,
+          )
+          .fromTo(
+            p.querySelector(".paragraph-content"),
+            { autoAlpha: 0, y: 20 },
+            { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" },
+            0.15,
+          );
+      });
+
+      // === PARALLAX en imagen (solo desktop) ===
+      if (isDesktop) {
+        gsap.to(".bio-image-wrapper", {
+          y: -40,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".bio-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+
+        gsap.to(".decorative-frame", {
+          y: -60,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".bio-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5,
+          },
+        });
+      }
+
+      // === FIRMA: reveal dramático ===
+      const sigTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".signature",
+          start: "top 88%",
+        },
+      });
+
+      // === CTA: reveal ===
+      gsap.fromTo(
+        ".bio-cta",
+        { autoAlpha: 0, y: 20 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".bio-cta",
+            start: "top 90%",
+          },
+        },
+      );
+
+      sigTl
+        .fromTo(
+          ".signature-line",
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.8, ease: "power3.inOut" },
+        )
+        .fromTo(
+          ".signature-name",
+          { autoAlpha: 0, y: 30, skewY: 3 },
+          { autoAlpha: 1, y: 0, skewY: 0, duration: 0.7, ease: "power3.out" },
+          0.3,
+        )
+        .fromTo(
+          ".signature-title",
+          { autoAlpha: 0, y: 15 },
+          { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" },
+          0.6,
+        );
+    },
+  );
+</script>
 
 <style>
   .bio-section {
@@ -70,9 +333,37 @@ const paragraphs = bioText.split("\n").filter((line) => line.trim() !== "");
     pointer-events: none;
   }
 
+  /* Línea dorada vertical decorativa */
+  .bio-gold-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bio-gold-line-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--gold-primary),
+      var(--gold-secondary),
+      transparent
+    );
+    transform-origin: top center;
+    opacity: 0.15;
+  }
+
   .bio-container {
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 1;
   }
 
   .bio-header {
@@ -84,32 +375,35 @@ const paragraphs = bioText.split("\n").filter((line) => line.trim() !== "");
     display: block;
   }
 
+  /* Imagen con reveal */
   .bio-image-wrapper {
     float: left;
     width: 400px;
     position: relative;
     padding: 2rem;
-    margin-right: var(--spacing-md);
-    margin-bottom: 1rem;
+    margin: 0 var(--spacing-md) 1rem 0;
     shape-outside: margin-box;
   }
 
-  .bio-image {
+  .bio-image-reveal {
     position: relative;
     z-index: 2;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    will-change: clip-path;
+  }
+
+  .bio-image {
     overflow: hidden;
     border-radius: var(--radius-lg);
     box-shadow:
       0 0 0 1px rgba(201, 169, 97, 0.2),
       0 30px 60px rgba(0, 0, 0, 0.6),
       0 0 80px rgba(201, 169, 97, 0.15);
-    transition: all var(--transition-premium);
-    filter: grayscale(20%) contrast(110%);
+    transition: box-shadow var(--transition-premium);
   }
 
   .bio-image:hover {
-    filter: grayscale(0%) contrast(100%);
-    transform: translateY(-10px);
     box-shadow:
       0 0 0 1px rgba(201, 169, 97, 0.4),
       0 40px 80px rgba(0, 0, 0, 0.7),
@@ -120,39 +414,77 @@ const paragraphs = bioText.split("\n").filter((line) => line.trim() !== "");
     width: 100%;
     height: auto;
     display: block;
-    transform: scale(1.05);
+    filter: grayscale(20%) contrast(110%);
+    transition: filter var(--transition-premium);
   }
 
-  .image-overlay {
+  .bio-image:hover img {
+    filter: grayscale(0%) contrast(100%);
+  }
+
+  .bio-image-caption {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-top: 1rem;
+    visibility: hidden;
+  }
+
+  /* Marco decorativo con esquinas */
+  .decorative-frame {
     position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 2.5rem;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .frame-corner {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-color: var(--gold-primary);
+    border-style: solid;
+    border-width: 0;
+    opacity: 0.6;
+    visibility: hidden;
+  }
+
+  .frame-tl {
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      transparent 50%,
-      rgba(10, 10, 15, 0.6) 100%
-    );
-    pointer-events: none;
-    z-index: 1;
+    border-top-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 4px;
   }
 
-  .decorative-border {
-    position: absolute;
-    bottom: -10px;
-    left: -10px;
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-    border: 2px solid rgba(201, 169, 97, 0.2);
-    border-radius: var(--radius-lg);
-    z-index: 1;
-    transition: all 0.5s ease;
+  .frame-tr {
+    top: 0;
+    right: 0;
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-top-right-radius: 4px;
   }
 
-  .bio-image-wrapper:hover .decorative-border {
-    border-color: rgba(201, 169, 97, 0.4);
-    transform: translate(-5px, -5px);
+  .frame-bl {
+    bottom: 0;
+    left: 0;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-bottom-left-radius: 4px;
+  }
+
+  .frame-br {
+    bottom: 0;
+    right: 0;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+    border-bottom-right-radius: 4px;
   }
 
   .section-subtitle {
@@ -172,6 +504,7 @@ const paragraphs = bioText.split("\n").filter((line) => line.trim() !== "");
     );
     border: 1px solid rgba(201, 169, 97, 0.2);
     border-radius: 30px;
+    visibility: hidden;
   }
 
   .bio-title {
@@ -188,100 +521,91 @@ const paragraphs = bioText.split("\n").filter((line) => line.trim() !== "");
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-style: italic;
     font-weight: 600;
   }
 
+  /* Texto bio con números y barras */
   .bio-text {
     color: var(--text-secondary);
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     line-height: 1.9;
     font-weight: 300;
   }
 
   .bio-paragraph {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     position: relative;
-    padding-left: 1.5rem;
-    animation: fadeInUp 0.8s ease-out both;
-  }
-
-  .bio-paragraph:nth-child(1) {
-    animation-delay: 0.2s;
-  }
-
-  .bio-paragraph:nth-child(2) {
-    animation-delay: 0.3s;
-  }
-
-  .bio-paragraph:nth-child(3) {
-    animation-delay: 0.4s;
-  }
-
-  .bio-paragraph:nth-child(4) {
-    animation-delay: 0.5s;
+    padding-left: 3.5rem;
+    --bar-scale: 0;
   }
 
   .bio-paragraph::before {
     content: "";
     position: absolute;
-    left: 0;
-    top: 0.5rem;
-    width: 3px;
-    height: 0;
+    left: 2rem;
+    top: 0;
+    width: 2px;
+    height: 100%;
     background: linear-gradient(
       to bottom,
       var(--gold-primary),
       var(--gold-secondary)
     );
     border-radius: 2px;
-    transition: height 0.6s ease;
+    transform: scaleY(var(--bar-scale));
+    transform-origin: top center;
   }
 
+  .paragraph-number {
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gold-primary);
+    opacity: 0.4;
+    letter-spacing: 1px;
+    visibility: hidden;
+  }
+
+  .paragraph-content {
+    visibility: hidden;
+  }
+
+  /* Firma */
   .signature {
     margin-top: 4rem;
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: var(--radius-md);
     background: linear-gradient(
       135deg,
-      rgba(201, 169, 97, 0.08),
-      rgba(201, 169, 97, 0.03)
+      rgba(201, 169, 97, 0.06),
+      rgba(201, 169, 97, 0.02)
     );
-    border: 1px solid rgba(201, 169, 97, 0.15);
+    border: 1px solid rgba(201, 169, 97, 0.1);
     position: relative;
     overflow: hidden;
-    animation: fadeIn 1s ease-out 0.8s both;
+    text-align: center;
   }
 
-  .signature::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
+  .signature-line {
+    width: 80px;
+    height: 2px;
     background: linear-gradient(
       90deg,
-      transparent,
-      rgba(201, 169, 97, 0.1),
-      transparent
+      var(--gold-primary),
+      var(--gold-secondary)
     );
-    animation: slideShine 3s ease-in-out infinite;
+    margin: 0 auto 1.5rem;
+    transform-origin: center;
   }
 
-  @keyframes slideShine {
-    0% {
-      left: -100%;
-    }
-    50%,
-    100% {
-      left: 100%;
-    }
-  }
-
-  .signature p {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 2.8rem;
+  .signature-name {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 2.8rem);
     background: linear-gradient(
       135deg,
       var(--gold-primary),
@@ -289,31 +613,44 @@ const paragraphs = bioText.split("\n").filter((line) => line.trim() !== "");
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-style: italic;
     font-weight: 600;
-    margin: 0;
-    position: relative;
-    z-index: 1;
+    margin: 0 0 0.5rem;
+    visibility: hidden;
   }
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .signature-title {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    visibility: hidden;
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  /* CTA */
+  .bio-cta {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    visibility: hidden;
+  }
+
+  .bio-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .btn-arrow {
+    display: inline-block;
+    transition: transform var(--transition-fast);
+  }
+
+  .bio-cta-btn:hover .btn-arrow {
+    transform: translateX(5px);
   }
 
   @media (max-width: 900px) {
@@ -335,12 +672,24 @@ const paragraphs = bioText.split("\n").filter((line) => line.trim() !== "");
       text-align: left;
     }
 
+    .bio-gold-line {
+      display: none;
+    }
+
     .signature {
       text-align: center;
     }
 
-    .signature p {
+    .signature-name {
       font-size: 2rem;
+    }
+
+    .bio-paragraph {
+      padding-left: 2.5rem;
+    }
+
+    .bio-paragraph::before {
+      left: 1.5rem;
     }
   }
 </style>
