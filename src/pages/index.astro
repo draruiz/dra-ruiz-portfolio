@@ -2,23 +2,41 @@
 import Bio from "../components/Bio.astro";
 import Books from "../components/Books.astro";
 import CEO from "../components/CEO.astro";
+import Conferences from "../components/Conferences.astro";
 import Contact from "../components/Contact.astro";
-import Footer from "../components/Footer.astro";
 import Hero from "../components/Hero.astro";
 import Navigation from "../components/Navigation.astro";
 import Podcasts from "../components/Podcasts.astro";
+import Retreats from "../components/Retreats.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title='Dra. Maria Alejandra Ruiz | Psicóloga Clínica'>
   <Navigation />
-  <main id='main-content'>
-    <Hero />
-    <Bio />
-    <Books />
-    <Podcasts />
-    <CEO />
-    <Contact />
+  <main id='main-content' class='sections-wrapper'>
+    <div class='section-panel is-active' id='hero' data-section='hero'>
+      <Hero />
+    </div>
+    <div class='section-panel' id='bio' data-section='bio'>
+      <Bio />
+    </div>
+    <div class='section-panel' id='books' data-section='books'>
+      <Books />
+    </div>
+    <div class='section-panel' id='podcasts' data-section='podcasts'>
+      <Podcasts />
+    </div>
+    <div class='section-panel' id='ceo' data-section='ceo'>
+      <CEO />
+    </div>
+    <div class='section-panel' id='conferences' data-section='conferences'>
+      <Conferences />
+    </div>
+    <div class='section-panel' id='retreats' data-section='retreats'>
+      <Retreats />
+    </div>
+    <div class='section-panel' id='contact' data-section='contact'>
+      <Contact />
+    </div>
   </main>
-  <Footer />
 </Layout>

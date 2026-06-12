@@ -2,11 +2,7 @@
 
 ---
 
-<section
-  class='hero cinematic-hero'
-  id='hero'
-  aria-label='Presentación principal'
->
+<section class='hero cinematic-hero' aria-label='Presentación principal'>
   <!-- Video de fondo -->
   <div class='hero-video-wrapper' aria-hidden='true'>
     <video
@@ -25,11 +21,11 @@
     </video>
   </div>
 
-  <!-- Capas de overlay cinematográficas -->
+  <!-- Overlays cinematográficos -->
   <div class='hero-overlay-gradient' aria-hidden='true'></div>
   <div class='hero-overlay-vignette' aria-hidden='true'></div>
 
-  <!-- Partículas doradas decorativas -->
+  <!-- Partículas doradas -->
   <div class='hero-particles' aria-hidden='true'>
     <span class='particle'></span>
     <span class='particle'></span>
@@ -39,26 +35,23 @@
     <span class='particle'></span>
   </div>
 
-  <!-- Línea dorada decorativa lateral -->
+  <!-- Línea dorada lateral -->
   <div class='hero-gold-line' aria-hidden='true'></div>
 
   <div class='hero-content container'>
     <div class='hero-text-wrapper'>
-      <!-- Subtítulo con líneas decorativas -->
       <div class='subtitle-wrapper'>
         <div class='subtitle-line-left' aria-hidden='true'></div>
         <span class='subtitle'>Psicóloga Clínica de Excelencia</span>
         <div class='subtitle-line-right' aria-hidden='true'></div>
       </div>
 
-      <!-- Nombre principal -->
       <h1 class='hero-title'>
         <span class='title-line' data-text='Maria'>Maria</span>
         <span class='title-line' data-text='Alejandra'>Alejandra</span>
         <span class='title-line title-accent' data-text='Ruiz'>Ruiz</span>
       </h1>
 
-      <!-- Descripción -->
       <div class='hero-desc-block'>
         <p class='hero-desc'>
           Transformando vidas a través de la
@@ -66,7 +59,6 @@
         </p>
       </div>
 
-      <!-- Estadísticas -->
       <div class='hero-stats' role='list' aria-label='Logros profesionales'>
         <div class='stat-item' role='listitem'>
           <span class='stat-number' data-value='20'>0</span>
@@ -87,87 +79,53 @@
         </div>
       </div>
     </div>
-
-    <!-- Indicador de scroll -->
-    <div class='hero-scroll-cta' aria-hidden='true'>
-      <span class='scroll-text'>Descubre más</span>
-      <div class='scroll-mouse'>
-        <div class='scroll-wheel'></div>
-      </div>
-      <svg
-        class='scroll-arrow'
-        width='16'
-        height='24'
-        viewBox='0 0 16 24'
-        fill='none'
-      >
-        <path
-          d='M7.293 23.707a1 1 0 001.414 0l6.364-6.364a1 1 0 00-1.414-1.414L8 21.586l-5.657-5.657a1 1 0 00-1.414 1.414l6.364 6.364zM7 0v23h2V0H7z'
-          fill='currentColor'></path>
-      </svg>
-    </div>
   </div>
 </section>
 
 <script>
   import { gsap } from "gsap";
 
-  document.addEventListener("loaderComplete", () => {
+  let hasAnimated = false;
+
+  const animateHero = () => {
+    if (hasAnimated) return;
+    hasAnimated = true;
+
     const mm = gsap.matchMedia();
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const hero = document.querySelector(".cinematic-hero") as HTMLElement;
-      if (!hero) return;
-
-      // Timeline principal — secuencia cinematográfica
       const master = gsap.timeline({
         defaults: { ease: "power4.out", duration: 1 },
       });
 
-      // 1. Reveal del hero con zoom-out del video
       master
-        .fromTo(
-          hero,
-          { autoAlpha: 0 },
-          { autoAlpha: 1, duration: 0.6, ease: "power2.inOut" },
-        )
         .fromTo(
           ".hero-video",
           { scale: 1.3 },
           { scale: 1.05, duration: 2.5, ease: "power2.out" },
           0,
         )
-
-        // 2. Línea dorada lateral se despliega
         .fromTo(
           ".hero-gold-line",
           { scaleY: 0 },
           { scaleY: 1, duration: 1.2, ease: "power3.inOut" },
           0.3,
         )
-
-        // 3. Líneas decorativas del subtítulo se expanden
         .fromTo(
           ".subtitle-line-left",
           { scaleX: 0, transformOrigin: "right center" },
           { scaleX: 1, duration: 0.8, ease: "power3.inOut" },
-          0.6,
+          0.5,
         )
         .fromTo(
           ".subtitle-line-right",
           { scaleX: 0, transformOrigin: "left center" },
           { scaleX: 1, duration: 0.8, ease: "power3.inOut" },
-          0.6,
+          0.5,
         )
-
-        // 4. Subtítulo — fade con clip-path reveal
         .fromTo(
           ".subtitle",
-          {
-            autoAlpha: 0,
-            y: 10,
-            clipPath: "inset(0 100% 0 0)",
-          },
+          { autoAlpha: 0, y: 10, clipPath: "inset(0 100% 0 0)" },
           {
             autoAlpha: 1,
             y: 0,
@@ -175,10 +133,8 @@
             duration: 0.9,
             ease: "power3.out",
           },
-          0.75,
+          0.65,
         )
-
-        // 5. Nombre — líneas con stagger y mask reveal
         .fromTo(
           ".title-line",
           {
@@ -195,18 +151,14 @@
             stagger: 0.12,
             ease: "power4.out",
           },
-          1.0,
+          0.9,
         )
-
-        // 6. Descripción con reveal suave
         .fromTo(
           ".hero-desc-block",
           { autoAlpha: 0, y: 30 },
           { autoAlpha: 1, y: 0, duration: 0.9 },
           "-=0.5",
         )
-
-        // 7. Stats — números con counter + fade
         .fromTo(
           ".stat-item",
           { autoAlpha: 0, y: 25, scale: 0.95 },
@@ -226,16 +178,6 @@
           { scaleY: 1, stagger: 0.08, duration: 0.5, ease: "power3.inOut" },
           "<0.1",
         )
-
-        // 8. Scroll indicator
-        .fromTo(
-          ".hero-scroll-cta",
-          { autoAlpha: 0, y: 20 },
-          { autoAlpha: 1, y: 0, duration: 0.8, ease: "power2.out" },
-          "-=0.3",
-        )
-
-        // 9. Partículas doradas
         .fromTo(
           ".particle",
           { autoAlpha: 0, scale: 0 },
@@ -249,14 +191,14 @@
           "-=0.8",
         );
 
-      // Animar counter de números
+      // Counter animation
       gsap.utils.toArray<HTMLElement>(".stat-number").forEach((el) => {
         const target = parseInt(el.dataset.value || "0", 10);
         const obj = { val: 0 };
         gsap.to(obj, {
           val: target,
           duration: 2,
-          delay: 2.2,
+          delay: 2,
           ease: "power2.out",
           onUpdate: () => {
             el.textContent = Math.round(obj.val).toString();
@@ -264,7 +206,7 @@
         });
       });
 
-      // Animaciones continuas — partículas flotando
+      // Floating particles
       gsap.utils.toArray<HTMLElement>(".particle").forEach((p, i) => {
         gsap.to(p, {
           y: gsap.utils.random(-40, 40),
@@ -276,56 +218,11 @@
           delay: i * 0.4,
         });
       });
-
-      // Scroll wheel bounce
-      gsap.to(".scroll-wheel", {
-        y: 8,
-        repeat: -1,
-        yoyo: true,
-        duration: 0.9,
-        ease: "power1.inOut",
-      });
-
-      // Scroll arrow pulse
-      gsap.to(".scroll-arrow", {
-        y: 4,
-        autoAlpha: 0.4,
-        repeat: -1,
-        yoyo: true,
-        duration: 1.2,
-        ease: "sine.inOut",
-      });
-
-      // Parallax sutil del video al hacer scroll
-      gsap.to(".hero-video", {
-        y: 100,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".cinematic-hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
-
-      // Fade out del contenido al scrollear
-      gsap.to(".hero-content", {
-        autoAlpha: 0,
-        y: -60,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".cinematic-hero",
-          start: "60% top",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
     });
 
-    // Reduced motion: mostrar todo inmediatamente sin animaciones
     mm.add("(prefers-reduced-motion: reduce)", () => {
       gsap.set(
-        ".cinematic-hero, .subtitle-line-left, .subtitle-line-right, .subtitle, .title-line, .hero-desc-block, .stat-item, .stat-divider, .hero-scroll-cta, .particle, .hero-gold-line",
+        ".cinematic-hero, .subtitle-line-left, .subtitle-line-right, .subtitle, .title-line, .hero-desc-block, .stat-item, .stat-divider, .particle, .hero-gold-line",
         {
           autoAlpha: 1,
           y: 0,
@@ -337,28 +234,27 @@
           clipPath: "none",
         },
       );
-
-      // Mostrar valores finales de los counters
       gsap.utils.toArray<HTMLElement>(".stat-number").forEach((el) => {
         el.textContent = el.dataset.value || "0";
       });
     });
-  });
+  };
+
+  document.addEventListener("sectionEnter", ((e: CustomEvent) => {
+    if (e.detail.section === "hero") animateHero();
+  }) as EventListener);
 </script>
 
 <style>
-  /* === BASE === */
   .cinematic-hero {
-    visibility: hidden;
-    min-height: 100vh;
     width: 100%;
+    height: 100%;
     position: relative;
     display: flex;
     align-items: center;
     overflow: hidden;
   }
 
-  /* === VIDEO DE FONDO === */
   .hero-video-wrapper {
     position: absolute;
     inset: 0;
@@ -370,10 +266,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    will-change: transform;
   }
 
-  /* === OVERLAYS === */
   .hero-overlay-gradient {
     position: absolute;
     inset: 0;
@@ -399,7 +293,6 @@
     );
   }
 
-  /* === LÍNEA DORADA LATERAL === */
   .hero-gold-line {
     position: absolute;
     left: 5%;
@@ -418,7 +311,6 @@
     opacity: 0.6;
   }
 
-  /* === PARTÍCULAS DORADAS === */
   .hero-particles {
     position: absolute;
     inset: 0;
@@ -474,22 +366,20 @@
     height: 5px;
   }
 
-  /* === CONTENIDO === */
   .hero-content {
     position: relative;
     z-index: 5;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 100vh;
-    padding: 8rem 0 4rem;
+    height: 100%;
+    padding: 4rem 0;
   }
 
   .hero-text-wrapper {
     max-width: 900px;
   }
 
-  /* === SUBTÍTULO === */
   .subtitle-wrapper {
     display: flex;
     align-items: center;
@@ -518,7 +408,6 @@
     white-space: nowrap;
   }
 
-  /* === TÍTULO === */
   .hero-title {
     font-size: clamp(3.8rem, 11vw, 9.5rem);
     line-height: 0.92;
@@ -530,7 +419,6 @@
     display: block;
     font-weight: 300;
     color: var(--text-primary);
-    will-change: transform;
   }
 
   .title-accent {
@@ -548,7 +436,6 @@
     animation: shimmer 6s ease-in-out infinite;
   }
 
-  /* === DESCRIPCIÓN === */
   .hero-desc-block {
     margin-bottom: 2.5rem;
   }
@@ -566,10 +453,8 @@
     color: var(--gold-primary);
     font-weight: 500;
     font-style: italic;
-    position: relative;
   }
 
-  /* === ESTADÍSTICAS === */
   .hero-stats {
     display: flex;
     align-items: center;
@@ -580,7 +465,6 @@
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-    position: relative;
   }
 
   .stat-number {
@@ -610,7 +494,6 @@
     -webkit-text-fill-color: transparent;
     font-family: var(--font-heading);
     line-height: 1;
-    margin-top: -0.2rem;
   }
 
   .stat-label {
@@ -633,50 +516,6 @@
     transform-origin: center top;
   }
 
-  /* === SCROLL CTA === */
-  .hero-scroll-cta {
-    position: absolute;
-    bottom: 3rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .scroll-text {
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 0.65rem;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  .scroll-mouse {
-    width: 26px;
-    height: 42px;
-    border: 2px solid rgba(201, 169, 97, 0.35);
-    border-radius: 14px;
-    display: flex;
-    justify-content: center;
-    padding-top: 8px;
-  }
-
-  .scroll-wheel {
-    width: 4px;
-    height: 8px;
-    background: var(--gold-primary);
-    border-radius: 4px;
-  }
-
-  .scroll-arrow {
-    color: rgba(201, 169, 97, 0.4);
-    width: 12px;
-    margin-top: -4px;
-  }
-
-  /* === ANIMACIONES CSS === */
   @keyframes shimmer {
     0%,
     100% {
@@ -687,52 +526,41 @@
     }
   }
 
-  /* === RESPONSIVE === */
   @media (max-width: 768px) {
     .hero-content {
-      padding: 6rem 0 3rem;
+      padding: 4rem 0 3rem;
     }
-
     .hero-title {
       font-size: clamp(2.8rem, 13vw, 5.5rem);
     }
-
     .hero-stats {
       flex-wrap: wrap;
       gap: 1.5rem;
     }
-
     .stat-number {
       font-size: 2rem;
     }
-
     .stat-suffix {
       font-size: 1.4rem;
     }
-
     .subtitle-wrapper {
       gap: 0.8rem;
     }
-
     .subtitle {
       letter-spacing: 3px;
       font-size: 0.7rem;
     }
-
     .subtitle-line-left,
     .subtitle-line-right {
       width: 30px;
     }
-
     .hero-gold-line {
       left: 3%;
       opacity: 0.4;
     }
-
     .hero-desc {
       font-size: 1.05rem;
     }
-
     .particle:nth-child(3),
     .particle:nth-child(5) {
       display: none;
@@ -744,19 +572,15 @@
     .subtitle-line-right {
       display: none;
     }
-
     .subtitle-wrapper {
       justify-content: center;
     }
-
     .hero-gold-line {
       display: none;
     }
-
     .stat-divider {
       display: none;
     }
-
     .hero-stats {
       justify-content: center;
       text-align: center;

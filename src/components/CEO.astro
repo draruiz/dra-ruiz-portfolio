@@ -151,221 +151,150 @@ import almaymenteImage from "../assets/almaymente_hero.png";
 
 <script>
   import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  gsap.registerPlugin(ScrollTrigger);
+  let hasAnimated = false;
 
-  const mm = gsap.matchMedia();
+  const animateCEO = () => {
+    if (hasAnimated) return;
+    hasAnimated = true;
 
-  mm.add("(prefers-reduced-motion: no-preference)", () => {
-    // Accent line draws from center outward
-    gsap.fromTo(
-      ".ceo-section .accent-line",
-      { scaleX: 0 },
-      {
-        scaleX: 1,
-        duration: 1.2,
-        ease: "power3.inOut",
-        scrollTrigger: {
-          trigger: ".ceo-header",
-          start: "top 85%",
-        },
-      },
-    );
+    const mm = gsap.matchMedia();
 
-    // Header text sequence
-    const headerTl = gsap.timeline({
-      defaults: { ease: "power3.out", duration: 0.9 },
-      scrollTrigger: {
-        trigger: ".ceo-header",
-        start: "top 80%",
-      },
-    });
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const master = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    headerTl
-      .fromTo(
-        ".ceo-section .section-label",
-        { autoAlpha: 0, y: 20, xPercent: -10 },
-        { autoAlpha: 1, y: 0, xPercent: 0 },
-      )
-      .fromTo(
-        ".ceo-title",
-        { autoAlpha: 0, y: 40 },
-        { autoAlpha: 1, y: 0, duration: 1 },
-        "-=0.5",
-      )
-      .fromTo(
-        ".title-highlight",
-        { backgroundSize: "0% 100%" },
-        { backgroundSize: "100% 100%", duration: 0.8, ease: "power2.inOut" },
-        "-=0.4",
-      )
-      .fromTo(
-        ".ceo-tagline",
-        { autoAlpha: 0, y: 25 },
-        { autoAlpha: 1, y: 0 },
-        "-=0.5",
+      // Accent line
+      master.fromTo(
+        ".ceo-section .accent-line",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 1.2, ease: "power3.inOut" },
       );
 
-    // Showcase: Image with 3D perspective reveal
-    const showcaseTl = gsap.timeline({
-      defaults: { ease: "power3.out" },
-      scrollTrigger: {
-        trigger: ".ceo-showcase",
-        start: "top 75%",
-      },
-    });
+      // Header
+      master
+        .fromTo(
+          ".ceo-section .section-label",
+          { autoAlpha: 0, y: 20 },
+          { autoAlpha: 1, y: 0, duration: 0.9 },
+          0.2,
+        )
+        .fromTo(
+          ".ceo-title",
+          { autoAlpha: 0, y: 40 },
+          { autoAlpha: 1, y: 0, duration: 1 },
+          0.3,
+        )
+        .fromTo(
+          ".title-highlight",
+          { backgroundSize: "0% 100%" },
+          { backgroundSize: "100% 100%", duration: 0.8, ease: "power2.inOut" },
+          0.5,
+        )
+        .fromTo(
+          ".ceo-tagline",
+          { autoAlpha: 0, y: 25 },
+          { autoAlpha: 1, y: 0, duration: 0.9 },
+          0.5,
+        );
 
-    showcaseTl
-      .fromTo(
-        ".ceo-image-wrapper",
-        {
-          autoAlpha: 0,
-          rotationY: -8,
-          rotationX: 4,
-          scale: 0.88,
-          y: 60,
-        },
+      // Showcase with 3D perspective
+      master
+        .fromTo(
+          ".ceo-image-wrapper",
+          { autoAlpha: 0, rotationY: -8, rotationX: 4, scale: 0.88, y: 60 },
+          {
+            autoAlpha: 1,
+            rotationY: 0,
+            rotationX: 0,
+            scale: 1,
+            y: 0,
+            duration: 1.4,
+          },
+          0.5,
+        )
+        .fromTo(
+          ".image-glow",
+          { autoAlpha: 0, scale: 0.6 },
+          { autoAlpha: 1, scale: 1, duration: 1.2 },
+          0.6,
+        )
+        .fromTo(
+          ".image-shine",
+          { xPercent: -120 },
+          { xPercent: 120, duration: 1, ease: "power2.inOut" },
+          0.9,
+        );
+
+      // Glass panel
+      master.fromTo(
+        ".ceo-glass-panel",
+        { autoAlpha: 0, x: 80, rotationY: 5 },
+        { autoAlpha: 1, x: 0, rotationY: 0, duration: 1.2 },
+        0.7,
+      );
+
+      // Feature cards
+      master.fromTo(
+        ".feature-card",
+        { autoAlpha: 0, y: 50, scale: 0.92 },
         {
           autoAlpha: 1,
-          rotationY: 0,
-          rotationX: 0,
-          scale: 1,
           y: 0,
-          duration: 1.4,
-          ease: "power3.out",
+          scale: 1,
+          duration: 0.8,
+          ease: "back.out(1.4)",
+          stagger: { amount: 0.4 },
         },
-      )
-      .fromTo(
-        ".image-glow",
-        { autoAlpha: 0, scale: 0.6 },
-        { autoAlpha: 1, scale: 1, duration: 1.2 },
-        "-=1",
-      )
-      .fromTo(
-        ".image-shine",
-        { xPercent: -120 },
-        { xPercent: 120, duration: 1, ease: "power2.inOut" },
-        "-=0.6",
+        1.0,
       );
 
-    // Glass panel slides in from right
-    gsap.fromTo(
-      ".ceo-glass-panel",
-      { autoAlpha: 0, x: 80, rotationY: 5 },
-      {
-        autoAlpha: 1,
-        x: 0,
-        rotationY: 0,
-        duration: 1.2,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".ceo-glass-panel",
-          start: "top 85%",
-        },
-      },
-    );
+      // CTA
+      master.fromTo(
+        ".ceo-btn",
+        { autoAlpha: 0, y: 30 },
+        { autoAlpha: 1, y: 0, duration: 0.8 },
+        1.3,
+      );
 
-    // Feature cards stagger in
-    gsap.fromTo(
-      ".feature-card",
-      { autoAlpha: 0, y: 50, scale: 0.92 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        ease: "back.out(1.4)",
-        stagger: { amount: 0.4 },
-        scrollTrigger: {
-          trigger: ".ceo-features",
-          start: "top 85%",
-        },
-      },
-    );
-
-    // CTA entrance
-    gsap.fromTo(
-      ".ceo-btn",
-      { autoAlpha: 0, y: 30 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".ceo-cta",
-          start: "top 90%",
-        },
-      },
-    );
-
-    // Background decorative elements — parallax on scroll
-    gsap.utils.toArray(".bg-ring").forEach((ring, i) => {
-      gsap.to(ring, {
-        y: (i + 1) * -80,
-        rotation: (i + 1) * 45,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".ceo-section",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5,
-        },
-      });
+      // Background lines
+      gsap.fromTo(
+        ".bg-line--h",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 2, ease: "power2.inOut" },
+      );
+      gsap.fromTo(
+        ".bg-line--v",
+        { scaleY: 0 },
+        { scaleY: 1, duration: 2, delay: 0.3, ease: "power2.inOut" },
+      );
     });
 
-    gsap.utils.toArray(".bg-dot").forEach((dot, i) => {
-      gsap.to(dot, {
-        y: (i + 1) * -60,
-        x: i % 2 === 0 ? 30 : -30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".ceo-section",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 2,
+    mm.add("(prefers-reduced-motion: reduce)", () => {
+      gsap.set(
+        ".ceo-section .accent-line, .section-label, .ceo-title, .title-highlight, .ceo-tagline, .ceo-image-wrapper, .image-glow, .ceo-glass-panel, .feature-card, .ceo-btn, .bg-line--h, .bg-line--v",
+        {
+          autoAlpha: 1,
+          y: 0,
+          x: 0,
+          scale: 1,
+          scaleX: 1,
+          scaleY: 1,
+          rotationY: 0,
+          rotationX: 0,
         },
-      });
+      );
     });
+  };
 
-    // Horizontal and vertical lines draw on scroll
-    gsap.fromTo(
-      ".bg-line--h",
-      { scaleX: 0 },
-      {
-        scaleX: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".ceo-section",
-          start: "top 60%",
-          end: "center center",
-          scrub: 1,
-        },
-      },
-    );
-
-    gsap.fromTo(
-      ".bg-line--v",
-      { scaleY: 0 },
-      {
-        scaleY: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".ceo-section",
-          start: "top 50%",
-          end: "center 20%",
-          scrub: 1,
-        },
-      },
-    );
-  });
+  document.addEventListener("sectionEnter", ((e: CustomEvent) => {
+    if (e.detail.section === "ceo") animateCEO();
+  }) as EventListener);
 </script>
 
 <style>
   /* ── Section ── */
   .ceo-section {
-    padding: var(--spacing-xl) 0;
+    padding: 4rem 0 calc(var(--nav-height) + 2rem);
     background: linear-gradient(
       160deg,
       #000000 0%,

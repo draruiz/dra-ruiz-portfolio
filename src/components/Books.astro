@@ -88,185 +88,163 @@ const description = lines[2];
 
 <script>
   import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  gsap.registerPlugin(ScrollTrigger);
+  let hasAnimated = false;
 
-  const mm = gsap.matchMedia();
+  const animateBooks = () => {
+    if (hasAnimated) return;
+    hasAnimated = true;
 
-  mm.add("(prefers-reduced-motion: no-preference)", () => {
-    // Divider reveal
-    const dividerTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".books-section",
-        start: "top 85%",
-      },
-    });
+    const mm = gsap.matchMedia();
 
-    dividerTl
-      .fromTo(
-        ".divider-line",
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.8, ease: "power3.inOut", stagger: 0.1 },
-      )
-      .fromTo(
-        ".divider-diamond",
-        { scale: 0, rotation: 45 },
-        { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(1.7)" },
-        "-=0.4",
-      );
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const master = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    // Imagen del libro: entrada elegante
-    const bookEntranceTl = gsap.timeline({
-      defaults: { ease: "power3.out" },
-      scrollTrigger: {
-        trigger: ".book-visual",
-        start: "top 80%",
-      },
-    });
+      // Divider
+      master
+        .fromTo(
+          ".books-section .divider-line",
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.8, ease: "power3.inOut", stagger: 0.1 },
+        )
+        .fromTo(
+          ".divider-diamond",
+          { scale: 0, rotation: 45 },
+          { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(1.7)" },
+          "-=0.4",
+        );
 
-    bookEntranceTl
-      .fromTo(
-        ".book-glow",
-        { autoAlpha: 0, scale: 0.5 },
-        { autoAlpha: 1, scale: 1, duration: 1.2, ease: "power2.out" },
-      )
-      .fromTo(
-        ".book-image-wrapper",
-        { autoAlpha: 0, y: 60, scale: 0.9, rotation: -3 },
-        { autoAlpha: 1, y: 0, scale: 1, rotation: 0, duration: 1.2 },
-        "-=0.8",
-      )
-      .fromTo(
-        ".book-shadow",
-        { autoAlpha: 0, scaleX: 0.3 },
-        { autoAlpha: 0.6, scaleX: 1, duration: 1, ease: "power2.out" },
-        "-=0.8",
-      );
+      // Book visual
+      master
+        .fromTo(
+          ".book-glow",
+          { autoAlpha: 0, scale: 0.5 },
+          { autoAlpha: 1, scale: 1, duration: 1.2, ease: "power2.out" },
+          0.3,
+        )
+        .fromTo(
+          ".book-image-wrapper",
+          { autoAlpha: 0, y: 60, scale: 0.9, rotation: -3 },
+          { autoAlpha: 1, y: 0, scale: 1, rotation: 0, duration: 1.2 },
+          0.4,
+        )
+        .fromTo(
+          ".book-shadow",
+          { autoAlpha: 0, scaleX: 0.3 },
+          { autoAlpha: 0.6, scaleX: 1, duration: 1 },
+          0.5,
+        );
 
-    // Levitacion suave continua
-    gsap.to(".book-image-wrapper", {
-      y: -10,
-      repeat: -1,
-      yoyo: true,
-      duration: 3,
-      ease: "sine.inOut",
-    });
-
-    // Glow pulsante
-    gsap.to(".book-glow", {
-      scale: 1.15,
-      autoAlpha: 0.8,
-      repeat: -1,
-      yoyo: true,
-      duration: 4,
-      ease: "sine.inOut",
-    });
-
-    // Particulas flotantes
-    gsap.utils.toArray(".particle").forEach((particle, i) => {
-      gsap.fromTo(
-        particle as Element,
-        { autoAlpha: 0, y: 40, scale: 0 },
-        {
-          autoAlpha: 0.6,
-          y: 0,
-          scale: 1,
-          duration: 1.5,
-          delay: 0.3 + i * 0.15,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".books-section",
-            start: "top 70%",
-          },
-        },
-      );
-
-      gsap.to(particle as Element, {
-        y: "random(-30, 30)",
-        x: "random(-20, 20)",
-        rotation: "random(-15, 15)",
+      // Levitation
+      gsap.to(".book-image-wrapper", {
+        y: -10,
         repeat: -1,
         yoyo: true,
-        duration: "random(3, 6)",
+        duration: 3,
         ease: "sine.inOut",
-        delay: i * 0.5,
       });
+      gsap.to(".book-glow", {
+        scale: 1.15,
+        autoAlpha: 0.8,
+        repeat: -1,
+        yoyo: true,
+        duration: 4,
+        ease: "sine.inOut",
+      });
+
+      // Particles
+      gsap.utils
+        .toArray<Element>(".books-section .particle")
+        .forEach((p, i) => {
+          gsap.fromTo(
+            p,
+            { autoAlpha: 0, y: 40, scale: 0 },
+            {
+              autoAlpha: 0.6,
+              y: 0,
+              scale: 1,
+              duration: 1.5,
+              delay: 0.3 + i * 0.15,
+              ease: "power2.out",
+            },
+          );
+          gsap.to(p, {
+            y: "random(-30, 30)",
+            x: "random(-20, 20)",
+            rotation: "random(-15, 15)",
+            repeat: -1,
+            yoyo: true,
+            duration: "random(3, 6)",
+            ease: "sine.inOut",
+            delay: i * 0.5,
+          });
+        });
+
+      // Info content
+      master
+        .fromTo(
+          ".section-label",
+          { autoAlpha: 0, y: 20, scale: 0.9 },
+          { autoAlpha: 1, y: 0, scale: 1, duration: 0.6 },
+          0.5,
+        )
+        .fromTo(
+          ".book-info .title-line",
+          { autoAlpha: 0, y: 40, skewY: 3 },
+          { autoAlpha: 1, y: 0, skewY: 0, duration: 1 },
+          0.6,
+        )
+        .fromTo(
+          ".edition-pill",
+          { autoAlpha: 0, x: -30, scale: 0.95 },
+          { autoAlpha: 1, x: 0, scale: 1, duration: 0.7 },
+          0.7,
+        )
+        .fromTo(
+          ".book-description",
+          { autoAlpha: 0, y: 25 },
+          { autoAlpha: 1, y: 0, duration: 0.8 },
+          0.8,
+        )
+        .fromTo(
+          ".highlight-item",
+          { autoAlpha: 0, x: -20 },
+          { autoAlpha: 1, x: 0, duration: 0.6, stagger: { amount: 0.4 } },
+          0.9,
+        )
+        .fromTo(
+          ".btn-book",
+          { autoAlpha: 0, y: 20, scale: 0.95 },
+          { autoAlpha: 1, y: 0, scale: 1, duration: 0.7 },
+          1.1,
+        );
     });
 
-    // Contenido: reveal secuencial
-    const infoTl = gsap.timeline({
-      defaults: { ease: "power3.out", duration: 0.9 },
-      scrollTrigger: {
-        trigger: ".book-info",
-        start: "top 80%",
-      },
-    });
-
-    infoTl
-      .fromTo(
-        ".section-label",
-        { autoAlpha: 0, y: 20, scale: 0.9 },
-        { autoAlpha: 1, y: 0, scale: 1, duration: 0.6 },
-      )
-      .fromTo(
-        ".title-line",
-        { autoAlpha: 0, y: 40, skewY: 3 },
-        { autoAlpha: 1, y: 0, skewY: 0, duration: 1 },
-        "-=0.3",
-      )
-      .fromTo(
-        ".edition-pill",
-        { autoAlpha: 0, x: -30, scale: 0.95 },
-        { autoAlpha: 1, x: 0, scale: 1, duration: 0.7 },
-        "-=0.5",
-      )
-      .fromTo(
-        ".book-description",
-        { autoAlpha: 0, y: 25 },
-        { autoAlpha: 1, y: 0, duration: 0.8 },
-        "-=0.4",
-      )
-      .fromTo(
-        ".highlight-item",
-        { autoAlpha: 0, x: -20 },
+    mm.add("(prefers-reduced-motion: reduce)", () => {
+      gsap.set(
+        ".books-section .divider-line, .divider-diamond, .book-glow, .book-image-wrapper, .book-shadow, .section-label, .title-line, .edition-pill, .book-description, .highlight-item, .btn-book, .books-section .particle",
         {
           autoAlpha: 1,
+          y: 0,
           x: 0,
-          duration: 0.6,
-          stagger: { amount: 0.4, from: "start" },
+          scale: 1,
+          scaleX: 1,
+          rotation: 0,
+          skewY: 0,
         },
-        "-=0.3",
-      )
-      .fromTo(
-        ".btn-book",
-        { autoAlpha: 0, y: 20, scale: 0.95 },
-        { autoAlpha: 1, y: 0, scale: 1, duration: 0.7 },
-        "-=0.2",
       );
+    });
+  };
 
-    // Parallax suave de particulas
-    gsap.fromTo(
-      ".book-particles",
-      { y: 0 },
-      {
-        y: -60,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".books-section",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5,
-        },
-      },
-    );
-  });
+  document.addEventListener("sectionEnter", ((e: CustomEvent) => {
+    if (e.detail.section === "books") animateBooks();
+  }) as EventListener);
 </script>
 
 <style>
   /* ---- Seccion principal ---- */
   .books-section {
-    padding: var(--spacing-xl) 0;
+    padding: 4rem 0 calc(var(--nav-height) + 2rem);
     background: linear-gradient(
       180deg,
       #000000 0%,

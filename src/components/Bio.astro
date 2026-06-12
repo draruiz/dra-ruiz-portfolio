@@ -78,96 +78,58 @@ const paragraphs = [
 
 <script>
   import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
   import { SplitText } from "gsap/SplitText";
 
-  gsap.registerPlugin(ScrollTrigger, SplitText);
+  gsap.registerPlugin(SplitText);
 
-  const mm = gsap.matchMedia();
+  let hasAnimated = false;
 
-  mm.add(
-    {
-      isDesktop: "(min-width: 901px)",
-      isMobile: "(max-width: 900px)",
-      motionOk: "(prefers-reduced-motion: no-preference)",
-      motionReduce: "(prefers-reduced-motion: reduce)",
-    },
-    (context) => {
-      const { motionOk, motionReduce, isDesktop } =
-        context.conditions as Record<string, boolean>;
+  const animateBio = () => {
+    if (hasAnimated) return;
+    hasAnimated = true;
 
-      // Reduced motion: mostrar todo sin animación
-      if (motionReduce) {
-        gsap.set(
-          ".bio-header, .bio-image-wrapper, .bio-paragraph, .signature, .bio-gold-line-inner, .bio-cta",
-          { autoAlpha: 1, y: 0, x: 0, scale: 1, clipPath: "none" },
-        );
-        gsap.set(".bio-gold-line-inner", { scaleY: 1 });
-        return;
-      }
+    const mm = gsap.matchMedia();
 
-      // === LÍNEA DORADA VERTICAL (scrub continuo) ===
-      gsap.fromTo(
-        ".bio-gold-line-inner",
-        { scaleY: 0 },
-        {
-          scaleY: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".bio-section",
-            start: "top 60%",
-            end: "bottom 20%",
-            scrub: 0.8,
-          },
-        },
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const master = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      // Subtitle badge
+      master.fromTo(
+        ".bio-section .section-subtitle",
+        { autoAlpha: 0, y: 20, scale: 0.9 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.7)" },
       );
 
-      // === HEADING con SplitText ===
+      // Heading with SplitText
       SplitText.create(".bio-title", {
         type: "words, chars",
         autoSplit: true,
         mask: "words",
         onSplit(self) {
-          return gsap.from(self.chars, {
-            y: "100%",
-            opacity: 0,
-            stagger: 0.02,
-            duration: 0.6,
-            ease: "power4.out",
-            scrollTrigger: {
-              trigger: ".bio-header",
-              start: "top 80%",
+          master.from(
+            self.chars,
+            {
+              y: "100%",
+              opacity: 0,
+              stagger: 0.02,
+              duration: 0.6,
+              ease: "power4.out",
             },
-          });
+            "-=0.3",
+          );
         },
       });
 
-      // Subtitle badge
-      gsap.fromTo(
-        ".bio-section .section-subtitle",
-        { autoAlpha: 0, y: 20, scale: 0.9 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.6,
-          ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: ".bio-header",
-            start: "top 85%",
-          },
-        },
+      // Gold line
+      master.fromTo(
+        ".bio-gold-line-inner",
+        { scaleY: 0 },
+        { scaleY: 1, duration: 1.2, ease: "power2.inOut" },
+        0.2,
       );
 
-      // === IMAGEN: reveal con clip-path cinematográfico ===
-      const imgTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".bio-image-wrapper",
-          start: "top 75%",
-        },
-      });
-
-      imgTl
+      // Image reveal
+      master
         .fromTo(
           ".bio-image-reveal",
           { clipPath: "inset(100% 0% 0% 0%)" },
@@ -176,12 +138,13 @@ const paragraphs = [
             duration: 1.2,
             ease: "power4.inOut",
           },
+          0.4,
         )
         .fromTo(
           ".bio-image img",
           { scale: 1.3 },
           { scale: 1.05, duration: 1.4, ease: "power3.out" },
-          0,
+          0.4,
         )
         .fromTo(
           ".frame-corner",
@@ -193,120 +156,92 @@ const paragraphs = [
             stagger: { amount: 0.3, from: "random" },
             ease: "back.out(2)",
           },
-          0.6,
+          0.9,
         )
         .fromTo(
           ".bio-image-caption",
           { autoAlpha: 0, y: 10 },
-          { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" },
-          0.9,
+          { autoAlpha: 1, y: 0, duration: 0.5 },
+          1.1,
         );
 
-      // === PÁRRAFOS: reveal staggereado con barra dorada ===
-      const paragraphs = gsap.utils.toArray<HTMLElement>(".bio-paragraph");
-
-      paragraphs.forEach((p, i) => {
-        const pTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: p,
-            start: "top 82%",
-          },
-        });
-
-        pTl
+      // Paragraphs
+      gsap.utils.toArray<HTMLElement>(".bio-paragraph").forEach((p, i) => {
+        master
           .fromTo(
             p.querySelector(".paragraph-number"),
             { autoAlpha: 0, x: -20 },
-            { autoAlpha: 1, x: 0, duration: 0.4, ease: "power2.out" },
+            { autoAlpha: 1, x: 0, duration: 0.4 },
+            0.8 + i * 0.2,
           )
           .fromTo(
             p,
-            { "--bar-scale": "0" },
-            { "--bar-scale": "1", duration: 0.6, ease: "power2.out" },
-            0,
+            { "--bar-scale": "0" } as any,
+            { "--bar-scale": "1", duration: 0.6 } as any,
+            0.8 + i * 0.2,
           )
           .fromTo(
             p.querySelector(".paragraph-content"),
             { autoAlpha: 0, y: 20 },
-            { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" },
-            0.15,
+            { autoAlpha: 1, y: 0, duration: 0.6 },
+            0.9 + i * 0.2,
           );
       });
 
-      // === PARALLAX en imagen (solo desktop) ===
-      if (isDesktop) {
-        gsap.to(".bio-image-wrapper", {
-          y: -40,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".bio-section",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
-
-        gsap.to(".decorative-frame", {
-          y: -60,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".bio-section",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1.5,
-          },
-        });
-      }
-
-      // === FIRMA: reveal dramático ===
-      const sigTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".signature",
-          start: "top 88%",
-        },
-      });
-
-      // === CTA: reveal ===
-      gsap.fromTo(
+      // CTA
+      master.fromTo(
         ".bio-cta",
         { autoAlpha: 0, y: 20 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.6,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".bio-cta",
-            start: "top 90%",
-          },
-        },
+        { autoAlpha: 1, y: 0, duration: 0.6 },
+        "-=0.3",
       );
 
-      sigTl
+      // Signature
+      master
         .fromTo(
           ".signature-line",
           { scaleX: 0 },
           { scaleX: 1, duration: 0.8, ease: "power3.inOut" },
+          "-=0.2",
         )
         .fromTo(
           ".signature-name",
           { autoAlpha: 0, y: 30, skewY: 3 },
-          { autoAlpha: 1, y: 0, skewY: 0, duration: 0.7, ease: "power3.out" },
-          0.3,
+          { autoAlpha: 1, y: 0, skewY: 0, duration: 0.7 },
+          "-=0.4",
         )
         .fromTo(
           ".signature-title",
           { autoAlpha: 0, y: 15 },
-          { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" },
-          0.6,
+          { autoAlpha: 1, y: 0, duration: 0.5 },
+          "-=0.3",
         );
-    },
-  );
+    });
+
+    mm.add("(prefers-reduced-motion: reduce)", () => {
+      gsap.set(
+        ".bio-header, .bio-image-wrapper, .bio-paragraph, .signature, .bio-gold-line-inner, .bio-cta, .section-subtitle, .paragraph-number, .paragraph-content, .bio-image-reveal, .bio-image-caption, .frame-corner, .signature-name, .signature-title, .signature-line",
+        {
+          autoAlpha: 1,
+          y: 0,
+          x: 0,
+          scale: 1,
+          clipPath: "none",
+          scaleX: 1,
+          scaleY: 1,
+        },
+      );
+    });
+  };
+
+  document.addEventListener("sectionEnter", ((e: CustomEvent) => {
+    if (e.detail.section === "bio") animateBio();
+  }) as EventListener);
 </script>
 
 <style>
   .bio-section {
-    padding: var(--spacing-xl) 0;
+    padding: 4rem 0 calc(var(--nav-height) + 2rem);
     background: linear-gradient(
       to bottom,
       var(--bg-secondary) 0%,
@@ -314,7 +249,8 @@ const paragraphs = [
       var(--bg-secondary) 100%
     );
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    min-height: 100%;
   }
 
   .bio-section::before {

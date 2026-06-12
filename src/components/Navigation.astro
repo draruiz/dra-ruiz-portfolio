@@ -1,390 +1,524 @@
 ---
 import mainLogo from "../assets/main_logo_brain.png";
+
+const navItems = [
+  { id: "hero", label: "Inicio", number: "01" },
+  { id: "bio", label: "Bio", number: "02" },
+  { id: "books", label: "Libro", number: "03" },
+  { id: "podcasts", label: "Podcast", number: "04" },
+  { id: "ceo", label: "CEO", number: "05" },
+  { id: "conferences", label: "Eventos", number: "06" },
+  { id: "retreats", label: "Retiros", number: "07" },
+  { id: "contact", label: "Contacto", number: "08" },
+];
 ---
 
-<nav class='nav-container' aria-label='Navegacion principal'>
-  <div class='nav-content'>
-    <a href='#' class='logo'>
+<nav class='bottom-nav' id='bottom-nav' aria-label='Navegación principal'>
+  <!-- Left: Logo + socials -->
+  <div class='nav-left'>
+    <a href='#' class='nav-logo' aria-label='Inicio'>
       <img
         src={mainLogo.src}
-        alt='Logo Dra. Maria Alejandra Ruiz'
-        class='logo-img'
-        width='40'
-        height='40'
+        alt=''
+        class='nav-logo-img'
+        width='28'
+        height='28'
+        aria-hidden='true'
       />
-      <span class='logo-text'>Dra. Ruiz</span>
     </a>
+    <div class='nav-socials'>
+      <a
+        href='https://www.instagram.com/draruiz'
+        target='_blank'
+        rel='noopener noreferrer'
+        aria-label='Instagram'
+        class='social-link'
+      >
+        <svg
+          width='14'
+          height='14'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          stroke-width='2'
+          ><rect x='2' y='2' width='20' height='20' rx='5' ry='5'></rect><path
+            d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'></path><line
+            x1='17.5'
+            y1='6.5'
+            x2='17.51'
+            y2='6.5'></line></svg
+        >
+      </a>
+      <a
+        href='https://www.linkedin.com/in/draruiz'
+        target='_blank'
+        rel='noopener noreferrer'
+        aria-label='LinkedIn'
+        class='social-link'
+      >
+        <svg
+          width='14'
+          height='14'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          stroke-width='2'
+          ><path
+            d='M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z'
+          ></path><rect x='2' y='9' width='4' height='12'></rect><circle
+            cx='4'
+            cy='4'
+            r='2'></circle></svg
+        >
+      </a>
+      <a
+        href='https://www.youtube.com/@draruiz'
+        target='_blank'
+        rel='noopener noreferrer'
+        aria-label='YouTube'
+        class='social-link'
+      >
+        <svg
+          width='14'
+          height='14'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          stroke-width='2'
+          ><path
+            d='M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.43z'
+          ></path><polygon points='9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02'
+          ></polygon></svg
+        >
+      </a>
+    </div>
+  </div>
 
-    <ul class='nav-links'>
-      <li><a href='/#bio'>Bio</a></li>
-      <li><a href='/about'>Sobre Mí</a></li>
-      <li><a href='/#books'>Libros</a></li>
-      <li><a href='/#podcasts'>Podcast</a></li>
-      <li><a href='/#ceo'>CEO</a></li>
-      <li><a href='/#contact' class='btn-nav'>Contacto</a></li>
-    </ul>
+  <!-- Center: Navigation items -->
+  <div class='nav-center'>
+    <div class='nav-items'>
+      {
+        navItems.map((item) => (
+          <button
+            class={`nav-item ${item.id === "hero" ? "is-active" : ""}`}
+            data-target={item.id}
+            data-number={item.number}
+            type='button'
+            aria-label={`Ir a ${item.label}`}
+          >
+            <span class='nav-item-number'>{item.number}</span>
+            <span class='nav-item-label'>{item.label}</span>
+          </button>
+        ))
+      }
+    </div>
+    <!-- Active indicator line -->
+    <div class='nav-indicator' aria-hidden='true'></div>
+  </div>
 
+  <!-- Right: Section counter + Music toggle -->
+  <div class='nav-right'>
+    <div class='nav-counter'>
+      <span class='counter-current' id='nav-counter-current'>01</span>
+      <span class='counter-sep'>/</span>
+      <span class='counter-total'>08</span>
+    </div>
     <button
-      class='mobile-menu-btn'
-      aria-label='Abrir menu de navegacion'
-      aria-expanded='false'
+      class='music-toggle'
+      id='music-toggle'
+      type='button'
+      aria-label='Pausar música'
+      aria-pressed='true'
     >
-      <span></span>
-      <span></span>
-      <span></span>
+      <div class='music-bars' aria-hidden='true'>
+        <span class='bar'></span>
+        <span class='bar'></span>
+        <span class='bar'></span>
+        <span class='bar'></span>
+      </div>
     </button>
   </div>
 </nav>
 
-<style>
-  .nav-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 1.5rem 0;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    background: transparent;
-    visibility: hidden;
-  }
-
-  .nav-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      rgba(10, 10, 15, 0.95) 0%,
-      rgba(10, 10, 15, 0.7) 100%
-    );
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    opacity: 0;
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: -1;
-  }
-
-  .nav-container.scrolled {
-    padding: 1rem 0;
-    box-shadow:
-      0 0 0 1px rgba(201, 169, 97, 0.1),
-      0 10px 40px rgba(0, 0, 0, 0.5);
-  }
-
-  .nav-container.scrolled::before {
-    opacity: 1;
-  }
-
-  .nav-container.scrolled::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 5%;
-    width: 90%;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(201, 169, 97, 0.3),
-      transparent
-    );
-  }
-
-  .nav-content {
-    width: 90%;
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-  }
-
-  .logo {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    color: var(--text-primary);
-    font-weight: 400;
-    letter-spacing: 2px;
-    position: relative;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .logo-img {
-    width: 40px;
-    height: auto;
-    filter: drop-shadow(0 0 10px rgba(201, 169, 97, 0.3));
-    transition: all 0.3s ease;
-  }
-
-  .logo:hover .logo-img {
-    filter: drop-shadow(0 0 15px rgba(201, 169, 97, 0.6));
-    transform: scale(1.05);
-  }
-
-  .logo::after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      var(--gold-primary),
-      var(--gold-secondary)
-    );
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .logo:hover::after {
-    width: 100%;
-  }
-
-  .logo-text {
-    background: linear-gradient(
-      135deg,
-      var(--text-primary),
-      var(--gold-primary)
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 3.5rem;
-    list-style: none;
-    align-items: center;
-  }
-
-  .nav-links a {
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2.5px;
-    color: var(--text-secondary);
-    position: relative;
-    font-weight: 500;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .nav-links a::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: -15px;
-    width: 6px;
-    height: 6px;
-    background: var(--gold-primary);
-    border-radius: 50%;
-    transform: translateY(-50%) scale(0);
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .nav-links a:hover {
-    color: var(--gold-primary);
-    transform: translateX(8px);
-  }
-
-  .nav-links a:hover::before {
-    transform: translateY(-50%) scale(1);
-    opacity: 1;
-  }
-
-  .nav-links a::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      var(--gold-primary),
-      var(--gold-secondary)
-    );
-    box-shadow: 0 0 10px rgba(201, 169, 97, 0.5);
-    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .nav-links a:hover::after {
-    width: 100%;
-  }
-
-  .btn-nav {
-    padding: 0.9rem 2.2rem !important;
-    border: 1px solid rgba(201, 169, 97, 0.3) !important;
-    border-radius: var(--radius-md) !important;
-    background: linear-gradient(
-      145deg,
-      rgba(25, 25, 35, 0.4) 0%,
-      rgba(15, 15, 22, 0.6) 100%
-    ) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: var(--gold-primary) !important;
-    opacity: 1 !important;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow:
-      0 0 0 1px rgba(201, 169, 97, 0.1),
-      0 4px 15px rgba(0, 0, 0, 0.3);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-nav::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(201, 169, 97, 0.1),
-      transparent
-    );
-    transition: left 0.6s;
-  }
-
-  .btn-nav:hover {
-    border-color: rgba(201, 169, 97, 0.6) !important;
-    transform: translateY(-2px) !important;
-    box-shadow:
-      0 0 0 1px rgba(201, 169, 97, 0.4),
-      0 8px 25px rgba(0, 0, 0, 0.5),
-      0 0 30px rgba(201, 169, 97, 0.2);
-  }
-
-  .btn-nav:hover::before {
-    left: 100%;
-  }
-
-  .btn-nav::after {
-    display: none !important;
-  }
-
-  .mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    flex-direction: column;
-    gap: 6px;
-    padding: 0.5rem;
-    border-radius: 8px;
-    transition: background 0.3s ease;
-  }
-
-  .mobile-menu-btn:hover {
-    background: rgba(201, 169, 97, 0.1);
-  }
-
-  .mobile-menu-btn span {
-    display: block;
-    width: 30px;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      var(--gold-primary),
-      var(--gold-secondary)
-    );
-    transition: all 0.3s ease;
-    border-radius: 2px;
-  }
-
-  @media (max-width: 968px) {
-    .nav-links {
-      gap: 2.5rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .nav-links {
-      display: none;
-    }
-
-    .mobile-menu-btn {
-      display: flex;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-    }
-  }
-</style>
-
 <script>
   import { gsap } from "gsap";
 
-  // Reveal nav with GSAP after loader
+  const nav = document.getElementById("bottom-nav") as HTMLElement;
+  const navItems = nav?.querySelectorAll(".nav-item");
+  const indicator = nav?.querySelector(".nav-indicator") as HTMLElement;
+  const counterEl = document.getElementById("nav-counter-current");
+
+  // Show nav after loader
   document.addEventListener("loaderComplete", () => {
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      gsap.fromTo(
-        ".nav-container",
-        { autoAlpha: 0, y: -20 },
-        { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out", delay: 0.2 },
-      );
-    });
-    mm.add("(prefers-reduced-motion: reduce)", () => {
-      gsap.set(".nav-container", { autoAlpha: 1, y: 0 });
-    });
+    gsap.fromTo(
+      nav,
+      { y: 100, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out", delay: 0.3 },
+    );
   });
 
-  // Add scrolled class on scroll - Optimizado
-  const nav = document.querySelector(".nav-container");
+  // Update active state
+  const updateActiveNav = (sectionId: string) => {
+    navItems?.forEach((item) => {
+      const btn = item as HTMLButtonElement;
+      const isActive = btn.dataset.target === sectionId;
+      btn.classList.toggle("is-active", isActive);
+      if (isActive && counterEl) {
+        counterEl.textContent = btn.dataset.number || "01";
+      }
+    });
+    moveIndicator(sectionId);
+  };
 
-  if (nav) {
-    // Usar IntersectionObserver es más eficiente que scroll event
-    let ticking = false;
+  // Move indicator to active item
+  const moveIndicator = (sectionId: string) => {
+    const activeBtn = nav?.querySelector(
+      `[data-target="${sectionId}"]`,
+    ) as HTMLElement;
+    if (activeBtn && indicator) {
+      const rect = activeBtn.getBoundingClientRect();
+      const parentRect = activeBtn.parentElement!.getBoundingClientRect();
+      gsap.to(indicator, {
+        x: rect.left - parentRect.left,
+        width: rect.width,
+        duration: 0.4,
+        ease: "power3.out",
+      });
+    }
+  };
 
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            const currentScroll = window.scrollY;
-
-            if (currentScroll > 50) {
-              nav.classList.add("scrolled");
-            } else {
-              nav.classList.remove("scrolled");
-            }
-
-            ticking = false;
-          });
-          ticking = true;
-        }
-      },
-      { passive: true },
-    );
-  }
-
-  // Smooth anchor scrolling
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", (e) => {
-      e.preventDefault();
-      const href = anchor.getAttribute("href");
-      if (href) {
-        const target = document.querySelector(href);
-        if (target) {
-          target.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }
+  // Navigation click handlers
+  navItems?.forEach((item) => {
+    item.addEventListener("click", () => {
+      const target = (item as HTMLButtonElement).dataset.target;
+      if (target) {
+        document.dispatchEvent(
+          new CustomEvent("navigateTo", { detail: { section: target } }),
+        );
       }
     });
   });
+
+  // Listen for section changes from the section manager
+  document.addEventListener("sectionChanged", ((e: CustomEvent) => {
+    updateActiveNav(e.detail.section);
+  }) as EventListener);
+
+  // Music toggle
+  const musicToggle = document.getElementById(
+    "music-toggle",
+  ) as HTMLButtonElement;
+  musicToggle?.addEventListener("click", () => {
+    document.dispatchEvent(new CustomEvent("toggleMusic"));
+  });
+
+  document.addEventListener("musicStateChanged", ((e: CustomEvent) => {
+    musicToggle?.classList.toggle("is-paused", !e.detail.playing);
+    musicToggle?.setAttribute("aria-pressed", String(e.detail.playing));
+    musicToggle?.setAttribute(
+      "aria-label",
+      e.detail.playing ? "Pausar música" : "Reproducir música",
+    );
+  }) as EventListener);
+
+  // Initial indicator position
+  requestAnimationFrame(() => moveIndicator("hero"));
 </script>
+
+<style>
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    background: linear-gradient(
+      to top,
+      rgba(10, 10, 15, 0.95) 0%,
+      rgba(10, 10, 15, 0.8) 100%
+    );
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-top: 1px solid rgba(201, 169, 97, 0.1);
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  /* Left section */
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-logo:hover {
+    transform: scale(1.1);
+  }
+
+  .nav-logo-img {
+    width: 28px;
+    height: auto;
+    filter: drop-shadow(0 0 8px rgba(201, 169, 97, 0.3));
+  }
+
+  .nav-socials {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .social-link {
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+  }
+
+  .social-link:hover {
+    color: var(--gold-primary);
+    transform: translateY(-1px);
+  }
+
+  /* Center section */
+  .nav-center {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-items {
+    display: flex;
+    gap: 0;
+    position: relative;
+  }
+
+  .nav-item {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .nav-item-number {
+    font-family: var(--font-body);
+    font-size: 0.55rem;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: all 0.3s ease;
+  }
+
+  .nav-item-label {
+    font-family: var(--font-body);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .nav-item:hover .nav-item-number,
+  .nav-item.is-active .nav-item-number {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-item:hover .nav-item-label {
+    color: var(--text-secondary);
+  }
+
+  .nav-item.is-active .nav-item-label {
+    color: var(--gold-primary);
+    font-weight: 600;
+  }
+
+  .nav-item.is-active .nav-item-number {
+    color: var(--gold-primary);
+  }
+
+  /* Indicator */
+  .nav-indicator {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 2px;
+    width: 40px;
+    background: linear-gradient(
+      90deg,
+      var(--gold-primary),
+      var(--gold-secondary)
+    );
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--gold-glow);
+  }
+
+  /* Right section */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .nav-counter {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .counter-current {
+    color: var(--gold-primary);
+    font-weight: 600;
+    min-width: 1.2em;
+    text-align: right;
+  }
+
+  .counter-sep {
+    opacity: 0.4;
+    margin: 0 0.1rem;
+  }
+
+  .counter-total {
+    opacity: 0.5;
+  }
+
+  /* Music toggle */
+  .music-toggle {
+    background: none;
+    border: 1px solid rgba(201, 169, 97, 0.2);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .music-toggle:hover {
+    border-color: rgba(201, 169, 97, 0.5);
+    background: rgba(201, 169, 97, 0.05);
+  }
+
+  .music-toggle:focus-visible {
+    outline: 2px solid var(--gold-primary);
+    outline-offset: 2px;
+  }
+
+  .music-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 14px;
+  }
+
+  .bar {
+    width: 2px;
+    background: var(--gold-primary);
+    border-radius: 1px;
+    animation: musicBar 0.8s ease-in-out infinite alternate;
+  }
+
+  .bar:nth-child(1) {
+    height: 40%;
+    animation-delay: 0s;
+  }
+  .bar:nth-child(2) {
+    height: 70%;
+    animation-delay: 0.15s;
+  }
+  .bar:nth-child(3) {
+    height: 50%;
+    animation-delay: 0.3s;
+  }
+  .bar:nth-child(4) {
+    height: 80%;
+    animation-delay: 0.45s;
+  }
+
+  @keyframes musicBar {
+    0% {
+      height: 20%;
+    }
+    100% {
+      height: 100%;
+    }
+  }
+
+  .music-toggle.is-paused .bar {
+    animation: none;
+    height: 30% !important;
+    opacity: 0.4;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .bottom-nav {
+      padding: 0 1rem;
+    }
+
+    .nav-socials {
+      display: none;
+    }
+
+    .nav-item {
+      padding: 0.5rem 0.7rem;
+    }
+
+    .nav-item-number {
+      display: none;
+    }
+
+    .nav-item-label {
+      font-size: 0.6rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-counter {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav-item-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-item {
+      padding: 0.5rem 0.5rem;
+    }
+
+    .nav-logo-img {
+      width: 22px;
+    }
+  }
+</style>
