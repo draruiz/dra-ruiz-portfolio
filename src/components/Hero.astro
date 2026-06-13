@@ -11,7 +11,7 @@ import heroVideo from "../assets/hero_video.mp4";
       muted
       loop
       playsinline
-      preload='auto'
+      preload='metadata'
       poster='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><rect fill="%230a0a0f" width="1920" height="1080"/></svg>'
     >
       <source src={heroVideo} type='video/mp4' />
@@ -21,16 +21,6 @@ import heroVideo from "../assets/hero_video.mp4";
   <!-- Overlays cinematográficos -->
   <div class='hero-overlay-gradient' aria-hidden='true'></div>
   <div class='hero-overlay-vignette' aria-hidden='true'></div>
-
-  <!-- Partículas doradas -->
-  <div class='hero-particles' aria-hidden='true'>
-    <span class='particle'></span>
-    <span class='particle'></span>
-    <span class='particle'></span>
-    <span class='particle'></span>
-    <span class='particle'></span>
-    <span class='particle'></span>
-  </div>
 
   <!-- Línea dorada lateral -->
   <div class='hero-gold-line' aria-hidden='true'></div>
@@ -74,6 +64,20 @@ import heroVideo from "../assets/hero_video.mp4";
           <span class='stat-suffix'>★</span>
           <span class='stat-label'>Reconocimiento</span>
         </div>
+      </div>
+
+      <div class='hero-cta'>
+        <a
+          href='https://almaymente.io'
+          target='_blank'
+          rel='noopener noreferrer'
+          class='btn-courses'
+          aria-label='Ir a la plataforma de cursos Alma y Mente'
+        >
+          <span class='btn-courses-icon' aria-hidden='true'>✦</span>
+          <span class='btn-courses-label'>Mis Cursos</span>
+          <span class='btn-courses-arrow' aria-hidden='true'>→</span>
+        </a>
       </div>
     </div>
   </div>
@@ -134,19 +138,13 @@ import heroVideo from "../assets/hero_video.mp4";
         )
         .fromTo(
           ".title-line",
-          {
-            autoAlpha: 0,
-            y: 80,
-            rotationX: -15,
-            transformOrigin: "left bottom",
-          },
+          { autoAlpha: 0, y: 50 },
           {
             autoAlpha: 1,
             y: 0,
-            rotationX: 0,
-            duration: 1.2,
-            stagger: 0.12,
-            ease: "power4.out",
+            duration: 0.9,
+            stagger: 0.1,
+            ease: "power3.out",
           },
           0.9,
         )
@@ -174,18 +172,6 @@ import heroVideo from "../assets/hero_video.mp4";
           { scaleY: 0 },
           { scaleY: 1, stagger: 0.08, duration: 0.5, ease: "power3.inOut" },
           "<0.1",
-        )
-        .fromTo(
-          ".particle",
-          { autoAlpha: 0, scale: 0 },
-          {
-            autoAlpha: 1,
-            scale: 1,
-            stagger: { amount: 0.6, from: "random" },
-            duration: 0.8,
-            ease: "back.out(2)",
-          },
-          "-=0.8",
         );
 
       // Counter animation
@@ -194,32 +180,19 @@ import heroVideo from "../assets/hero_video.mp4";
         const obj = { val: 0 };
         gsap.to(obj, {
           val: target,
-          duration: 2,
-          delay: 2,
+          duration: 1.5,
+          delay: 1.2,
           ease: "power2.out",
           onUpdate: () => {
             el.textContent = Math.round(obj.val).toString();
           },
         });
       });
-
-      // Floating particles
-      gsap.utils.toArray<HTMLElement>(".particle").forEach((p, i) => {
-        gsap.to(p, {
-          y: gsap.utils.random(-40, 40),
-          x: gsap.utils.random(-30, 30),
-          duration: gsap.utils.random(3, 6),
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: i * 0.4,
-        });
-      });
     });
 
     mm.add("(prefers-reduced-motion: reduce)", () => {
       gsap.set(
-        ".cinematic-hero, .subtitle-line-left, .subtitle-line-right, .subtitle, .title-line, .hero-desc-block, .stat-item, .stat-divider, .particle, .hero-gold-line",
+        ".cinematic-hero, .subtitle-line-left, .subtitle-line-right, .subtitle, .title-line, .hero-desc-block, .stat-item, .stat-divider, .hero-gold-line",
         {
           autoAlpha: 1,
           y: 0,
@@ -505,6 +478,90 @@ import heroVideo from "../assets/hero_video.mp4";
       transparent
     );
     transform-origin: center top;
+  }
+
+  /* Botón Mis Cursos */
+  .hero-cta {
+    margin-top: 2.5rem;
+  }
+
+  .btn-courses {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 2rem;
+    background: linear-gradient(
+      135deg,
+      rgba(201, 169, 97, 0.15),
+      rgba(212, 175, 55, 0.08)
+    );
+    border: 1px solid var(--gold-primary);
+    color: var(--gold-primary);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: var(--radius-sm, 8px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition:
+      background var(--transition-base, 0.3s ease),
+      color var(--transition-base, 0.3s ease),
+      box-shadow var(--transition-base, 0.3s ease),
+      transform var(--transition-base, 0.3s ease);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-courses::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      var(--gold-primary),
+      var(--gold-secondary)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+  }
+
+  .btn-courses:hover::before,
+  .btn-courses:focus-visible::before {
+    opacity: 1;
+  }
+
+  .btn-courses:hover,
+  .btn-courses:focus-visible {
+    color: #0a0a0f;
+    box-shadow: 0 8px 32px rgba(201, 169, 97, 0.35);
+    transform: translateY(-2px);
+    outline: none;
+  }
+
+  .btn-courses:focus-visible {
+    outline: 2px solid var(--gold-primary);
+    outline-offset: 3px;
+  }
+
+  .btn-courses-icon,
+  .btn-courses-label,
+  .btn-courses-arrow {
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-courses-icon,
+  .btn-courses-arrow {
+    font-size: 0.85em;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-courses:hover .btn-courses-arrow {
+    transform: translateX(4px);
   }
 
   @keyframes shimmer {

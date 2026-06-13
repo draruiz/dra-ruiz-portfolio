@@ -135,24 +135,7 @@ const description = lines[2];
           0.5,
         );
 
-      // Levitation
-      gsap.to(".book-image-wrapper", {
-        y: -10,
-        repeat: -1,
-        yoyo: true,
-        duration: 3,
-        ease: "sine.inOut",
-      });
-      gsap.to(".book-glow", {
-        scale: 1.15,
-        autoAlpha: 0.8,
-        repeat: -1,
-        yoyo: true,
-        duration: 4,
-        ease: "sine.inOut",
-      });
-
-      // Particles
+      // Particles (entrance only, no float)
       gsap.utils
         .toArray<Element>(".books-section .particle")
         .forEach((p, i) => {
@@ -163,21 +146,11 @@ const description = lines[2];
               autoAlpha: 0.6,
               y: 0,
               scale: 1,
-              duration: 1.5,
-              delay: 0.3 + i * 0.15,
+              duration: 1,
+              delay: 0.3 + i * 0.1,
               ease: "power2.out",
             },
           );
-          gsap.to(p, {
-            y: "random(-30, 30)",
-            x: "random(-20, 20)",
-            rotation: "random(-15, 15)",
-            repeat: -1,
-            yoyo: true,
-            duration: "random(3, 6)",
-            ease: "sine.inOut",
-            delay: i * 0.5,
-          });
         });
 
       // Info content

@@ -497,52 +497,6 @@ main {
   pointer-events: none;
 }
 
-/* Custom cursor */
-.custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 20px;
-  height: 20px;
-  border: 1.5px solid var(--gold-primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 10000;
-  mix-blend-mode: difference;
-  transition:
-    width 0.3s ease,
-    height 0.3s ease,
-    border-color 0.3s ease;
-  transform: translate(-50%, -50%);
-}
-
-.custom-cursor.is-hover {
-  width: 50px;
-  height: 50px;
-  border-color: var(--gold-secondary);
-  background: rgba(201, 169, 97, 0.1);
-}
-
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 5px;
-  height: 5px;
-  background: var(--gold-primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 10001;
-  transform: translate(-50%, -50%);
-}
-
-@media (pointer: coarse) {
-  .custom-cursor,
-  .cursor-dot {
-    display: none;
-  }
-}
-
 /* Film grain */
 .film-grain-overlay {
   position: fixed;

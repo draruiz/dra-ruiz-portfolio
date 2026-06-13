@@ -113,10 +113,6 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
     <!-- Decorative layers -->
     <div class='film-grain-overlay' aria-hidden='true'></div>
 
-    <!-- Custom cursor -->
-    <div class='custom-cursor' aria-hidden='true'></div>
-    <div class='cursor-dot' aria-hidden='true'></div>
-
     <!-- Transition overlay -->
     <div class='transition-overlay' aria-hidden='true'></div>
 
@@ -332,50 +328,6 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
           }),
         );
       });
-
-      // === CUSTOM CURSOR ===
-      const cursor = document.querySelector(".custom-cursor") as HTMLElement;
-      const dot = document.querySelector(".cursor-dot") as HTMLElement;
-
-      if (cursor && dot && window.matchMedia("(pointer: fine)").matches) {
-        const xTo = gsap.quickTo(cursor, "x", {
-          duration: 0.5,
-          ease: "power3",
-        });
-        const yTo = gsap.quickTo(cursor, "y", {
-          duration: 0.5,
-          ease: "power3",
-        });
-        const dotXTo = gsap.quickTo(dot, "x", {
-          duration: 0.15,
-          ease: "power3",
-        });
-        const dotYTo = gsap.quickTo(dot, "y", {
-          duration: 0.15,
-          ease: "power3",
-        });
-
-        document.addEventListener("mousemove", (e) => {
-          xTo(e.clientX);
-          yTo(e.clientY);
-          dotXTo(e.clientX);
-          dotYTo(e.clientY);
-        });
-
-        // Hover effects
-        const hoverTargets =
-          "a, button, .nav-item, .podcast-card, .feature-card, .book-image-wrapper";
-        document.addEventListener("mouseover", (e) => {
-          if ((e.target as HTMLElement).closest(hoverTargets)) {
-            cursor.classList.add("is-hover");
-          }
-        });
-        document.addEventListener("mouseout", (e) => {
-          if ((e.target as HTMLElement).closest(hoverTargets)) {
-            cursor.classList.remove("is-hover");
-          }
-        });
-      }
     </script>
 
     <style is:global>
