@@ -48,19 +48,19 @@ import heroVideo from "../assets/hero_video.mp4";
 
       <div class='hero-stats' role='list' aria-label='Logros profesionales'>
         <div class='stat-item' role='listitem'>
-          <span class='stat-number' data-value='20'>0</span>
+          <span class='stat-number'>20</span>
           <span class='stat-suffix'>+</span>
           <span class='stat-label'>Años de Experiencia</span>
         </div>
         <div class='stat-divider' aria-hidden='true'></div>
         <div class='stat-item' role='listitem'>
-          <span class='stat-number' data-value='10'>0</span>
+          <span class='stat-number'>10</span>
           <span class='stat-suffix'>k+</span>
           <span class='stat-label'>Vidas Transformadas</span>
         </div>
         <div class='stat-divider' aria-hidden='true'></div>
         <div class='stat-item' role='listitem'>
-          <span class='stat-number' data-value='5'>0</span>
+          <span class='stat-number'>5</span>
           <span class='stat-suffix'>★</span>
           <span class='stat-label'>Reconocimiento</span>
         </div>
@@ -173,21 +173,6 @@ import heroVideo from "../assets/hero_video.mp4";
           { scaleY: 1, stagger: 0.08, duration: 0.5, ease: "power3.inOut" },
           "<0.1",
         );
-
-      // Counter animation
-      gsap.utils.toArray<HTMLElement>(".stat-number").forEach((el) => {
-        const target = parseInt(el.dataset.value || "0", 10);
-        const obj = { val: 0 };
-        gsap.to(obj, {
-          val: target,
-          duration: 1.5,
-          delay: 1.2,
-          ease: "power2.out",
-          onUpdate: () => {
-            el.textContent = Math.round(obj.val).toString();
-          },
-        });
-      });
     });
 
     mm.add("(prefers-reduced-motion: reduce)", () => {
@@ -204,9 +189,6 @@ import heroVideo from "../assets/hero_video.mp4";
           clipPath: "none",
         },
       );
-      gsap.utils.toArray<HTMLElement>(".stat-number").forEach((el) => {
-        el.textContent = el.dataset.value || "0";
-      });
     });
   };
 
