@@ -1,16 +1,15 @@
 ---
-import podcast1Text from "../assets/her_podcast_1.txt?raw";
-import podcast2Text from "../assets/her_podcast_2.txt?raw";
-
-const parsePodcast = (text: string) => {
-  const lines = text.split("\n").filter((line) => line.trim() !== "");
-  const title = lines[0].replace("Su Podcast: ", "").replace(/"|"|"/g, "");
-  const description = lines.slice(1).join(" ");
-  return { title, description };
+const podcast1 = {
+  title: "Dilo Como Es",
+  description:
+    '"Dilo Como Es" es un innovador podcast show donde María Alejandra, Dra. en psicología clínica, y Lily Taveras, reconocida influencer y actriz, se unen para ofrecer una mirada honesta y sincera sobre los complejos temas de las relaciones, rupturas y autoestima. Con la combinación perfecta de sabiduría profesional y autenticidad, cada episodio es un espacio donde la sinceridad se encuentra con la comprensión, creando una comunidad de apoyo y crecimiento personal.',
 };
 
-const podcast1 = parsePodcast(podcast1Text);
-const podcast2 = parsePodcast(podcast2Text);
+const podcast2 = {
+  title: "Canal Oficial Dra. Ruiz",
+  description:
+    "El canal oficial de la Dra. Maria Alejandra Ruiz en YouTube: contenido gratuito con conversaciones, reflexiones y herramientas prácticas sobre salud mental y bienestar emocional. Un espacio para conectar con el equipo de la Dra. Ruiz y acceder a recursos que te acompañen en tu proceso de crecimiento personal.",
+};
 ---
 
 <section class='pod-section' aria-labelledby='pod-heading'>

@@ -8,8 +8,9 @@ const navItems = [
   { id: "podcasts", label: "Podcast", number: "04" },
   { id: "ceo", label: "CEO", number: "05" },
   { id: "conferences", label: "Eventos", number: "06" },
-  { id: "retreats", label: "Retiros", number: "07" },
-  { id: "contact", label: "Contacto", number: "08" },
+  { id: "collaborations", label: "Colaboraciones", number: "07" },
+  { id: "retreats", label: "Retiros", number: "08" },
+  { id: "contact", label: "Contacto", number: "09" },
 ];
 ---
 
@@ -116,12 +117,28 @@ const navItems = [
     <div class='nav-indicator' aria-hidden='true'></div>
   </div>
 
+  <!-- Hamburger — solo visible en mobile, centrado -->
+  <div class='nav-hamburger'>
+    <button
+      class='hamburger-btn'
+      id='hamburger-btn'
+      type='button'
+      aria-label='Abrir menú'
+      aria-expanded='false'
+      aria-controls='mobile-menu'
+    >
+      <span class='ham-bar'></span>
+      <span class='ham-bar'></span>
+      <span class='ham-bar'></span>
+    </button>
+  </div>
+
   <!-- Right: Section counter + Music toggle -->
   <div class='nav-right'>
     <div class='nav-counter'>
       <span class='counter-current' id='nav-counter-current'>01</span>
       <span class='counter-sep'>/</span>
-      <span class='counter-total'>08</span>
+      <span class='counter-total'>09</span>
     </div>
     <button
       class='music-toggle'
@@ -139,6 +156,100 @@ const navItems = [
     </button>
   </div>
 </nav>
+
+<!-- Mobile menu overlay -->
+<div
+  class='mobile-menu'
+  id='mobile-menu'
+  role='dialog'
+  aria-modal='true'
+  aria-label='Menú de navegación'
+  aria-hidden='true'
+>
+  <div class='mobile-menu-inner'>
+    <nav class='mobile-nav-items' aria-label='Secciones'>
+      {
+        navItems.map((item) => (
+          <button
+            class='mobile-nav-item'
+            data-target={item.id}
+            type='button'
+            aria-label={`Ir a ${item.label}`}
+          >
+            <span class='mobile-nav-number'>{item.number}</span>
+            <span class='mobile-nav-label'>{item.label}</span>
+          </button>
+        ))
+      }
+    </nav>
+    <div class='mobile-menu-socials'>
+      <a
+        href='https://www.instagram.com/draruiz'
+        target='_blank'
+        rel='noopener noreferrer'
+        aria-label='Instagram'
+        class='social-link'
+      >
+        <svg
+          width='18'
+          height='18'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          stroke-width='2'
+        >
+          <rect x='2' y='2' width='20' height='20' rx='5' ry='5'></rect>
+          <path d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'></path>
+          <line x1='17.5' y1='6.5' x2='17.51' y2='6.5'></line>
+        </svg>
+      </a>
+      <a
+        href='https://www.linkedin.com/in/draruiz'
+        target='_blank'
+        rel='noopener noreferrer'
+        aria-label='LinkedIn'
+        class='social-link'
+      >
+        <svg
+          width='18'
+          height='18'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          stroke-width='2'
+        >
+          <path
+            d='M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z'
+          ></path>
+          <rect x='2' y='9' width='4' height='12'></rect>
+          <circle cx='4' cy='4' r='2'></circle>
+        </svg>
+      </a>
+      <a
+        href='https://www.youtube.com/@draruiz'
+        target='_blank'
+        rel='noopener noreferrer'
+        aria-label='YouTube'
+        class='social-link'
+      >
+        <svg
+          width='18'
+          height='18'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke='currentColor'
+          stroke-width='2'
+        >
+          <path
+            d='M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.43z'
+          ></path>
+          <polygon points='9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02'
+          ></polygon>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
 
 <script>
   import { gsap } from "gsap";
@@ -223,6 +334,97 @@ const navItems = [
 
   // Initial indicator position
   requestAnimationFrame(() => moveIndicator("hero"));
+
+  // ── Mobile menu ────────────────────────────────────────────────────────────
+  const hamburgerBtn = document.getElementById(
+    "hamburger-btn",
+  ) as HTMLButtonElement;
+  const mobileMenu = document.getElementById("mobile-menu") as HTMLElement;
+  const mobileNavItems = mobileMenu?.querySelectorAll(".mobile-nav-item");
+
+  let menuOpen = false;
+
+  const openMenu = () => {
+    menuOpen = true;
+    mobileMenu.removeAttribute("aria-hidden");
+    hamburgerBtn.setAttribute("aria-expanded", "true");
+    hamburgerBtn.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+
+    gsap.set(mobileMenu, { display: "flex" });
+    gsap.fromTo(
+      mobileMenu,
+      { y: "100%" },
+      { y: "0%", duration: 0.5, ease: "power3.out" },
+    );
+    gsap.fromTo(
+      ".mobile-nav-item",
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        stagger: 0.05,
+        ease: "power3.out",
+        delay: 0.15,
+      },
+    );
+    gsap.fromTo(
+      ".mobile-menu-socials",
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.3, ease: "power2.out", delay: 0.5 },
+    );
+  };
+
+  const closeMenu = () => {
+    menuOpen = false;
+    hamburgerBtn.setAttribute("aria-expanded", "false");
+    hamburgerBtn.classList.remove("is-open");
+    document.body.style.overflow = "";
+
+    gsap.to(mobileMenu, {
+      y: "100%",
+      duration: 0.4,
+      ease: "power3.in",
+      onComplete: () => {
+        gsap.set(mobileMenu, { display: "none" });
+        mobileMenu.setAttribute("aria-hidden", "true");
+      },
+    });
+  };
+
+  hamburgerBtn?.addEventListener("click", () => {
+    menuOpen ? closeMenu() : openMenu();
+  });
+
+  // Close on item click
+  mobileNavItems?.forEach((item) => {
+    item.addEventListener("click", () => {
+      const target = (item as HTMLButtonElement).dataset.target;
+      if (target) {
+        closeMenu();
+        document.dispatchEvent(
+          new CustomEvent("navigateTo", { detail: { section: target } }),
+        );
+      }
+    });
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menuOpen) closeMenu();
+  });
+
+  // Update mobile active state on section change
+  document.addEventListener("sectionChanged", ((e: CustomEvent) => {
+    mobileNavItems?.forEach((item) => {
+      const btn = item as HTMLButtonElement;
+      btn.classList.toggle(
+        "is-active",
+        btn.dataset.target === e.detail.section,
+      );
+    });
+  }) as EventListener);
 </script>
 
 <style>
@@ -479,6 +681,15 @@ const navItems = [
     opacity: 0.4;
   }
 
+  /* ── Responsive ────────────────────────────────────────────────────────── */
+  /* Hamburger wrapper — oculto por defecto, solo mobile */
+  .nav-hamburger {
+    display: none;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
   /* Responsive */
   @media (max-width: 768px) {
     .bottom-nav {
@@ -489,22 +700,194 @@ const navItems = [
       display: none;
     }
 
-    .nav-item {
-      padding: 0.5rem 0.7rem;
-    }
-
-    .nav-item-number {
+    /* Ocultar nav-center en mobile */
+    .nav-center {
       display: none;
-    }
-
-    .nav-item-label {
-      font-size: 0.6rem;
-      letter-spacing: 1px;
     }
 
     .nav-counter {
       display: none;
     }
+
+    /* Mostrar hamburger centrado */
+    .nav-hamburger {
+      display: flex;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .nav-hamburger {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: none !important;
+    }
+  }
+
+  /* Hamburger button */
+  .hamburger-btn {
+    background: none;
+    border: 1px solid rgba(201, 169, 97, 0.25);
+    border-radius: 8px;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    padding: 0 8px;
+    transition:
+      border-color 0.3s ease,
+      background 0.3s ease;
+  }
+
+  .hamburger-btn:hover {
+    border-color: rgba(201, 169, 97, 0.55);
+    background: rgba(201, 169, 97, 0.06);
+  }
+
+  .hamburger-btn:focus-visible {
+    outline: 2px solid var(--gold-primary);
+    outline-offset: 2px;
+  }
+
+  .ham-bar {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: var(--gold-primary);
+    border-radius: 2px;
+    transition:
+      transform 0.35s ease,
+      opacity 0.35s ease;
+    transform-origin: center;
+  }
+
+  /* Animated to X */
+  .hamburger-btn.is-open .ham-bar:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .hamburger-btn.is-open .ham-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .hamburger-btn.is-open .ham-bar:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* Mobile menu overlay */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    bottom: var(--nav-height);
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 10, 15, 0.98) 0%,
+      rgba(18, 18, 26, 0.98) 100%
+    );
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    transform: translateY(100%);
+    border-top: 1px solid rgba(201, 169, 97, 0.15);
+  }
+
+  .mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    height: 100%;
+    padding: 2rem 1.5rem;
+  }
+
+  .mobile-nav-items {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 340px;
+    gap: 0;
+  }
+
+  .mobile-nav-item {
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.08);
+    cursor: pointer;
+    padding: 1rem 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+    transition: background 0.2s ease;
+    width: 100%;
+  }
+
+  .mobile-nav-item:first-child {
+    border-top: 1px solid rgba(201, 169, 97, 0.08);
+  }
+
+  .mobile-nav-item:active {
+    background: rgba(201, 169, 97, 0.06);
+  }
+
+  .mobile-nav-number {
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    min-width: 1.8rem;
+    transition: color 0.2s ease;
+  }
+
+  .mobile-nav-label {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    transition: color 0.2s ease;
+  }
+
+  .mobile-nav-item.is-active .mobile-nav-number,
+  .mobile-nav-item.is-active .mobile-nav-label {
+    color: var(--gold-primary);
+  }
+
+  .mobile-nav-item.is-active .mobile-nav-label {
+    font-weight: 600;
+  }
+
+  .mobile-menu-socials {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .mobile-menu-socials .social-link {
+    color: var(--text-muted);
+    padding: 8px;
+    transition:
+      color 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .mobile-menu-socials .social-link:hover {
+    color: var(--gold-primary);
+    transform: translateY(-2px);
   }
 
   @media (max-width: 480px) {
@@ -519,6 +902,11 @@ const navItems = [
 
     .nav-logo-img {
       width: 22px;
+    }
+
+    .mobile-nav-label {
+      font-size: 1rem;
+      letter-spacing: 2.5px;
     }
   }
 </style>

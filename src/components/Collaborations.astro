@@ -1,0 +1,426 @@
+---
+
+---
+
+<section class='collab-section' aria-labelledby='collab-heading'>
+  <div class='collab-backdrop' aria-hidden='true'></div>
+  <div class='collab-orb collab-orb--one' aria-hidden='true'></div>
+  <div class='collab-orb collab-orb--two' aria-hidden='true'></div>
+  <div class='collab-grid' aria-hidden='true'></div>
+
+  <div class='collab-shell'>
+    <article class='collab-card service-card--glass'>
+      <span class='collab-label'>Colaboraciones</span>
+      <h2 id='collab-heading' class='collab-title'>
+        Si tu propuesta nace de la sanación,
+        <span class='amp'>los vínculos y el crecimiento emocional</span>
+      </h2>
+
+      <p class='collab-copy'>
+        La Dra. María Alejandra Ruiz trabaja desde la psicología clínica, la
+        autoestima y la sanación emocional, con especial atención a la
+        dependencia emocional, el apego y los vínculos afectivos.
+      </p>
+
+      <p class='collab-copy'>
+        Si tienes una idea para un taller, conferencia, contenido, programa o
+        iniciativa que ayude a transformar relaciones, fortalecer la autoestima
+        o acompañar a personas en su proceso de bienestar, me encantaría
+        escucharla. Juntas podemos desarrollar algo profundo, humano y realmente
+        útil.
+      </p>
+
+      <div class='collab-highlights'>
+        <span>Dependencia emocional</span>
+        <span>Vínculos y apego</span>
+        <span>Autoestima y sanación</span>
+        <span>Relaciones y bienestar</span>
+      </div>
+
+      <a
+        href='https://wa.me/18135686424?text=Hola%20Dra.%20Ruiz%2C%20tengo%20una%20propuesta%20de%20colaboración%20que%20me%20gustaría%20compartir%20contigo.'
+        target='_blank'
+        rel='noopener noreferrer'
+        class='cta-whatsapp'
+      >
+        <svg
+          width='22'
+          height='22'
+          viewBox='0 0 24 24'
+          fill='currentColor'
+          aria-hidden='true'
+        >
+          <path
+            d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z'
+          ></path>
+        </svg>
+        <span>Escríbeme por WhatsApp</span>
+      </a>
+    </article>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+
+  let hasAnimated = false;
+
+  const animateCollaborations = () => {
+    if (hasAnimated) return;
+    hasAnimated = true;
+
+    const mm = gsap.matchMedia();
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.fromTo(
+        ".collab-card",
+        { autoAlpha: 0, y: 30, scale: 0.98 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.8 },
+      )
+        .fromTo(
+          ".collab-label",
+          { autoAlpha: 0, y: 16 },
+          { autoAlpha: 1, y: 0, duration: 0.6 },
+          "-=0.35",
+        )
+        .fromTo(
+          ".collab-title",
+          { autoAlpha: 0, y: 24 },
+          { autoAlpha: 1, y: 0, duration: 0.75 },
+          "-=0.25",
+        )
+        .fromTo(
+          ".collab-copy",
+          { autoAlpha: 0, y: 18 },
+          { autoAlpha: 1, y: 0, duration: 0.65, stagger: 0.12 },
+          "-=0.1",
+        )
+        .fromTo(
+          ".collab-highlights span",
+          { autoAlpha: 0, y: 14 },
+          { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.06 },
+          "-=0.15",
+        )
+        .fromTo(
+          ".cta-whatsapp",
+          { autoAlpha: 0, y: 20 },
+          { autoAlpha: 1, y: 0, duration: 0.6 },
+          "-=0.1",
+        );
+
+      gsap.to(".collab-orb", {
+        y: "-=" + 10,
+        x: "+=" + 4,
+        rotate: 1,
+        duration: 6,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true,
+        stagger: { each: 1.6, yoyo: true },
+      });
+    });
+
+    mm.add("(prefers-reduced-motion: reduce)", () => {
+      gsap.set(
+        ".collab-card, .collab-label, .collab-title, .collab-copy, .collab-highlights span, .cta-whatsapp",
+        { autoAlpha: 1, y: 0, scale: 1 },
+      );
+    });
+  };
+
+  document.addEventListener("sectionEnter", ((e: CustomEvent) => {
+    if (e.detail.section === "collaborations") animateCollaborations();
+  }) as EventListener);
+</script>
+
+<style>
+  .collab-section {
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem clamp(1rem, 4vw, 2rem) calc(var(--nav-height) + 2rem);
+    isolation: isolate;
+  }
+
+  .collab-section::before,
+  .collab-section::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .collab-section::before {
+    background:
+      radial-gradient(
+        circle at top left,
+        rgba(201, 169, 97, 0.12),
+        transparent 18%
+      ),
+      radial-gradient(
+        circle at top right,
+        rgba(255, 255, 255, 0.05),
+        transparent 20%
+      ),
+      linear-gradient(135deg, rgba(10, 10, 15, 0.96), rgba(18, 18, 26, 0.92));
+    z-index: -2;
+  }
+
+  .collab-section::after {
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(201, 169, 97, 0.04) 45%,
+      transparent 70%
+    );
+    mix-blend-mode: screen;
+    opacity: 0.9;
+    z-index: -1;
+  }
+
+  .collab-backdrop {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at 20% 20%,
+        rgba(201, 169, 97, 0.08),
+        transparent 18%
+      ),
+      radial-gradient(
+        circle at 80% 30%,
+        rgba(255, 255, 255, 0.04),
+        transparent 15%
+      ),
+      linear-gradient(135deg, rgba(7, 8, 12, 0.98), rgba(14, 16, 24, 0.96));
+    z-index: -2;
+  }
+
+  .collab-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201, 169, 97, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201, 169, 97, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.9)
+    );
+    opacity: 0.35;
+    z-index: -1;
+  }
+
+  .collab-orb {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(10px);
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(
+      circle,
+      rgba(201, 169, 97, 0.35),
+      transparent 65%
+    );
+    animation: drift 10s ease-in-out infinite alternate;
+  }
+
+  .collab-orb--one {
+    width: 220px;
+    height: 220px;
+    top: 8%;
+    left: 4%;
+  }
+
+  .collab-orb--two {
+    width: 180px;
+    height: 180px;
+    right: 6%;
+    bottom: 12%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.12),
+      transparent 62%
+    );
+    animation-duration: 12s;
+  }
+
+  .collab-shell {
+    position: relative;
+    z-index: 1;
+    width: min(900px, 100%);
+  }
+
+  .service-card--glass {
+    position: relative;
+    padding: clamp(1.6rem, 4vw, 2.6rem);
+    border-radius: var(--radius-xl);
+    background: linear-gradient(
+      145deg,
+      rgba(18, 18, 26, 0.78),
+      rgba(25, 25, 35, 0.58)
+    );
+    border: 1px solid rgba(201, 169, 97, 0.12);
+    box-shadow:
+      0 0 0 1px rgba(201, 169, 97, 0.06),
+      0 18px 45px rgba(0, 0, 0, 0.35),
+      0 40px 90px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    overflow: hidden;
+  }
+
+  .service-card--glass::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.04),
+      transparent 35%,
+      rgba(201, 169, 97, 0.06)
+    );
+    pointer-events: none;
+    opacity: 0.9;
+  }
+
+  .collab-label {
+    display: inline-block;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.45rem 1rem;
+    border-radius: 30px;
+    background: linear-gradient(
+      135deg,
+      rgba(201, 169, 97, 0.12),
+      rgba(201, 169, 97, 0.05)
+    );
+    border: 1px solid rgba(201, 169, 97, 0.18);
+    margin-bottom: 1rem;
+  }
+
+  .collab-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.08;
+    color: var(--text-primary);
+    margin-bottom: 1.1rem;
+  }
+
+  .amp {
+    background: linear-gradient(
+      135deg,
+      var(--gold-primary),
+      var(--gold-secondary)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-style: italic;
+  }
+
+  .collab-copy {
+    color: var(--text-secondary);
+    font-size: clamp(0.98rem, 2vw, 1.08rem);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    max-width: 680px;
+  }
+
+  .collab-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin: 1.3rem 0 1.6rem;
+  }
+
+  .collab-highlights span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba(201, 169, 97, 0.16);
+    background: rgba(10, 10, 15, 0.55);
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+  }
+
+  .cta-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: fit-content;
+    padding: 1rem 1.6rem;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+      0 4px 20px rgba(37, 211, 102, 0.3),
+      0 0 0 1px rgba(37, 211, 102, 0.15);
+  }
+
+  .cta-whatsapp:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+      0 10px 30px rgba(37, 211, 102, 0.35),
+      0 0 0 1px rgba(37, 211, 102, 0.25);
+  }
+
+  @keyframes drift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(0, -10px, 0) scale(1.06);
+    }
+  }
+
+  .cta-whatsapp:focus-visible {
+    outline: 2px solid #25d366;
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 768px) {
+    .collab-section {
+      padding: 1rem 0.9rem calc(var(--nav-height) + 1rem);
+    }
+
+    .collab-orb {
+      opacity: 0.18;
+      filter: blur(8px);
+    }
+
+    .collab-highlights {
+      gap: 0.55rem;
+    }
+
+    .collab-highlights span {
+      font-size: 0.78rem;
+    }
+
+    .cta-whatsapp {
+      padding: 0.95rem 1.3rem;
+      font-size: 0.78rem;
+    }
+  }
+</style>
