@@ -1,152 +1,79 @@
 ---
-import mainLogo from "../assets/main_logo_brain.png";
-const currentYear = new Date().getFullYear();
+import { Image } from "astro:assets";
+import logoWhite from "../assets/logo_white.png";
+const year = new Date().getFullYear();
+const links = [
+  { href: "/#bio", label: "Sobre mí" },
+  { href: "/#libro", label: "Libro" },
+  { href: "/#podcast", label: "Podcast" },
+  { href: "/#eventos", label: "Eventos" },
+  { href: "/#retiros", label: "Retiros" },
+  { href: "/#contacto", label: "Contacto" },
+  { href: "/about", label: "Mi historia" },
+];
 ---
 
-<footer class='footer'>
-  <div class='container'>
-    <div class='footer-content'>
-      <div class='footer-logo'>
-        <img src={mainLogo.src} alt='Logo Dra. Maria Alejandra Ruiz' class='footer-logo-img' width='60' height='60' />
-        <span>Dra. Ruiz</span>
-      </div>
-
-      <div class='footer-links'>
-        <a href='#bio'>Bio</a>
-        <a href='#books'>Libros</a>
-        <a href='#podcasts'>Podcast</a>
-        <a href='#ceo'>CEO</a>
-        <a href='#contact'>Contacto</a>
-      </div>
-
-      <div class='copyright'>
-        <p>
-          &copy; {currentYear} Dra. Maria Alejandra Ruiz. Todos los derechos reservados.
-        </p>
-      </div>
+<footer class="footer" data-surface="noche">
+  <div class="container footer__grid">
+    <a href="/" class="footer__logo" aria-label="María Alejandra Ruiz — inicio">
+      <Image src={logoWhite} alt="" width={480} densities={[1, 2]} loading="lazy" />
+    </a>
+    <nav class="footer__nav" aria-label="Pie de página">
+      <ul>
+        {links.map((l) => <li><a class="link link--quiet" href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="footer__meta">
+      <p class="caption">© {year} Dra. María Alejandra Ruiz. Todos los derechos reservados.</p>
+      <p class="caption">Tampa, Florida · Online</p>
     </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    background: linear-gradient(
-      to bottom,
-      var(--bg-secondary) 0%,
-      #000000 100%
-    );
-    color: var(--text-primary);
-    padding: 4rem 0 2rem;
-    text-align: center;
-    border-top: 1px solid rgba(201, 169, 97, 0.1);
-    position: relative;
+    border-top: 1px solid var(--rule);
+    padding-block: clamp(40px, 6vw, 72px) 32px;
   }
-
-  .footer::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(201, 169, 97, 0.5),
-      transparent
-    );
+  .footer__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 40px;
+    align-items: end;
   }
-
-  .footer-logo {
-    font-family: var(--font-heading);
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    background: linear-gradient(
-      135deg,
-      var(--text-primary),
-      var(--gold-primary)
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 400;
-    letter-spacing: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+  .footer__logo {
+    grid-column: 1 / span 5;
+    display: block;
+    max-width: 320px;
   }
-
-  .footer-logo-img {
-    width: 60px;
-    height: auto;
-    filter: drop-shadow(0 0 15px rgba(201, 169, 97, 0.4));
-    transition: all 0.3s ease;
-  }
-
-  .footer-logo:hover .footer-logo-img {
-    filter: drop-shadow(0 0 25px rgba(201, 169, 97, 0.7));
-    transform: scale(1.05);
-  }
-
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 3.5rem;
-    margin-bottom: 4rem;
-    flex-wrap: wrap;
-  }
-
-  .footer-links a {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2.5px;
-    color: var(--text-secondary);
-    font-weight: 500;
-    position: relative;
-    transition: all 0.4s ease;
-  }
-
-  .footer-links a::after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--gold-primary);
-    transition: width 0.4s ease;
-  }
-
-  .footer-links a:hover {
-    color: var(--gold-primary);
-  }
-
-  .footer-links a:hover::after {
+  .footer__logo img {
     width: 100%;
+    height: auto;
   }
-
-  .copyright {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    letter-spacing: 1px;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(201, 169, 97, 0.05);
-    margin: 0 auto;
-    max-width: 600px;
+  .footer__nav {
+    grid-column: 7 / span 6;
+    justify-self: end;
   }
-
-  .copyright p {
-    margin: 0;
+  .footer__nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+    font-size: 0.875rem;
+    justify-content: flex-end;
   }
-
-  @media (max-width: 768px) {
-    .footer-links {
-      gap: 2rem;
-    }
-
-    .footer-logo {
-      font-size: 2rem;
-    }
+  .footer__meta {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+  }
+  @media (max-width: 899px) {
+    .footer__logo { grid-column: 1 / -1; max-width: 260px; }
+    .footer__nav { grid-column: 1 / -1; justify-self: start; }
+    .footer__nav ul { justify-content: flex-start; }
   }
 </style>

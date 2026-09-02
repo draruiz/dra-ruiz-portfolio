@@ -1,0 +1,90 @@
+---
+import Thread from "./Thread.astro";
+
+/* Haz: el hilo principal entra por arriba, converge en el punto del CTA y tres ramas
+   salen de las facetas hacia ese mismo punto (la marca con sus múltiples facetas). */
+const main = "M 1000 -10 C 1000 200, 1272 300, 1272 437 C 1272 660, 820 820, 720 910";
+const branches = [
+  "M 655 575 C 850 575, 1080 437, 1272 437",
+  "M 655 659 C 880 659, 1080 470, 1272 437",
+  "M 655 744 C 900 744, 1080 500, 1272 437",
+];
+---
+
+<section id="almaymente" class="alma section" data-surface="noche" aria-labelledby="alma-heading">
+  <Thread class="alma__thread" draw="scrub" width={1.25} paths={[main, ...branches]} pathsMobile={["M 40 -10 L 40 910", "M 0 0", "M 0 0", "M 0 0"]} dot={{ cx: 1272, cy: 437 }} anchor=".alma__cta .btn" />
+
+  <div class="container alma__grid">
+    <div class="alma__text">
+      <p class="kicker kicker--rule" data-reveal>Almaymente.io · Fundadora y CEO</p>
+      <h2 id="alma-heading" class="display-2" data-reveal style="--i:1">
+        Psicología clínica y tecnología, en un mismo <span class="script">lugar</span>
+      </h2>
+      <p class="body-lg" data-reveal style="--i:2">
+        Como fundadora y CEO de Almaymente.io lidero una plataforma que une la psicología clínica con la
+        tecnología accesible: cursos y herramientas de salud mental para construir una vida más consciente,
+        equilibrada y plena.
+      </p>
+      <ul class="rules rules--stack alma__facets" data-reveal style="--i:3">
+        <li>
+          <strong class="h3">Plataforma digital</strong>
+          <span>Un ecosistema de bienestar mental accesible desde cualquier lugar.</span>
+        </li>
+        <li>
+          <strong class="h3">Bienestar integral</strong>
+          <span>Herramientas respaldadas por la psicología clínica.</span>
+        </li>
+        <li>
+          <strong class="h3">Comunidad consciente</strong>
+          <span>Un movimiento hacia una vida más equilibrada y plena.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="alma__cta" data-reveal style="--i:2">
+      <p class="label">almaymente.io</p>
+      <a class="btn btn--primary btn--lg" href="https://almaymente.io" target="_blank" rel="noopener noreferrer">Explorar los cursos</a>
+      <p class="body-sm muted">Cursos y herramientas creados desde la práctica clínica, en español.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .alma__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 48px;
+    align-items: center;
+  }
+  .alma__text {
+    grid-column: 1 / span 7;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 24px;
+  }
+  .alma__text .body-lg { color: var(--fg-muted); }
+  .alma__facets {
+    width: 100%;
+    max-width: 36rem;
+    margin-top: 8px;
+  }
+  .alma__facets > li { padding-block: 18px; }
+  .alma__cta {
+    grid-column: 9 / span 4;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 16px;
+    justify-items: start;
+    padding: 28px 0 28px 28px;
+    border-left: 1px solid var(--rule);
+  }
+  .alma__cta .body-sm { max-width: 18rem; }
+  @media (max-width: 899px) {
+    .alma__thread :global(path:not(:first-of-type)) { display: none; }
+    .alma__text { grid-column: 1 / -1; }
+    .alma__cta { grid-column: 1 / -1; padding: 24px 0 0; border-left: 0; border-top: 1px solid var(--rule); }
+  }
+</style>

@@ -1,50 +1,30 @@
 ---
-import Bio from "../components/Bio.astro";
-import Books from "../components/Books.astro";
-import CEO from "../components/CEO.astro";
-import Collaborations from "../components/Collaborations.astro";
-import Conferences from "../components/Conferences.astro";
-import Contact from "../components/Contact.astro";
-import Hero from "../components/Hero.astro";
-import Navigation from "../components/Navigation.astro";
-import Podcasts from "../components/Podcasts.astro";
-import Retreats from "../components/Retreats.astro";
 import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Toc from "../components/Toc.astro";
+import Bio from "../components/Bio.astro";
+import Book from "../components/Book.astro";
+import Media from "../components/Media.astro";
+import Almaymente from "../components/Almaymente.astro";
+import Talks from "../components/Talks.astro";
+import Collab from "../components/Collab.astro";
+import Retreats from "../components/Retreats.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<Layout title='Dra. Maria Alejandra Ruiz | Psicóloga Clínica'>
-  <Navigation />
-  <main id='main-content' class='sections-wrapper'>
-    <div class='section-panel is-active' id='hero' data-section='hero'>
-      <Hero />
-    </div>
-    <div class='section-panel' id='bio' data-section='bio'>
-      <Bio />
-    </div>
-    <div class='section-panel' id='books' data-section='books'>
-      <Books />
-    </div>
-    <div class='section-panel' id='podcasts' data-section='podcasts'>
-      <Podcasts />
-    </div>
-    <div class='section-panel' id='ceo' data-section='ceo'>
-      <CEO />
-    </div>
-    <div class='section-panel' id='conferences' data-section='conferences'>
-      <Conferences />
-    </div>
-    <div
-      class='section-panel'
-      id='collaborations'
-      data-section='collaborations'
-    >
-      <Collaborations />
-    </div>
-    <div class='section-panel' id='retreats' data-section='retreats'>
-      <Retreats />
-    </div>
-    <div class='section-panel' id='contact' data-section='contact'>
-      <Contact />
-    </div>
+<Layout title="Dra. María Alejandra Ruiz · Psicóloga clínica, autora y conferencista">
+  <main id="contenido">
+    <Hero />
+    <Toc />
+    <Bio />
+    <Book />
+    <Media />
+    <Almaymente />
+    <Talks />
+    <Collab />
+    <Retreats />
+    <Contact />
   </main>
+  <Footer />
 </Layout>

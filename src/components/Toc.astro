@@ -1,0 +1,141 @@
+---
+import Thread from "./Thread.astro";
+import Arrow from "./Arrow.astro";
+
+const items = [
+  { id: "bio", n: "01", title: "Sobre mí", meta: "De Medellín a Tampa · psicóloga clínica" },
+  { id: "libro", n: "02", title: "El libro", meta: "El niño que fui, el adulto que elijo ser" },
+  { id: "podcast", n: "03", title: "Podcast & Media", meta: "Dilo Como Es · YouTube" },
+  { id: "almaymente", n: "04", title: "Almaymente", meta: "Cursos y herramientas · fundadora y CEO" },
+  { id: "eventos", n: "05", title: "Conferencias & Talleres", meta: "Empresas, equipos y comunidades" },
+  { id: "colaboraciones", n: "06", title: "Colaboraciones", meta: "Proyectos que nacen del vínculo" },
+  { id: "retiros", n: "07", title: "Retiros", meta: "Sanación y reconexión" },
+  { id: "contacto", n: "08", title: "Contacto", meta: "Tampa, Florida · Online" },
+];
+---
+
+<section id="indice" class="toc section" data-surface="papel" aria-labelledby="toc-heading">
+  <Thread class="toc__thread" draw="scrub" d="M 1180 -10 C 1180 100, 900 150, 600 150 S 100 120, 80 200 L 80 910" dm="M 1180 -10 C 1180 110, 80 150, 80 270 L 80 910" />
+
+  <div class="container">
+    <header class="toc__head">
+      <h2 id="toc-heading" class="kicker kicker--rule" data-reveal>Índice</h2>
+      <p class="toc__lede body-lg" data-reveal style="--i:1">
+        Psicóloga clínica, autora y fundadora de Healthy Mind Specialists. Todo lo que hago, en una sola página.
+      </p>
+    </header>
+
+    <ol class="toc__list" data-toc>
+      <span class="toc__dot" aria-hidden="true"></span>
+      {
+        items.map((it, i) => (
+          <li class="toc__item" data-reveal style={`--i:${Math.min(i, 6)}`}>
+            <a class="toc__row" href={`#${it.id}`} data-toc-link={it.id}>
+              <span class="toc__num caption">{it.n}</span>
+              <span class="toc__title">{it.title}</span>
+              <span class="toc__meta body-sm">{it.meta}</span>
+              <Arrow class="toc__arrow" size={28} />
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .toc__head {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 24px;
+    margin-bottom: clamp(48px, 7vw, 96px);
+  }
+  .toc__head .kicker {
+    grid-column: 1 / span 3;
+    align-self: start;
+  }
+  .toc__lede {
+    grid-column: 6 / span 6;
+    color: var(--fg-muted);
+  }
+  .toc__list {
+    position: relative;
+    z-index: 2;
+    margin-left: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .toc__dot {
+    position: absolute;
+    left: -36px;
+    top: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--thread);
+    transform: translateY(-50%);
+    will-change: transform;
+  }
+  .toc__row {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr minmax(0, 20rem) 28px;
+    align-items: center;
+    column-gap: var(--gap);
+    padding-block: clamp(18px, 2.4vw, 30px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .toc__num {
+    color: var(--fg-muted);
+    transition: color var(--dur-instant) ease;
+  }
+  .toc__title {
+    font-size: clamp(2rem, 5.6vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-wrap: balance;
+  }
+  .toc__meta {
+    color: var(--fg-muted);
+    text-align: right;
+  }
+  .toc__arrow {
+    color: var(--fg-muted);
+    transition:
+      transform var(--dur-fast) var(--ease-out),
+      color var(--dur-instant) ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .toc__row:hover .toc__num,
+    .toc__row:hover .toc__arrow {
+      color: var(--accent);
+    }
+    .toc__row:hover .toc__arrow {
+      transform: translateX(6px);
+    }
+  }
+  .toc__row:focus-visible {
+    outline-offset: -2px;
+  }
+
+  @media (max-width: 899px) {
+    .toc__head .kicker { grid-column: 1 / -1; }
+    .toc__lede { grid-column: 1 / -1; }
+    .toc__list { margin-left: 24px; }
+    .toc__dot { left: -28px; }
+    .toc__row {
+      grid-template-columns: 2.5rem 1fr 24px;
+      row-gap: 6px;
+    }
+    .toc__meta {
+      grid-column: 2;
+      text-align: left;
+    }
+    .toc__arrow {
+      grid-row: 1 / span 2;
+      grid-column: 3;
+    }
+  }
+</style>

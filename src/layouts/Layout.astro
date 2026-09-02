@@ -1,393 +1,116 @@
 ---
 import "../styles/global.css";
-import Loader from "../components/Loader.astro";
+import Preloader from "../components/Preloader.astro";
+import Nav from "../components/Nav.astro";
 
 interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  navSurface?: "noche" | "papel" | "rubor" | "tension";
 }
 
 const siteUrl = "https://draruiz.com";
 const {
   title,
-  description = "Dra. Maria Alejandra Ruiz — Psicóloga Clínica con más de 20 años de experiencia. Autora, conferencista y CEO de Almaymente.io.",
+  description = "Dra. María Alejandra Ruiz, psicóloga clínica con más de 20 años de experiencia. Autora, conferencista y fundadora de Almaymente.io y Healthy Mind Specialists.",
   ogImage = `${siteUrl}/og-image.jpg`,
+  navSurface = "noche",
 } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+
+const ldPerson = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Dra. María Alejandra Ruiz",
+  jobTitle: "Psicóloga Clínica",
+  url: siteUrl,
+  image: `${siteUrl}/og-image.jpg`,
+  description:
+    "Psicóloga clínica, autora y conferencista. Fundadora de Healthy Mind Specialists y CEO de Almaymente.io.",
+  knowsAbout: ["Psicología Clínica", "Apego", "Ansiedad", "Dependencia emocional", "Salud mental"],
+  sameAs: [
+    "https://www.instagram.com/dramariaalejandraruiz/",
+    "https://www.linkedin.com/in/drmarialejandraruiz",
+    "https://www.youtube.com/@Pensandoenvozaltadraruiz",
+    "https://open.spotify.com/show/7EAPPcMUumoRKNNJd44f6k",
+  ],
+  worksFor: { "@type": "Organization", name: "Almaymente.io", url: "https://almaymente.io" },
+};
+const ldSite = { "@context": "https://schema.org", "@type": "WebSite", name: "Dra. María Alejandra Ruiz", url: siteUrl };
+const ldBook = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  name: "El niño que fui, el adulto que elijo ser",
+  author: { "@type": "Person", name: "Dra. María Alejandra Ruiz" },
+  bookEdition: "Segunda edición",
+  inLanguage: "es",
+};
+const ldPodcast = {
+  "@context": "https://schema.org",
+  "@type": "PodcastSeries",
+  name: "Dilo Como Es",
+  url: "https://open.spotify.com/show/7EAPPcMUumoRKNNJd44f6k",
+  inLanguage: "es",
+  author: { "@type": "Person", name: "Dra. María Alejandra Ruiz" },
+};
 ---
 
 <!doctype html>
-<html lang='es'>
+<html lang="es">
   <head>
-    <meta charset='UTF-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <meta name='description' content={description} />
-    <meta name='robots' content='index, follow' />
-    <meta name='author' content='Dra. Maria Alejandra Ruiz' />
-    <link rel='canonical' href={canonicalUrl} />
-
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-
-    <meta property='og:type' content='website' />
-    <meta property='og:url' content={canonicalUrl} />
-    <meta property='og:title' content={title} />
-    <meta property='og:description' content={description} />
-    <meta property='og:image' content={ogImage} />
-    <meta property='og:locale' content='es_ES' />
-    <meta property='og:site_name' content='Dra. Maria Alejandra Ruiz' />
-
-    <meta name='twitter:card' content='summary_large_image' />
-    <meta name='twitter:title' content={title} />
-    <meta name='twitter:description' content={description} />
-    <meta name='twitter:image' content={ogImage} />
-
-    <meta name='generator' content={Astro.generator} />
-
-    <link rel='preconnect' href='https://fonts.googleapis.com' />
-    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
-    <link
-      href='https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap'
-      rel='stylesheet'
-    />
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Dra. María Alejandra Ruiz" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <script
-      type='application/ld+json'
-      set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Person",
-        name: "Dra. Maria Alejandra Ruiz",
-        jobTitle: "Psicóloga Clínica",
-        url: siteUrl,
-        image: `${siteUrl}/og-image.jpg`,
-        description:
-          "Psicóloga Clínica con más de 20 años de experiencia especializada en salud mental y bienestar emocional.",
-        knowsAbout: [
-          "Psicología Clínica",
-          "Salud Mental",
-          "Bienestar Emocional",
-        ],
-        sameAs: [
-          "https://www.instagram.com/draruiz",
-          "https://www.linkedin.com/in/draruiz",
-          "https://www.youtube.com/@draruiz",
-        ],
-        worksFor: {
-          "@type": "Organization",
-          name: "Almaymente.io",
-          url: "https://www.almaymente.io",
-        },
-      })}
-    />
-    <script
-      type='application/ld+json'
-      set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        name: "Dra. Maria Alejandra Ruiz",
-        url: siteUrl,
-      })}
-    />
-    <script
-      type='application/ld+json'
-      set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Book",
-        name: "El niño que fui, el adulto que elijo ser",
-        author: { "@type": "Person", name: "Dra. Maria Alejandra Ruiz" },
-        bookEdition: "Segunda Edición",
-        inLanguage: "es",
-      })}
-    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Dra. María Alejandra Ruiz" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="preload" href="/fonts/century-gothic-700.woff" as="font" type="font/woff" crossorigin />
+    <link rel="preload" href="/fonts/century-gothic-400.woff" as="font" type="font/woff" crossorigin />
+    <link rel="preload" href="/fonts/amoresa.woff" as="font" type="font/woff" crossorigin />
+
+    <script is:inline>document.documentElement.classList.add("js");</script>
+
+    <script type="application/ld+json" set:html={JSON.stringify(ldPerson)} />
+    <script type="application/ld+json" set:html={JSON.stringify(ldSite)} />
+    <script type="application/ld+json" set:html={JSON.stringify(ldBook)} />
+    <script type="application/ld+json" set:html={JSON.stringify(ldPodcast)} />
   </head>
   <body>
-    <a href='#main-content' class='skip-to-content'>Ir al contenido principal</a
-    >
-
-    <!-- Loader -->
-    <Loader />
-
-    <!-- Decorative layers -->
-    <div class='film-grain-overlay' aria-hidden='true'></div>
-
-    <!-- Transition overlay -->
-    <div class='transition-overlay' aria-hidden='true'></div>
-
-    <!-- Background music -->
-    <audio id='bg-music' loop preload='none'>
-      <source
-        src='https://cdn.pixabay.com/audio/2024/11/28/audio_3a4e0e498a.mp3'
-        type='audio/mpeg'
-      />
-    </audio>
-
-    <!-- Main content -->
+    <!--
+    DIRECCIÓN · Hilo Rojo / Índice editorial · seed d15e204a (impeccable, surface, persuade)
+    THESIS: La home es una tabla de contenidos gigante unida por un solo hilo rojo que se dibuja al hacer scroll. Refusa el hero centrado con tarjetas de servicios.
+    OWN-WORLD: Crema, negro, rosa y rojo #AA1C1A en cuatro superficies que alternan por corte limpio; Century Gothic 700 como imagen y 400 para leer; Amoresa una palabra por pantalla; filetes 1px, píldoras, arco mid-century; un hilo SVG continuo por sección, con punto de encuentro en cada CTA.
+    STORY: En segundos el visitante sabe quién es (psicóloga clínica, vínculos), ve en el índice todo lo que hace y va a los cursos de Almaymente o escribe por WhatsApp.
+    FIRST VIEWPORT: Video a sangre oscurecido; nav transparente con píldora "Cursos"; nombre en display-1 anclado abajo-izquierda en 8 columnas con "dra" y "R" en script; a la derecha rol, una frase y el CTA primario; el hilo rojo cruza detrás del nombre y sale abajo a la derecha hacia el índice.
+    FORM: Índice editorial, #3 de 7 estructuras, elegido por el cliente sobre la mano d15e204a.
+    FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+    -->
+    <a class="skip" href="#contenido">Ir al contenido</a>
+    <Preloader />
+    <Nav surface={navSurface} />
     <slot />
-
-    <!-- WhatsApp FAB -->
-    <a
-      href='https://wa.me/18135686424'
-      target='_blank'
-      rel='noopener noreferrer'
-      class='whatsapp-fab'
-      aria-label='Contactar por WhatsApp'
-    >
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width='28'
-        height='28'
-        viewBox='0 0 24 24'
-        fill='currentColor'
-        aria-hidden='true'
-      >
-        <path
-          d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z'
-        ></path>
-      </svg>
-    </a>
-
-    <!-- ==========================================
-         SECTION MANAGER + MUSIC + CURSOR
-         ========================================== -->
     <script>
-      import { gsap } from "gsap";
-
-      // === SECTION MANAGER ===
-      const SECTIONS = [
-        "hero",
-        "bio",
-        "books",
-        "podcasts",
-        "ceo",
-        "conferences",
-        "collaborations",
-        "retreats",
-        "contact",
-      ];
-      let currentSection = "hero";
-      let isAnimating = false;
-
-      const getDirection = (from: string, to: string): number => {
-        return SECTIONS.indexOf(to) > SECTIONS.indexOf(from) ? 1 : -1;
-      };
-
-      const navigateTo = (sectionId: string) => {
-        if (isAnimating || sectionId === currentSection) return;
-        if (!SECTIONS.includes(sectionId)) return;
-
-        isAnimating = true;
-        const direction = getDirection(currentSection, sectionId);
-        const currentEl = document.getElementById(currentSection);
-        const nextEl = document.getElementById(sectionId);
-        const overlay = document.querySelector(
-          ".transition-overlay",
-        ) as HTMLElement;
-
-        if (!currentEl || !nextEl || !overlay) {
-          isAnimating = false;
-          return;
-        }
-
-        const mm = gsap.matchMedia();
-
-        mm.add("(prefers-reduced-motion: no-preference)", () => {
-          const tl = gsap.timeline({
-            onComplete: () => {
-              currentEl.classList.remove("is-active");
-              currentSection = sectionId;
-              isAnimating = false;
-              document.dispatchEvent(
-                new CustomEvent("sectionChanged", {
-                  detail: { section: sectionId },
-                }),
-              );
-              document.dispatchEvent(
-                new CustomEvent("sectionEnter", {
-                  detail: { section: sectionId },
-                }),
-              );
-            },
-          });
-
-          // Phase 1: Overlay sweeps in
-          tl.set(overlay, {
-            transformOrigin: direction > 0 ? "left center" : "right center",
-          })
-            .to(overlay, { scaleX: 1, duration: 0.5, ease: "power4.inOut" })
-
-            // Phase 2: Swap sections while hidden behind overlay
-            .call(() => {
-              gsap.set(currentEl, { autoAlpha: 0 });
-              nextEl.classList.add("is-active");
-              gsap.set(nextEl, { autoAlpha: 1 });
-              nextEl.scrollTop = 0;
-            })
-
-            // Phase 3: Overlay exits in opposite direction
-            .set(overlay, {
-              transformOrigin: direction > 0 ? "right center" : "left center",
-            })
-            .to(overlay, { scaleX: 0, duration: 0.5, ease: "power4.inOut" });
-        });
-
-        mm.add("(prefers-reduced-motion: reduce)", () => {
-          currentEl.classList.remove("is-active");
-          gsap.set(currentEl, { autoAlpha: 0 });
-          nextEl.classList.add("is-active");
-          gsap.set(nextEl, { autoAlpha: 1 });
-          nextEl.scrollTop = 0;
-          currentSection = sectionId;
-          isAnimating = false;
-          document.dispatchEvent(
-            new CustomEvent("sectionChanged", {
-              detail: { section: sectionId },
-            }),
-          );
-          document.dispatchEvent(
-            new CustomEvent("sectionEnter", { detail: { section: sectionId } }),
-          );
-        });
-      };
-
-      // Listen for navigation events
-      document.addEventListener("navigateTo", ((e: CustomEvent) => {
-        navigateTo(e.detail.section);
-      }) as EventListener);
-
-      // Keyboard navigation (left/right arrows)
-      document.addEventListener("keydown", (e) => {
-        if (isAnimating) return;
-        const idx = SECTIONS.indexOf(currentSection);
-        if (e.key === "ArrowRight" && idx < SECTIONS.length - 1) {
-          navigateTo(SECTIONS[idx + 1]);
-        } else if (e.key === "ArrowLeft" && idx > 0) {
-          navigateTo(SECTIONS[idx - 1]);
-        }
-      });
-
-      // Loader complete: show hero section
-      document.addEventListener("loaderComplete", () => {
-        const heroEl = document.getElementById("hero");
-        if (heroEl) {
-          heroEl.classList.add("is-active");
-          gsap.set(heroEl, { autoAlpha: 1 });
-          document.dispatchEvent(
-            new CustomEvent("sectionEnter", { detail: { section: "hero" } }),
-          );
-          document.dispatchEvent(
-            new CustomEvent("sectionChanged", { detail: { section: "hero" } }),
-          );
-        }
-      });
-
-      // === MUSIC SYSTEM ===
-      const audio = document.getElementById("bg-music") as HTMLAudioElement;
-      let musicPlaying = false;
-
-      document.addEventListener("startMusic", () => {
-        if (audio) {
-          audio.volume = 0.5;
-          audio
-            .play()
-            .then(() => {
-              musicPlaying = true;
-              document.dispatchEvent(
-                new CustomEvent("musicStateChanged", {
-                  detail: { playing: true },
-                }),
-              );
-            })
-            .catch(() => {
-              // Autoplay blocked — silently ignore
-              musicPlaying = false;
-              document.dispatchEvent(
-                new CustomEvent("musicStateChanged", {
-                  detail: { playing: false },
-                }),
-              );
-            });
-        }
-      });
-
-      document.addEventListener("toggleMusic", () => {
-        if (!audio) return;
-        if (musicPlaying) {
-          audio.pause();
-          musicPlaying = false;
-        } else {
-          audio.volume = 0.5;
-          audio.play().catch(() => {});
-          musicPlaying = true;
-        }
-        document.dispatchEvent(
-          new CustomEvent("musicStateChanged", {
-            detail: { playing: musicPlaying },
-          }),
-        );
-      });
+      import "../scripts/motion.ts";
     </script>
-
-    <style is:global>
-      .skip-to-content {
-        position: absolute;
-        top: -100%;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 10000;
-        padding: 1rem 2rem;
-        background: var(--gold-primary);
-        color: #0a0a0f;
-        font-weight: 700;
-        border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-        text-decoration: none;
-        transition: top 0.3s ease;
-      }
-
-      .skip-to-content:focus {
-        top: 0;
-      }
-
-      .whatsapp-fab {
-        position: fixed;
-        bottom: calc(var(--nav-height) + 1rem);
-        right: 2rem;
-        z-index: 99;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 52px;
-        height: 52px;
-        border-radius: 50%;
-        background: #25d366;
-        color: #fff;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
-        text-decoration: none;
-      }
-
-      .whatsapp-fab:hover {
-        transform: scale(1.1);
-        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-      }
-
-      .whatsapp-fab:focus-visible {
-        outline: 2px solid var(--gold-primary);
-        outline-offset: 3px;
-      }
-
-      @media (max-width: 480px) {
-        .whatsapp-fab {
-          bottom: calc(var(--nav-height) + 0.75rem);
-          right: 1rem;
-          width: 46px;
-          height: 46px;
-        }
-      }
-    </style>
   </body>
 </html>

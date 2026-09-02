@@ -1,619 +1,179 @@
 ---
 import heroVideo from "../assets/hero_video.mp4";
+import Thread from "./Thread.astro";
 ---
 
-<section class='hero cinematic-hero' aria-label='Presentación principal'>
-  <!-- Video de fondo -->
-  <div class='hero-video-wrapper' aria-hidden='true'>
-    <video
-      class='hero-video'
-      autoplay
-      muted
-      loop
-      playsinline
-      preload='metadata'
-      poster='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><rect fill="%230a0a0f" width="1920" height="1080"/></svg>'
-    >
-      <source src={heroVideo} type='video/mp4' />
-    </video>
+<section id="inicio" class="hero" data-surface="noche" aria-label="Presentación">
+  <div class="hero__media" aria-hidden="true">
+    <video class="hero__video" muted loop playsinline preload="none" data-src={heroVideo} poster="/hero-poster.jpg" tabindex="-1"></video>
   </div>
 
-  <!-- Overlays cinematográficos -->
-  <div class='hero-overlay-gradient' aria-hidden='true'></div>
-  <div class='hero-overlay-vignette' aria-hidden='true'></div>
+  <Thread class="hero__thread" draw="hero" width={1.5} d="M -20 170 C 300 70, 520 430, 820 340 C 1040 270, 1250 430, 1180 920" dot={{ cx: 1192, cy: 790 }} />
 
-  <!-- Línea dorada lateral -->
-  <div class='hero-gold-line' aria-hidden='true'></div>
+  <div class="container hero__body">
+    <h1 class="hero__name display-1">
+      <span class="hero__line" data-hero>María</span>
+      <span class="hero__line" data-hero>Alejan<span class="script">dra</span></span>
+      <span class="hero__line" data-hero><span class="script">R</span>uiz</span>
+    </h1>
 
-  <div class='hero-content container'>
-    <div class='hero-text-wrapper'>
-      <div class='subtitle-wrapper'>
-        <div class='subtitle-line-left' aria-hidden='true'></div>
-        <span class='subtitle'>Psicóloga Clínica de Excelencia</span>
-        <div class='subtitle-line-right' aria-hidden='true'></div>
-      </div>
-
-      <h1 class='hero-title'>
-        <span class='title-line' data-text='Maria'>Maria</span>
-        <span class='title-line' data-text='Alejandra'>Alejandra</span>
-        <span class='title-line title-accent' data-text='Ruiz'>Ruiz</span>
-      </h1>
-
-      <div class='hero-desc-block'>
-        <p class='hero-desc'>
-          Transformando vidas a través de la
-          <span class='desc-highlight'>psicología clínica de vanguardia</span>
-        </p>
-      </div>
-
-      <div class='hero-stats' role='list' aria-label='Logros profesionales'>
-        <div class='stat-item' role='listitem'>
-          <span class='stat-number'>20</span>
-          <span class='stat-suffix'>+</span>
-          <span class='stat-label'>Años de Experiencia</span>
-        </div>
-        <div class='stat-divider' aria-hidden='true'></div>
-        <div class='stat-item' role='listitem'>
-          <span class='stat-number'>10</span>
-          <span class='stat-suffix'>k+</span>
-          <span class='stat-label'>Vidas Transformadas</span>
-        </div>
-        <div class='stat-divider' aria-hidden='true'></div>
-        <div class='stat-item' role='listitem'>
-          <span class='stat-number'>5</span>
-          <span class='stat-suffix'>★</span>
-          <span class='stat-label'>Reconocimiento</span>
-        </div>
-      </div>
-
-      <div class='hero-cta'>
-        <a
-          href='https://almaymente.io'
-          target='_blank'
-          rel='noopener noreferrer'
-          class='btn-courses'
-          aria-label='Ir a la plataforma de cursos Alma y Mente'
-        >
-          <span class='btn-courses-icon' aria-hidden='true'>✦</span>
-          <span class='btn-courses-label'>Mis Cursos</span>
-          <span class='btn-courses-arrow' aria-hidden='true'>→</span>
-        </a>
+    <div class="hero__aside">
+      <p class="hero__role kicker" data-hero>Psicóloga clínica · Autora · Conferencista</p>
+      <p class="hero__lede body-lg" data-hero>
+        Más de veinte años acompañando a personas y equipos a entender sus vínculos: apego, ansiedad y
+        dependencia emocional, con rigor clínico y en español.
+      </p>
+      <div class="hero__actions" data-hero>
+        <a class="btn btn--primary" href="https://almaymente.io" target="_blank" rel="noopener noreferrer">Ver los cursos</a>
+        <a class="link" href="https://wa.me/18135686424?text=Hola%20Dra.%20Ruiz%2C%20me%20gustar%C3%ADa%20ponerme%20en%20contacto%20con%20usted." target="_blank" rel="noopener noreferrer">Escríbeme</a>
       </div>
     </div>
   </div>
+
+  <div class="container hero__foot" data-hero>
+    <span class="caption">Tampa, Florida · Online</span>
+    <a class="caption hero__scroll" href="#indice">Índice</a>
+  </div>
 </section>
 
-<script>
-  import { gsap } from "gsap";
-
-  let hasAnimated = false;
-
-  const animateHero = () => {
-    if (hasAnimated) return;
-    hasAnimated = true;
-
-    const mm = gsap.matchMedia();
-
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const master = gsap.timeline({
-        defaults: { ease: "power4.out", duration: 1 },
-      });
-
-      master
-        .fromTo(
-          ".hero-video",
-          { scale: 1.3 },
-          { scale: 1.05, duration: 2.5, ease: "power2.out" },
-          0,
-        )
-        .fromTo(
-          ".hero-gold-line",
-          { scaleY: 0 },
-          { scaleY: 1, duration: 1.2, ease: "power3.inOut" },
-          0.3,
-        )
-        .fromTo(
-          ".subtitle-line-left",
-          { scaleX: 0, transformOrigin: "right center" },
-          { scaleX: 1, duration: 0.8, ease: "power3.inOut" },
-          0.5,
-        )
-        .fromTo(
-          ".subtitle-line-right",
-          { scaleX: 0, transformOrigin: "left center" },
-          { scaleX: 1, duration: 0.8, ease: "power3.inOut" },
-          0.5,
-        )
-        .fromTo(
-          ".subtitle",
-          { autoAlpha: 0, y: 10, clipPath: "inset(0 100% 0 0)" },
-          {
-            autoAlpha: 1,
-            y: 0,
-            clipPath: "inset(0 0% 0 0)",
-            duration: 0.9,
-            ease: "power3.out",
-          },
-          0.65,
-        )
-        .fromTo(
-          ".title-line",
-          { autoAlpha: 0, y: 50 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.9,
-            stagger: 0.1,
-            ease: "power3.out",
-          },
-          0.9,
-        )
-        .fromTo(
-          ".hero-desc-block",
-          { autoAlpha: 0, y: 30 },
-          { autoAlpha: 1, y: 0, duration: 0.9 },
-          "-=0.5",
-        )
-        .fromTo(
-          ".stat-item",
-          { autoAlpha: 0, y: 25, scale: 0.95 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            scale: 1,
-            stagger: 0.1,
-            duration: 0.7,
-            ease: "back.out(1.4)",
-          },
-          "-=0.4",
-        )
-        .fromTo(
-          ".stat-divider",
-          { scaleY: 0 },
-          { scaleY: 1, stagger: 0.08, duration: 0.5, ease: "power3.inOut" },
-          "<0.1",
-        );
-    });
-
-    mm.add("(prefers-reduced-motion: reduce)", () => {
-      gsap.set(
-        ".cinematic-hero, .subtitle-line-left, .subtitle-line-right, .subtitle, .title-line, .hero-desc-block, .stat-item, .stat-divider, .hero-gold-line",
-        {
-          autoAlpha: 1,
-          y: 0,
-          x: 0,
-          scale: 1,
-          scaleX: 1,
-          scaleY: 1,
-          rotationX: 0,
-          clipPath: "none",
-        },
-      );
-    });
-  };
-
-  document.addEventListener("sectionEnter", ((e: CustomEvent) => {
-    if (e.detail.section === "hero") animateHero();
-  }) as EventListener);
-</script>
-
 <style>
-  .cinematic-hero {
-    width: 100%;
-    height: 100%;
+  .hero {
     position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+    padding-top: var(--nav-h);
+    overflow: clip;
+    isolation: isolate;
   }
-
-  .hero-video-wrapper {
+  .hero__media {
     position: absolute;
     inset: 0;
     z-index: 0;
-    overflow: hidden;
+    background: var(--negro);
   }
-
-  .hero-video {
+  /* el poster (fotograma del propio video) se ve siempre; el video entra encima al reproducirse */
+  .hero__media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("/hero-poster.jpg") 62% 40% / cover no-repeat;
+  }
+  .hero__video {
+    position: relative;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 62% 40%;
+    opacity: 0;
+    transition: opacity var(--dur-slow) ease;
   }
-
-  .hero-overlay-gradient {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: rgba(0, 0, 0, 0.55);
+  .hero__video.is-playing {
+    opacity: 1;
   }
-
-  .hero-overlay-vignette {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    background: radial-gradient(
-      ellipse at 30% 50%,
-      transparent 0%,
-      rgba(10, 10, 15, 0.5) 70%,
-      rgba(10, 10, 15, 0.8) 100%
-    );
-  }
-
-  .hero-gold-line {
-    position: absolute;
-    left: 5%;
-    top: 15%;
-    width: 2px;
-    height: 70%;
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      var(--gold-primary),
-      var(--gold-secondary),
-      transparent
-    );
-    z-index: 3;
-    transform-origin: top center;
-    opacity: 0.6;
-  }
-
-  .hero-particles {
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    pointer-events: none;
-  }
-
-  .particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: var(--gold-primary);
-    border-radius: 50%;
-    box-shadow:
-      0 0 12px var(--gold-glow),
-      0 0 24px rgba(201, 169, 97, 0.2);
-  }
-
-  .particle:nth-child(1) {
-    top: 20%;
-    left: 15%;
-    width: 3px;
-    height: 3px;
-  }
-  .particle:nth-child(2) {
-    top: 60%;
-    left: 80%;
-    width: 5px;
-    height: 5px;
-  }
-  .particle:nth-child(3) {
-    top: 35%;
-    left: 65%;
-    width: 3px;
-    height: 3px;
-  }
-  .particle:nth-child(4) {
-    top: 75%;
-    left: 25%;
-    width: 4px;
-    height: 4px;
-  }
-  .particle:nth-child(5) {
-    top: 15%;
-    left: 85%;
-    width: 3px;
-    height: 3px;
-  }
-  .particle:nth-child(6) {
-    top: 50%;
-    left: 45%;
-    width: 5px;
-    height: 5px;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    padding: 4rem 0;
-  }
-
-  .hero-text-wrapper {
-    max-width: 900px;
-  }
-
-  .subtitle-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    margin-bottom: 2rem;
-  }
-
-  .subtitle-line-left,
-  .subtitle-line-right {
-    height: 1px;
-    width: 60px;
-    background: linear-gradient(90deg, transparent, var(--gold-primary));
-  }
-
-  .subtitle-line-right {
-    background: linear-gradient(90deg, var(--gold-primary), transparent);
-  }
-
-  .subtitle {
-    font-family: var(--font-body);
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    font-size: 0.8rem;
-    color: var(--gold-primary);
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  .hero-title {
-    font-size: clamp(3.8rem, 11vw, 9.5rem);
-    line-height: 0.92;
-    margin-bottom: 2.5rem;
-    letter-spacing: -0.03em;
-  }
-
-  .title-line {
-    display: block;
-    font-weight: 300;
-    color: var(--text-primary);
-  }
-
-  .title-accent {
-    font-weight: 600;
-    background: linear-gradient(
-      135deg,
-      #ffffff 0%,
-      var(--gold-primary) 40%,
-      var(--gold-secondary) 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    background-size: 200% 200%;
-    animation: shimmer 6s ease-in-out infinite;
-  }
-
-  .hero-desc-block {
-    margin-bottom: 2.5rem;
-  }
-
-  .hero-desc {
-    font-size: 1.25rem;
-    line-height: 1.7;
-    max-width: 560px;
-    color: var(--text-secondary);
-    font-weight: 300;
-    margin-bottom: 0;
-  }
-
-  .desc-highlight {
-    color: var(--gold-primary);
-    font-weight: 500;
-    font-style: italic;
-  }
-
-  .hero-stats {
-    display: flex;
-    align-items: center;
-    gap: 2.5rem;
-  }
-
-  .stat-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .stat-number {
-    font-size: 2.8rem;
-    font-weight: 700;
-    line-height: 1;
-    background: linear-gradient(
-      135deg,
-      var(--gold-primary),
-      var(--gold-secondary)
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: var(--font-heading);
-    display: inline;
-  }
-
-  .stat-suffix {
-    font-size: 2rem;
-    font-weight: 600;
-    background: linear-gradient(
-      135deg,
-      var(--gold-primary),
-      var(--gold-secondary)
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: var(--font-heading);
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  .stat-divider {
-    width: 1px;
-    height: 48px;
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      var(--gold-primary),
-      transparent
-    );
-    transform-origin: center top;
-  }
-
-  /* Botón Mis Cursos */
-  .hero-cta {
-    margin-top: 2.5rem;
-  }
-
-  .btn-courses {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.85rem 2rem;
-    background: linear-gradient(
-      135deg,
-      rgba(201, 169, 97, 0.15),
-      rgba(212, 175, 55, 0.08)
-    );
-    border: 1px solid var(--gold-primary);
-    color: var(--gold-primary);
-    font-family: var(--font-heading);
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: var(--radius-sm, 8px);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition:
-      background var(--transition-base, 0.3s ease),
-      color var(--transition-base, 0.3s ease),
-      box-shadow var(--transition-base, 0.3s ease),
-      transform var(--transition-base, 0.3s ease);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn-courses::before {
+  /* capa de protección para el texto: nunca se confía en la foto */
+  .hero__media::after {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      135deg,
-      var(--gold-primary),
-      var(--gold-secondary)
+      to top,
+      rgba(0, 0, 0, 0.78) 0%,
+      rgba(0, 0, 0, 0.42) 48%,
+      rgba(0, 0, 0, 0.5) 100%
     );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 0;
   }
-
-  .btn-courses:hover::before,
-  .btn-courses:focus-visible::before {
-    opacity: 1;
-  }
-
-  .btn-courses:hover,
-  .btn-courses:focus-visible {
-    color: #0a0a0f;
-    box-shadow: 0 8px 32px rgba(201, 169, 97, 0.35);
-    transform: translateY(-2px);
-    outline: none;
-  }
-
-  .btn-courses:focus-visible {
-    outline: 2px solid var(--gold-primary);
-    outline-offset: 3px;
-  }
-
-  .btn-courses-icon,
-  .btn-courses-label,
-  .btn-courses-arrow {
-    position: relative;
+  .hero__thread {
     z-index: 1;
   }
-
-  .btn-courses-icon,
-  .btn-courses-arrow {
-    font-size: 0.85em;
-    transition: transform 0.3s ease;
+  .hero__body {
+    position: relative;
+    z-index: 2;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 40px;
+    align-items: end;
+    padding-bottom: clamp(32px, 5vh, 64px);
+  }
+  .hero__name {
+    grid-column: 1 / span 8;
+    display: grid;
+    margin-left: -0.04em;
+  }
+  .hero__line {
+    display: block;
+  }
+  .hero__line .script {
+    position: relative;
+    top: 0.02em;
+  }
+  .hero__aside {
+    grid-column: 9 / -1;
+    display: grid;
+    gap: 20px;
+    padding-bottom: 0.4em;
+  }
+  .hero__role {
+    color: var(--accent);
+    display: block;
+    line-height: 1.5;
+    text-wrap: balance;
+  }
+  .hero__lede {
+    color: var(--fg-muted);
+    max-width: 30rem;
+  }
+  .hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .hero__foot {
+    position: relative;
+    z-index: 2;
+    grid-row: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 20px 24px;
+    border-top: 1px solid var(--rule);
+  }
+  .hero__scroll {
+    color: var(--fg-muted);
+    transition: color var(--dur-instant) ease;
+  }
+  .hero__scroll:hover {
+    color: var(--fg);
   }
 
-  .btn-courses:hover .btn-courses-arrow {
-    transform: translateX(4px);
+  /* entrada coordinada tras el preloader (solo con JS) */
+  :global(.js) [data-hero] {
+    opacity: 0;
+    transform: translateY(24px);
   }
 
-  @keyframes shimmer {
-    0%,
-    100% {
-      background-position: 0% 50%;
+  @media (max-width: 899px) {
+    .hero__thread :global(.thread__dot) {
+      display: none;
     }
-    50% {
-      background-position: 100% 50%;
+    .hero__body {
+      row-gap: 32px;
+    }
+    .hero__name {
+      grid-column: 1 / -1;
+    }
+    .hero__aside {
+      grid-column: 1 / -1;
+      padding-bottom: 0;
     }
   }
-
-  @media (max-width: 768px) {
-    .hero-content {
-      padding: 4rem 0 3rem;
-    }
-    .hero-title {
-      font-size: clamp(2.8rem, 13vw, 5.5rem);
-    }
-    .hero-stats {
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-    .stat-number {
-      font-size: 2rem;
-    }
-    .stat-suffix {
-      font-size: 1.4rem;
-    }
-    .subtitle-wrapper {
-      gap: 0.8rem;
-    }
-    .subtitle {
-      letter-spacing: 3px;
-      font-size: 0.7rem;
-    }
-    .subtitle-line-left,
-    .subtitle-line-right {
-      width: 30px;
-    }
-    .hero-gold-line {
-      left: 3%;
-      opacity: 0.4;
-    }
-    .hero-desc {
-      font-size: 1.05rem;
-    }
-    .particle:nth-child(3),
-    .particle:nth-child(5) {
-      display: none;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .subtitle-line-left,
-    .subtitle-line-right {
-      display: none;
-    }
-    .subtitle-wrapper {
-      justify-content: center;
-    }
-    .hero-gold-line {
-      display: none;
-    }
-    .stat-divider {
-      display: none;
-    }
-    .hero-stats {
-      justify-content: center;
-      text-align: center;
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) [data-hero] {
+      opacity: 1;
+      transform: none;
     }
   }
 </style>

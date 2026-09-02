@@ -1,0 +1,57 @@
+---
+/**
+ * El hilo rojo. Cuatro primitivas del manual (§8): onda, costura, haz y punto de encuentro.
+ * - Un solo hilo protagonista por pantalla.
+ * - Pasa por detrás de la tipografía (z-index 1) y por delante de la fotografía (z-index 0).
+ * - Se dibuja al hacer scroll (data-draw="scrub"), al entrar (hero) o se revela por clip (costura).
+ * - Las rutas se dibujan en un espacio de autor de 1440×900; motion.ts ajusta el viewBox al
+ *   tamaño real de la sección y escala las coordenadas. Bajo 900px se usa la ruta móvil (dm),
+ *   que corre por el margen izquierdo, y el punto se ancla al CTA real de la sección (anchor).
+ */
+interface Props {
+  d?: string;
+  dm?: string;
+  paths?: string[];
+  pathsMobile?: string[];
+  viewBox?: string;
+  draw?: "scrub" | "clip" | "hero" | "none";
+  width?: number;
+  dot?: { cx: number; cy: number };
+  anchor?: string;
+  anchorPos?: "center" | "above" | "end";
+  variant?: "wave" | "stitch";
+  class?: string;
+}
+const {
+  d,
+  dm,
+  paths,
+  pathsMobile,
+  viewBox = "0 0 1440 900",
+  draw = "scrub",
+  width = 1.5,
+  dot,
+  anchor,
+  anchorPos = "center",
+  variant = "wave",
+  class: className,
+} = Astro.props;
+const all = paths ?? (d ? [d] : []);
+const allMobile = pathsMobile ?? (dm ? [dm] : []);
+---
+
+<svg
+  class:list={["thread", `thread--${variant}`, className]}
+  viewBox={viewBox}
+  data-viewbox={viewBox}
+  preserveAspectRatio="none"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+  data-draw={draw}
+  data-anchor={anchor}
+  data-anchor-pos={anchor ? anchorPos : undefined}
+>
+  {all.map((p, i) => <path d={p} data-dm={allMobile[i]} style={`stroke-width:${width}`} />)}
+  {dot && <path class="thread__dot" d={`M${dot.cx} ${dot.cy} h0.01`} />}
+</svg>

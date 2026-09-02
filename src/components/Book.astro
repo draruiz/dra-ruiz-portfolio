@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets";
+import Thread from "./Thread.astro";
+
+const cover =
+  "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/d7bac4aa-ac33-4a71-1465-90fc6cda5d00/public";
+---
+
+<section id="libro" class="book section" data-surface="noche" aria-labelledby="book-heading">
+  <Thread class="book__thread" draw="scrub" d="M 1360 -10 C 1360 260, 1120 560, 860 520 S 340 520, 336 760 C 334 840, 300 870, 300 910" dm="M 40 -10 C 40 260, 64 420, 40 620 S 30 800, 40 910" dot={{ cx: 336, cy: 760 }} anchor=".book__text .btn" />
+
+  <div class="container book__grid">
+    <div class="book__text">
+      <p class="kicker kicker--rule" data-reveal>El libro</p>
+      <h2 id="book-heading" class="display-2" data-reveal style="--i:1">
+        El niño que fui, el adulto que elijo ser
+      </h2>
+      <p class="badge" data-reveal style="--i:2">Segunda edición</p>
+      <p class="body-lg" data-reveal style="--i:3">
+        Un recurso práctico y accesible para mejorar tu salud mental y emocional. Con un lenguaje claro y
+        ameno, te acompaño en un viaje de autodescubrimiento y transformación.
+      </p>
+      <ul class="rules" data-reveal style="--i:4">
+        <li>Guía práctica de autodescubrimiento</li>
+        <li>Lenguaje claro y accesible</li>
+        <li>Disponible en cualquier país a través de Buscalibre</li>
+      </ul>
+      <a
+        class="btn btn--primary"
+        href="https://www.buscalibre.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-reveal
+        style="--i:5">Conseguir el libro</a
+      >
+    </div>
+
+    <figure class="book__cover" data-reveal>
+      <Image
+        src={cover}
+        alt="Portada del libro El niño que fui, el adulto que elijo ser"
+        width={680}
+        height={980}
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .book__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 48px;
+    align-items: center;
+  }
+  .book__text {
+    grid-column: 1 / span 6;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+  }
+  .book__text .body-lg,
+  .book__text .rules {
+    color: var(--fg-muted);
+  }
+  .book__text .rules {
+    width: 100%;
+    max-width: var(--measure);
+  }
+  .book__cover {
+    grid-column: 8 / span 4;
+    position: relative;
+    z-index: 0;
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .book__cover img {
+    width: 100%;
+    aspect-ratio: 34 / 49;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .book__cover:hover {
+      transform: translateY(-2px);
+    }
+  }
+  @media (max-width: 899px) {
+    .book__text { grid-column: 1 / -1; }
+    .book__cover { grid-column: 2 / span 7; }
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+/** Preloader: el hilo se dibuja ~1.1 s y la cortina sube. Una vez por sesión. */
+---
+<div class="loader" id="loader" data-surface="noche" aria-hidden="true">
+  <svg class="loader__svg" viewBox="0 0 420 60" fill="none" aria-hidden="true" focusable="false">
+    <path class="loader__path" d="M 4 30 C 70 6, 130 54, 210 30 S 350 6, 404 30" pathLength="1" />
+    <path class="loader__dot" d="M404 30 h0.01" />
+  </svg>
+</div>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById("loader");
+    if (!el) return;
+    var html = document.documentElement;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var seen = false;
+    try { seen = sessionStorage.getItem("hr-seen") === "1"; } catch (e) {}
+    function ready() {
+      html.classList.add("hr-ready");
+      document.dispatchEvent(new CustomEvent("hr:ready"));
+    }
+    if (reduce || seen) {
+      el.remove();
+      ready();
+      return;
+    }
+    try { sessionStorage.setItem("hr-seen", "1"); } catch (e) {}
+    el.classList.add("is-drawing");
+    setTimeout(function () {
+      el.classList.add("is-done");
+      ready();
+      el.addEventListener("transitionend", function () { el.remove(); }, { once: true });
+      setTimeout(function () { if (el.parentNode) el.remove(); }, 1200);
+    }, 1350);
+  })();
+</script>
+
+<style>
+  .loader {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    transition: transform 620ms var(--ease-inout);
+  }
+  .loader.is-done {
+    transform: translateY(-100%);
+  }
+  .loader__svg {
+    width: min(420px, 60vw);
+    height: auto;
+    overflow: visible;
+  }
+  .loader__path {
+    stroke: var(--rojo);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .loader.is-drawing .loader__path {
+    animation: loader-draw 1100ms var(--ease-thread) 120ms forwards;
+  }
+  .loader__dot {
+    stroke: var(--rojo);
+    stroke-linecap: round;
+    stroke-width: 0;
+  }
+  .loader.is-drawing .loader__dot {
+    animation: loader-dot 240ms var(--ease-out) 1120ms forwards;
+  }
+  @keyframes loader-draw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes loader-dot {
+    to { stroke-width: 6; }
+  }
+</style>

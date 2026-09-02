@@ -1,0 +1,97 @@
+---
+import Thread from "./Thread.astro";
+const wa = "https://wa.me/18135686424?text=Hola%20Dra.%20Ruiz%2C%20me%20interesa%20informaci%C3%B3n%20sobre%20conferencias%20y%20talleres.";
+---
+
+<section id="eventos" class="talks section" data-surface="papel" aria-labelledby="talks-heading">
+  <Thread class="talks__thread" variant="stitch" draw="clip" width={1} d="M 720 -10 L 720 733" dm="M 40 -10 L 40 910" dot={{ cx: 720, cy: 733 }} anchor=".talks__cta .btn" />
+
+  <div class="container">
+    <header class="talks__head">
+      <p class="kicker kicker--rule" data-reveal>Conferencias & Talleres</p>
+      <h2 id="talks-heading" class="display-2" data-reveal style="--i:1">
+        Experiencias que <span class="script">transforman</span> equipos y organizaciones
+      </h2>
+    </header>
+
+    <div class="talks__grid">
+      <article class="talks__col" data-reveal>
+        <h3 class="h2">Conferencias</h3>
+        <p>
+          Charlas magistrales sobre salud mental, inteligencia emocional y desarrollo personal para audiencias
+          corporativas y académicas.
+        </p>
+        <ul class="rules">
+          <li>Keynote corporativo</li>
+          <li>Salud mental organizacional</li>
+          <li>Liderazgo consciente</li>
+          <li>Inteligencia emocional</li>
+        </ul>
+      </article>
+
+      <article class="talks__col" data-reveal style="--i:1">
+        <h3 class="h2">Talleres</h3>
+        <p>
+          Sesiones interactivas y prácticas para equipos y comunidades que buscan herramientas concretas de
+          bienestar.
+        </p>
+        <ul class="rules">
+          <li>Manejo del estrés</li>
+          <li>Comunicación asertiva</li>
+          <li>Mindfulness aplicado</li>
+          <li>Resiliencia personal</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="talks__cta" data-reveal>
+      <p class="body-lg">¿Listo para transformar tu organización? Conversemos sobre una experiencia a la medida.</p>
+      <a class="btn btn--secondary" href={wa} target="_blank" rel="noopener noreferrer">Agenda tu evento</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .talks__head {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 24px;
+    max-width: 56rem;
+    margin-bottom: clamp(48px, 6vw, 88px);
+  }
+  .talks__grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 48px;
+  }
+  .talks__col {
+    display: grid;
+    gap: 20px;
+    align-content: start;
+  }
+  .talks__col:first-child { grid-column: 1 / span 5; }
+  .talks__col:last-child { grid-column: 8 / span 5; }
+  .talks__col p { color: var(--fg-muted); }
+  .talks__col .rules { margin-top: 8px; }
+  .talks__cta {
+    position: relative;
+    z-index: 2;
+    margin-top: clamp(56px, 7vw, 104px);
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .talks__cta p { max-width: 36rem; }
+  @media (max-width: 899px) {
+    .talks__col:first-child,
+    .talks__col:last-child { grid-column: 1 / -1; }
+  }
+</style>

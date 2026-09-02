@@ -1,0 +1,581 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-02T04:24:03Z",
+  "title": "Design System: Hilo Rojo · Dra. María Alejandra Ruiz",
+  "extensions": {
+    "colorMeta": {
+      "rojo": {
+        "role": "primary",
+        "displayName": "Rojo hilo",
+        "canonical": "#aa1c1a",
+        "tonalRamp": [
+          "#3e0d11",
+          "#57131f",
+          "#751e31",
+          "#8e1718",
+          "#aa1c1a",
+          "#cc4a3f",
+          "#e37a70",
+          "#f9cfcb"
+        ]
+      },
+      "red-300": {
+        "role": "primary",
+        "displayName": "Rojo legible (texto sobre Noche)",
+        "canonical": "#e37a70",
+        "tonalRamp": [
+          "#3e0d11",
+          "#57131f",
+          "#751e31",
+          "#8e1718",
+          "#aa1c1a",
+          "#cc4a3f",
+          "#e37a70",
+          "#f9cfcb"
+        ]
+      },
+      "red-400": {
+        "role": "primary",
+        "displayName": "Rojo medio (reserva legible, sin uso)",
+        "canonical": "#cc4a3f",
+        "tonalRamp": [
+          "#3e0d11",
+          "#57131f",
+          "#751e31",
+          "#8e1718",
+          "#aa1c1a",
+          "#cc4a3f",
+          "#e37a70",
+          "#f9cfcb"
+        ]
+      },
+      "red-600": {
+        "role": "primary",
+        "displayName": "Rojo pulsado (hover del botón)",
+        "canonical": "#8e1718",
+        "tonalRamp": [
+          "#3e0d11",
+          "#57131f",
+          "#751e31",
+          "#8e1718",
+          "#aa1c1a",
+          "#cc4a3f",
+          "#e37a70",
+          "#f9cfcb"
+        ]
+      },
+      "vino": {
+        "role": "primary",
+        "displayName": "Vino (acento en Rubor)",
+        "canonical": "#751e31",
+        "tonalRamp": [
+          "#3e0d11",
+          "#57131f",
+          "#751e31",
+          "#8e1718",
+          "#aa1c1a",
+          "#cc4a3f",
+          "#e37a70",
+          "#f9cfcb"
+        ]
+      },
+      "borgona": {
+        "role": "neutral",
+        "displayName": "Borgoña (texto sobre claro)",
+        "canonical": "#3e0d11",
+        "tonalRamp": [
+          "#3e0d11",
+          "#57131f",
+          "#751e31",
+          "#8e1718",
+          "#aa1c1a",
+          "#cc4a3f",
+          "#e37a70",
+          "#f9cfcb"
+        ]
+      },
+      "celeste": {
+        "role": "secondary",
+        "displayName": "Celeste (el único frío; badge)",
+        "canonical": "#cfe7f3",
+        "tonalRamp": [
+          "oklch(15% 0.035 220)",
+          "oklch(26% 0.035 220)",
+          "oklch(37% 0.035 220)",
+          "oklch(48% 0.035 220)",
+          "oklch(60% 0.035 220)",
+          "oklch(72% 0.035 220)",
+          "oklch(84% 0.035 220)",
+          "#cfe7f3"
+        ]
+      },
+      "crema": {
+        "role": "neutral",
+        "displayName": "Crema (fondo Papel / texto sobre oscuro)",
+        "canonical": "#fef4eb",
+        "tonalRamp": [
+          "#000000",
+          "#171412",
+          "#2a2622",
+          "#453f3a",
+          "#6b6159",
+          "#9a8d82",
+          "#c9bbae",
+          "#fef4eb"
+        ]
+      },
+      "rosa-palo": {
+        "role": "neutral",
+        "displayName": "Rosa palo (fondo Rubor)",
+        "canonical": "#f2d4e0",
+        "tonalRamp": [
+          "oklch(15% 0.045 350)",
+          "oklch(26% 0.045 350)",
+          "oklch(37% 0.045 350)",
+          "oklch(48% 0.045 350)",
+          "oklch(60% 0.045 350)",
+          "oklch(72% 0.045 350)",
+          "oklch(84% 0.045 350)",
+          "#f2d4e0"
+        ]
+      },
+      "rosa": {
+        "role": "neutral",
+        "displayName": "Rosa (Rubor tono rosa / palabra sobre Tensión)",
+        "canonical": "#f6bad6",
+        "tonalRamp": [
+          "oklch(15% 0.085 350)",
+          "oklch(26% 0.085 350)",
+          "oklch(37% 0.085 350)",
+          "oklch(48% 0.085 350)",
+          "oklch(60% 0.085 350)",
+          "oklch(72% 0.085 350)",
+          "#f6bad6",
+          "oklch(95% 0.05 350)"
+        ]
+      },
+      "negro": {
+        "role": "neutral",
+        "displayName": "Negro (fondo Noche)",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#000000",
+          "#171412",
+          "#2a2622",
+          "#453f3a",
+          "#6b6159",
+          "#9a8d82",
+          "#c9bbae",
+          "#fef4eb"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display-1": {
+        "displayName": "Display 1",
+        "purpose": "El nombre en el hero (una línea por palabra, 8 columnas, abajo-izquierda) y el h1 de /about."
+      },
+      "display-2": {
+        "displayName": "Display 2",
+        "purpose": "Titular de cada sección de la home; aloja la única palabra en script."
+      },
+      "h1": {
+        "displayName": "H1",
+        "purpose": "Cita editorial larga; Colaboraciones la usa en 400."
+      },
+      "h2": {
+        "displayName": "H2",
+        "purpose": "Subtítulos de columna e ítems del menú móvil."
+      },
+      "h3": {
+        "displayName": "H3",
+        "purpose": "Título de módulo (podcast, canal, facetas, hitos)."
+      },
+      "body-lg": {
+        "displayName": "Body lg",
+        "purpose": "Bajada de sección y primer párrafo, en color de texto pleno."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Texto general; párrafos a 34rem máximo."
+      },
+      "body-sm": {
+        "displayName": "Body sm",
+        "purpose": "Metadatos, notas, enlaces de nav y footer."
+      },
+      "kicker": {
+        "displayName": "Kicker",
+        "purpose": "Etiqueta de sección en mayúsculas, color acento, con filete de 48px delante (kicker--rule). Fijado por el manual §5.3."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Texto pequeño en caja normal y color secundario: números del índice, pies de retrato, ubicación, legales."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Etiqueta de dato en mayúsculas y color secundario (el kicker sin filete): WhatsApp / Ubicación / Redes, tags y marca de la fachada, almaymente.io."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Texto de botón en mayúsculas con tracking 0.12em."
+      },
+      "script": {
+        "displayName": "Script (Amoresa)",
+        "purpose": "Una palabra por pantalla dentro de un titular display; nunca en UI."
+      }
+    },
+    "shadows": [],
+    "protection": [
+      {
+        "name": "hero-scrim",
+        "value": "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.42) 48%, rgba(0,0,0,0.5) 100%)",
+        "purpose": "Protege el texto sobre el poster (public/hero-poster.jpg) y el video del hero."
+      },
+      {
+        "name": "facade-scrim",
+        "value": "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.25) 100%)",
+        "purpose": "Protege las etiquetas y el título sobre la portada B/N del podcast en la fachada de Spotify."
+      }
+    ],
+    "surfaces": {
+      "noche": {
+        "bg": "#000000",
+        "fg": "#fef4eb",
+        "fgMuted": "rgba(254, 244, 235, 0.62)",
+        "fgFaint": "rgba(254, 244, 235, 0.38)",
+        "accent": "#e37a70",
+        "thread": "#aa1c1a",
+        "rule": "rgba(254, 244, 235, 0.14)",
+        "highlight": "#cfe7f3",
+        "btnBg": "#aa1c1a",
+        "btnFg": "#fef4eb",
+        "btnBgHover": "#8e1718"
+      },
+      "papel": {
+        "bg": "#fef4eb",
+        "fg": "#3e0d11",
+        "fgMuted": "rgba(62, 13, 17, 0.68)",
+        "fgFaint": "rgba(62, 13, 17, 0.42)",
+        "accent": "#aa1c1a",
+        "thread": "#aa1c1a",
+        "rule": "rgba(62, 13, 17, 0.14)",
+        "highlight": "#3e6e88",
+        "btnBg": "#aa1c1a",
+        "btnFg": "#fef4eb",
+        "btnBgHover": "#8e1718"
+      },
+      "rubor": {
+        "bg": "#f2d4e0",
+        "bgTonoRosa": "#f6bad6",
+        "fg": "#3e0d11",
+        "fgMuted": "rgba(62, 13, 17, 0.66)",
+        "fgFaint": "rgba(62, 13, 17, 0.4)",
+        "accent": "#751e31",
+        "thread": "#aa1c1a",
+        "rule": "rgba(62, 13, 17, 0.16)",
+        "highlight": "#3e6e88",
+        "btnBg": "#aa1c1a",
+        "btnFg": "#fef4eb",
+        "btnBgHover": "#8e1718"
+      },
+      "tension": {
+        "bg": "#aa1c1a",
+        "fg": "#fef4eb",
+        "fgMuted": "rgba(254, 244, 235, 0.78)",
+        "fgFaint": "rgba(254, 244, 235, 0.52)",
+        "accent": "#fef4eb",
+        "thread": "#fef4eb",
+        "rule": "rgba(254, 244, 235, 0.28)",
+        "highlight": "#cfe7f3",
+        "btnBg": "#fef4eb",
+        "btnFg": "#aa1c1a",
+        "btnBgHover": "#f2d4e0"
+      }
+    },
+    "motion": [
+      {
+        "name": "dur-instant",
+        "value": "120ms",
+        "purpose": "Hover de color en enlaces de nav, número y flecha del índice."
+      },
+      {
+        "name": "dur-fast",
+        "value": "220ms",
+        "purpose": "Botones, subrayado del enlace, punto activo de la nav, punto de encuentro del hilo, superficie de la nav."
+      },
+      {
+        "name": "dur-base",
+        "value": "380ms",
+        "purpose": "Entradas por viewport (opacity + 16px), cortina del menú móvil, punto del índice."
+      },
+      {
+        "name": "dur-slow",
+        "value": "700ms",
+        "purpose": "Fade-in del video del hero, color de la miniatura de YouTube."
+      },
+      {
+        "name": "dur-thread",
+        "value": "1600ms",
+        "purpose": "Dibujo del hilo del hero tras el preloader."
+      },
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Entradas y hovers."
+      },
+      {
+        "name": "ease-inout",
+        "value": "cubic-bezier(0.65, 0, 0.35, 1)",
+        "purpose": "Cortinas (preloader, menú) y la hamburguesa."
+      },
+      {
+        "name": "ease-thread",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Solo para el hilo (preloader)."
+      },
+      {
+        "name": "reveal",
+        "value": "opacity 0→1, translateY(16px→0), 380ms ease-out, delay calc(var(--i) * 60ms)",
+        "purpose": "Entrada de todo elemento [data-reveal] al cruzar el 10% inferior del viewport."
+      },
+      {
+        "name": "hero-intro",
+        "value": "hilo: dashoffset de la longitud medida a 0 en 1.6s expo.out; texto: autoAlpha 0→1 + y 24→0 en 0.7s, stagger 0.08s desde 0.15s; punto a los 1.35s (oculto bajo 900px)",
+        "purpose": "Secuencia del hero cuando termina el preloader (evento hr:ready)."
+      },
+      {
+        "name": "thread-fit",
+        "value": "tras document.fonts.ready (tope 1500ms): viewBox = tamaño real de la sección en px (1:1), coordenadas reescaladas desde el espacio de autor 1440×900 (x·W/1440, y·H/900); re-medida si cambia el ancho del viewport, 200ms de debounce; bajo 900px usa la ruta móvil data-dm y, con data-anchor, recoloca el punto en x = 40·sx a la altura del CTA (center: centro del botón; above/end: 14px por encima; end además recorta el trazo a una vertical hasta el punto)",
+        "purpose": "Trazo de 1.5px uniforme y longitud medible sin pathLength ni non-scaling-stroke; hasta .is-ready las ondas van a opacity 0 y las costuras recortadas."
+      },
+      {
+        "name": "thread-mobile-route",
+        "value": "dm por el margen izquierdo en x = 40 del espacio de autor (≈11px a 390px), ondas suaves; relevos hero → índice 1180, índice → bio 80, luego 40 (en /about 88); haz: solo el trazo principal (ramas M 0 0 ocultas); hero sin dm y con el punto oculto",
+        "purpose": "Convención de la ruta móvil de cada hilo."
+      },
+      {
+        "name": "thread-scrub",
+        "value": "stroke-dasharray = stroke-dashoffset = getTotalLength() en px; strokeDashoffset → 0 con ScrollTrigger start 'top 78%' end 'bottom 62%', scrub 0.6; is-done (punto 0→8px) a progress > 0.94",
+        "purpose": "Dibujo del hilo ligado al scroll en cada sección."
+      },
+      {
+        "name": "thread-clip",
+        "value": "costura (guiones 6 8 fijos en CSS): clip-path inset(0 0 100% 0) → inset(0 0 0% 0), mismo ScrollTrigger; is-done a progress > 0.94",
+        "purpose": "Revelado de la costura vertical."
+      },
+      {
+        "name": "preloader",
+        "value": "dibujo 1100ms ease-thread +120ms; punto 240ms a 1120ms; cortina translateY(-100%) 620ms ease-inout a 1350ms; una vez por sesión",
+        "purpose": "Entrada del sitio."
+      },
+      {
+        "name": "menu",
+        "value": "translateY(-100%)→0 en 380ms ease-inout; ítems 120ms + 60ms × i",
+        "purpose": "Menú móvil a pantalla completa."
+      },
+      {
+        "name": "press",
+        "value": "scale(0.97) 160ms ease-out (botón); scale(0.94) (botón de play)",
+        "purpose": "Feedback al pulsar."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "transiciones y animaciones a 0.01ms; [data-reveal] visible; hilos completos con punto; sin preloader; sin video",
+        "purpose": "prefers-reduced-motion: reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-max",
+        "value": "899px",
+        "purpose": "Único corte: todo a 1 / -1, hamburguesa, costuras y ramas ocultas."
+      },
+      {
+        "name": "desktop",
+        "value": "900px",
+        "purpose": "Rejilla asimétrica de 12 columnas, nav con enlaces y CTA."
+      },
+      {
+        "name": "video",
+        "value": "768px",
+        "purpose": "Mínimo para cargar el video del hero (además sin saveData ni reduced-motion)."
+      },
+      {
+        "name": "container",
+        "value": "1440px",
+        "purpose": "Ancho máximo del contenedor."
+      },
+      {
+        "name": "facade-tags",
+        "value": "599px",
+        "purpose": "Única regla menor bajo 900px: las tags de la fachada de Spotify se ocultan (inset 20px entre 600 y 899px)."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón primario",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Píldora roja con texto crema en mayúsculas; uno por sección para la acción principal. En Tensión se invierte a crema con texto rojo.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Ver los cursos</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 44px; padding: 0 28px; border-radius: 999px; border: 1px solid transparent; background: var(--btn-bg, #aa1c1a); color: var(--btn-fg, #fef4eb); font-family: \"Century Gothic\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1; white-space: nowrap; text-decoration: none; cursor: pointer; transition: background-color 220ms ease, color 220ms ease, transform 160ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-primary:hover { background: var(--btn-bg-hover, #8e1718); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 999px; }"
+    },
+    {
+      "name": "Botón secundario",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Píldora transparente con borde en currentColor al 40%; para la acción de sección que no es la principal.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Agenda tu evento</a>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 44px; padding: 0 28px; border-radius: 999px; background: transparent; color: currentColor; border: 1px solid color-mix(in srgb, currentColor 40%, transparent); font-family: \"Century Gothic\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1; white-space: nowrap; text-decoration: none; cursor: pointer; transition: background-color 220ms ease, border-color 220ms ease, transform 160ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-secondary:hover { border-color: currentColor; background: color-mix(in srgb, currentColor 6%, transparent); } .ds-btn-secondary:active { transform: scale(0.97); } .ds-btn-secondary:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }"
+    },
+    {
+      "name": "Enlace fantasma",
+      "kind": "custom",
+      "refersTo": "link",
+      "description": "Texto en 700 y color acento con un subrayado de 1px que se dibuja de izquierda a derecha al pasar o enfocar.",
+      "html": "<a class=\"ds-link\" href=\"#\">Escríbeme</a>",
+      "css": ".ds-link { display: inline-block; padding-bottom: 3px; font-family: \"Century Gothic\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif; font-size: 1rem; font-weight: 700; line-height: 1.7; color: var(--accent, #aa1c1a); text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 0% 1px; background-repeat: no-repeat; background-position: left bottom; transition: background-size 220ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-link:hover, .ds-link:focus-visible { background-size: 100% 1px; } .ds-link:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 2px; }"
+    },
+    {
+      "name": "Kicker con filete y etiqueta de dato",
+      "kind": "custom",
+      "refersTo": "kicker",
+      "description": "Kicker: etiqueta de sección en mayúsculas y color acento, precedida por un filete de 48px × 1px (el hilo en miniatura). Label: la misma versalita sin filete, en color secundario, para etiquetar un dato.",
+      "html": "<div class=\"ds-kicker-demo\"><p class=\"ds-kicker\">Sobre mí</p><p class=\"ds-label\">WhatsApp</p></div>",
+      "css": ".ds-kicker-demo { display: grid; gap: 20px; font-family: \"Century Gothic\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif; } .ds-kicker { display: inline-flex; align-items: center; gap: 16px; margin: 0; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; line-height: 1; color: var(--accent, #aa1c1a); } .ds-kicker::before { content: \"\"; display: inline-block; width: 48px; height: 1px; background: currentColor; flex: none; } .ds-label { display: block; margin: 0; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.2; color: var(--fg-muted, rgba(62, 13, 17, 0.68)); }"
+    },
+    {
+      "name": "Chips",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Píldoras informativas con borde de 1px y sin fondo; no son filtros ni botones.",
+      "html": "<ul class=\"ds-chips\"><li>Dependencia emocional</li><li>Vínculos y apego</li><li>Autoestima y sanación</li></ul>",
+      "css": ".ds-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; font-family: \"Century Gothic\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif; } .ds-chips > li { padding: 6px 14px; border: 1px solid var(--rule, rgba(62, 13, 17, 0.14)); border-radius: 999px; font-size: 0.875rem; line-height: 1.4; }"
+    },
+    {
+      "name": "Badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "Píldora celeste con texto borgoña en mayúsculas: el uso canónico del único color frío.",
+      "html": "<span class=\"ds-badge\">Segunda edición</span>",
+      "css": ".ds-badge { display: inline-block; padding: 6px 14px; border-radius: 999px; background: #cfe7f3; color: #3e0d11; font-family: \"Century Gothic\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.3; }"
+    },
+    {
+      "name": "Navegación",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Barra de 72px en tres columnas: logotipo (imagen; 26px en móvil), enlaces en body-sm con punto de encuentro de 4px bajo el activo, y el CTA 'Cursos' en píldora pequeña que sigue visible junto a la hamburguesa en móvil. Transparente sobre el hero; al hacer scroll adopta la superficie que tiene debajo y un filete inferior.",
+      "html": "<nav class=\"ds-nav ds-nav--scrolled\"><svg class=\"ds-nav__logo\" width=\"96\" height=\"30\" viewBox=\"0 0 96 30\" aria-label=\"Logotipo (siempre imagen)\"><rect x=\"0.5\" y=\"0.5\" width=\"95\" height=\"29\" rx=\"3\" fill=\"none\" stroke=\"currentColor\" stroke-opacity=\"0.35\" stroke-dasharray=\"4 4\"/></svg><div class=\"ds-nav__links\"><a href=\"#\">Sobre mí</a><a href=\"#\" aria-current=\"true\">Libro</a><a href=\"#\">Podcast</a><a href=\"#\">Eventos</a><a href=\"#\">Contacto</a></div><a class=\"ds-nav__cta\" href=\"#\">Cursos</a></nav>",
+      "css": ".ds-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; height: 72px; padding: 0 32px; background: transparent; color: var(--fg, #fef4eb); border-bottom: 1px solid transparent; font-family: \"Century Gothic\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif; transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease; } .ds-nav--scrolled { background: var(--bg, #000000); border-bottom-color: var(--rule, rgba(254, 244, 235, 0.14)); } .ds-nav__logo { justify-self: start; height: 30px; width: auto; } .ds-nav__links { display: flex; gap: 28px; font-size: 0.875rem; letter-spacing: 0.01em; } .ds-nav__links a { position: relative; padding: 10px 0; color: var(--fg-muted, rgba(254, 244, 235, 0.62)); text-decoration: none; transition: color 120ms ease; } .ds-nav__links a:hover, .ds-nav__links a[aria-current=\"true\"] { color: var(--fg, #fef4eb); } .ds-nav__links a::after { content: \"\"; position: absolute; left: 50%; bottom: 0; width: 4px; height: 4px; border-radius: 50%; background: var(--accent, #e37a70); transform: translateX(-50%) scale(0); transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-nav__links a[aria-current=\"true\"]::after { transform: translateX(-50%) scale(1); } .ds-nav__cta { justify-self: end; display: inline-flex; align-items: center; min-height: 36px; padding: 0 20px; border-radius: 999px; background: var(--btn-bg, #aa1c1a); color: var(--btn-fg, #fef4eb); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1; text-decoration: none; transition: background-color 220ms ease; } .ds-nav__cta:hover { background: var(--btn-bg-hover, #8e1718); } .ds-nav__links a:focus-visible, .ds-nav__cta:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }"
+    },
+    {
+      "name": "Lista con filete",
+      "kind": "custom",
+      "refersTo": "rules",
+      "description": "Línea sobre caja: filete superior y un filete de 1px bajo cada ítem, 14px de padding, texto en color secundario. La variante apilada añade un título en h3.",
+      "html": "<ul class=\"ds-rules\"><li>Guía práctica de autodescubrimiento</li><li>Lenguaje claro y accesible</li><li>Disponible en cualquier país a través de Buscalibre</li></ul>",
+      "css": ".ds-rules { margin: 0; padding: 0; list-style: none; max-width: 34rem; border-top: 1px solid var(--rule, rgba(62, 13, 17, 0.14)); color: var(--fg-muted, rgba(62, 13, 17, 0.68)); font-family: \"Century Gothic\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif; font-size: 1rem; line-height: 1.7; } .ds-rules > li { padding: 14px 0; border-bottom: 1px solid var(--rule, rgba(62, 13, 17, 0.14)); }"
+    },
+    {
+      "name": "El hilo con punto de encuentro",
+      "kind": "custom",
+      "refersTo": "meeting-dot",
+      "description": "Onda de 1.5px sin relleno que cruza la sección detrás del texto y delante de la foto; escrita en el espacio de autor 1440×900, entra en y = -10 y sale en y = 910 o termina en el punto de 8px que marca el CTA principal. En el sitio el script ajusta el viewBox 1:1 a la sección, mide la longitud real y, bajo 900px, cambia a la ruta móvil por el margen izquierdo (x = 40) anclando el punto al CTA real; aquí, un SVG estático en su estado dibujado.",
+      "html": "<div class=\"ds-thread-wrap\"><svg class=\"ds-thread\" viewBox=\"0 0 640 220\" fill=\"none\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M -10 150 C 120 40, 250 210, 390 120 S 560 30, 600 110\"/><path class=\"ds-thread__dot\" d=\"M600 110 h0.01\"/></svg><p class=\"ds-thread-cap\">Ver los cursos</p></div>",
+      "css": ".ds-thread-wrap { position: relative; width: 100%; height: 220px; background: var(--bg, #fef4eb); color: var(--fg, #3e0d11); overflow: hidden; font-family: \"Century Gothic\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif; } .ds-thread { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 1; } .ds-thread path { fill: none; stroke: var(--thread, #aa1c1a); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; } .ds-thread__dot { stroke-width: 8; transition: stroke-width 220ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-thread-cap { position: absolute; right: 24px; top: 128px; z-index: 2; margin: 0; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent, #aa1c1a); }"
+    },
+    {
+      "name": "Fila del índice",
+      "kind": "custom",
+      "refersTo": "toc-row",
+      "description": "La tabla de contenidos: número en caption secundario, título enorme en 700, meta en body-sm a la derecha y flecha lineal de 28px. En hover, número y flecha pasan a acento y la flecha avanza 6px.",
+      "html": "<ol class=\"ds-toc\"><li><a class=\"ds-toc__row\" href=\"#\"><span class=\"ds-toc__num\">01</span><span class=\"ds-toc__title\">Sobre mí</span><span class=\"ds-toc__meta\">De Medellín a Tampa · psicóloga clínica</span><svg class=\"ds-toc__arrow\" width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a></li><li><a class=\"ds-toc__row\" href=\"#\"><span class=\"ds-toc__num\">02</span><span class=\"ds-toc__title\">El libro</span><span class=\"ds-toc__meta\">El niño que fui, el adulto que elijo ser</span><svg class=\"ds-toc__arrow\" width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a></li></ol>",
+      "css": ".ds-toc { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule, rgba(62, 13, 17, 0.14)); color: var(--fg, #3e0d11); font-family: \"Century Gothic\", \"Avenir Next\", \"Helvetica Neue\", Arial, sans-serif; } .ds-toc__row { display: grid; grid-template-columns: 3.5rem 1fr minmax(0, 20rem) 28px; align-items: center; column-gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--rule, rgba(62, 13, 17, 0.14)); color: inherit; text-decoration: none; } .ds-toc__num { font-size: 0.6875rem; letter-spacing: 0.08em; line-height: 1.4; color: var(--fg-muted, rgba(62, 13, 17, 0.68)); transition: color 120ms ease; } .ds-toc__title { font-size: clamp(2rem, 5.6vw, 5.5rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1; } .ds-toc__meta { font-size: 0.875rem; line-height: 1.6; letter-spacing: 0.01em; text-align: right; color: var(--fg-muted, rgba(62, 13, 17, 0.68)); } .ds-toc__arrow { color: var(--fg-muted, rgba(62, 13, 17, 0.68)); transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), color 120ms ease; } .ds-toc__row:hover .ds-toc__num, .ds-toc__row:hover .ds-toc__arrow { color: var(--accent, #aa1c1a); } .ds-toc__row:hover .ds-toc__arrow { transform: translateX(6px); } .ds-toc__row:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El índice cosido a un solo hilo",
+    "overview": "La home no es una landing con hero centrado y tarjetas de servicios: es una tabla de contenidos gigante, y lo que la une es un único hilo rojo que se dibuja al hacer scroll. Cada sección es un capítulo con su propia superficie (Noche, Papel, Rubor o Tensión), separado del anterior por un corte limpio a sangre, y el hilo entra por arriba exactamente donde salió el capítulo anterior. Al pasar por el CTA principal de cada sección el hilo lo marca con un punto de encuentro (un círculo rojo de 8px), y en Contacto termina en uno.\n\nLa tipografía es la imagen. Century Gothic 700 hace de titular enorme con tracking negativo; el 400 hace de lectura; Amoresa (la script del logotipo) aparece como una sola palabra por pantalla, dentro de un titular, nunca en la UI. Todo lo demás es quieto: filetes de 1px en vez de cajas, píldoras en vez de rectángulos, el arco mid-century para el retrato, fotografía en blanco y negro donde el único color que sobrevive es el rojo del hilo. No hay sombras, glass, degradados decorativos ni iconos: la profundidad se cuenta con el color de la superficie y el orden de capas (texto delante, hilo en medio, foto detrás).\n\nEl movimiento tiene un solo gesto expresivo, el hilo dibujándose (con el scroll, o en 1.6 s tras el preloader). Las entradas de texto son opacidad más 16px con escalonado de 60 ms; los hovers son cambios de color y un subrayado que se dibuja. Con `prefers-reduced-motion` todo se renderiza directamente en su estado final.",
+    "keyCharacteristics": [
+      "Un solo hilo rojo SVG por sección, `stroke` 1.5px sin relleno, que cruza detrás del texto y delante de la foto, marca el CTA principal con un punto de 8px y sale por abajo donde entra el siguiente.",
+      "Cuatro superficies por corte limpio (Noche, Papel, Rubor, Tensión) con sus propios tokens de primer plano; la nav adopta la superficie que tiene debajo.",
+      "Rojo #aa1c1a como hilo y CTA; sobre negro el texto rojo sube a #e37a70 para ser legible.",
+      "Century Gothic en dos pesos únicamente (400 y 700), sin itálica; tracking negativo en display, positivo en versalitas.",
+      "Amoresa: una palabra por pantalla, dentro del titular, tamaño display.",
+      "Filete 1px + aire en vez de tarjetas; píldora, círculo y arco como única geometría; cero `box-shadow`.",
+      "Composición asimétrica en 12 columnas (8/4, 5/6, 7/4, 6/4) que colapsa en un único corte a 900px."
+    ],
+    "rules": [
+      {
+        "name": "La Regla del Rojo Legible",
+        "body": "El rojo #aa1c1a nunca es texto, icono ni borde de input sobre negro. Sobre Noche el acento de texto es #e37a70; el hilo, que es gráfico, conserva #aa1c1a. Sobre Tensión el hilo y el acento pasan a crema.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regla de Tres Colores",
+        "body": "Una sección muestra fondo, texto y un solo acento activo. El rojo llena la pantalla solo por decisión editorial (Tensión) y nunca en dos secciones seguidas.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regla del Corte Limpio",
+        "body": "Las superficies cambian a borde completo, sin degradado ni transición de color; lo que las une es el hilo cruzando el límite. La nav no tiene superficie propia: adopta la de la sección bajo sus 72px (y cambia el logotipo blanco por el rojo en Papel y Rubor).",
+        "section": "colors"
+      },
+      {
+        "name": "La Regla de Dos Pesos",
+        "body": "Solo existen 400 y 700; no hay 500 ni itálica cargadas. Los títulos de sección (h2, h3) van en 700 aunque el manual proponga 500: el peso que no existe no se simula. El énfasis conceptual se hace con la script o con 700, nunca con `font-style: italic`.",
+        "section": "typography"
+      },
+      {
+        "name": "La Regla de Una Palabra",
+        "body": "Amoresa aparece una sola vez por pantalla, dentro de un titular, a tamaño display y nunca por debajo de 40px (2.5rem). Nunca en botones, navegación, párrafos ni etiquetas. El logotipo es siempre imagen, nunca texto compuesto.",
+        "section": "typography"
+      },
+      {
+        "name": "La Regla del Tracking",
+        "body": "Negativo en todo lo grande (-0.03em a -0.01em), positivo en todo lo pequeño (kicker 0.22em, label 0.2em, botón 0.12em, caption 0.08em). Mayúsculas solo en kicker, label y botón; el caption va en caja normal, y nunca hay mayúsculas en párrafos ni titulares.",
+        "section": "typography"
+      },
+      {
+        "name": "La Regla del Hilo Continuo",
+        "body": "Cada hilo se escribe en un espacio de autor de 1440×900 (`data-viewbox`); al cargar, el script ajusta el viewBox del SVG al tamaño real de la sección en píxeles (1:1) y reescala las coordenadas (x por ancho/1440, y por alto/900), de modo que el trazo de 1.5px es uniforme sin `pathLength` ni `non-scaling-stroke`. En ese espacio el trazo entra en `y = -10` y sale en `y = 910` (o termina en el punto de su CTA), y la `x` de entrada es la `x` de salida de la sección anterior (hero sale en 1180 → índice entra en 1180; índice sale en 80 → bio entra en 80; Conferencias termina su costura en el punto del CTA en 720 y Colaboraciones retoma en 720; y así hasta Contacto, donde el hilo termina en un punto). En `/about` la cadena es la misma: el hilo del hero sale abajo en 300 (la columna del retrato), la bio lo recoge en 300 y cruza esa columna hasta 80, donde arranca la costura de la ruta. Bajo 900px cada hilo tiene una ruta móvil (`dm` / `pathsMobile`) que baja por el margen izquierdo en x = 40 del espacio de autor (≈11px a 390px) con ondas suaves, y los relevos se conservan: hero → índice en 1180, índice → bio en 80, y 40 desde ahí (en `/about` la bio y la ruta bajan por 88, alineadas con las viñetas). Una sección nueva se inserta respetando esa cadena en las dos rutas.",
+        "section": "layout"
+      },
+      {
+        "name": "La Regla del Único Corte",
+        "body": "Hay un breakpoint estructural (900px): lo que no cabe se apila y los hilos cambian a su ruta móvil. No hay rejillas intermedias; la única regla menor por debajo es que las tags de la fachada de Spotify desaparecen bajo 600px.",
+        "section": "layout"
+      },
+      {
+        "name": "La Regla del Plano",
+        "body": "Cero sombras. Si algo tiene que destacarse, cambia de superficie, gana un filete o le llega el hilo. Un `box-shadow` sería una decisión nueva del sistema, no una variación.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do poner un solo `<Thread>` por sección, escrito en el espacio de autor 1440×900 (el script lo ajusta a la sección), con `y` de entrada en -10 y salida en 910 o final en el punto del CTA, entrando por la `x` donde salió la sección anterior; y darle una ruta móvil `dm` por el margen izquierdo (x = 40) con `anchor` al CTA para que el punto caiga sobre el botón real.",
+      "Do poner el punto de encuentro (8px) donde el hilo pasa por el CTA principal de la sección; solo pasa de largo sin punto cuando la sección no tiene un CTA único (índice, podcast).",
+      "Do leer todo el color de primer plano de las variables de superficie (`--fg`, `--fg-muted`, `--fg-faint`, `--accent`, `--thread`, `--rule`, `--btn-*`); en Noche el texto rojo es #e37a70, nunca #aa1c1a.",
+      "Do abrir cada sección con kicker (con filete de 48px) → titular display-2 → bajada body-lg, apilados a 24px, y una sola palabra en Amoresa dentro del titular como máximo.",
+      "Do separar con filete de 1px y aire: listas `.rules`, cabeceras al hacer scroll, pies, columnas laterales. Un módulo destacado cambia de superficie o gana un filete, no una caja.",
+      "Do usar solo dos pesos (400 y 700), tracking negativo en display y positivo en lo pequeño; mayúsculas únicamente en kicker, label y botón (el caption va en caja normal).",
+      "Do recortar el retrato en arco 4:5 y en blanco y negro (`grayscale(1) contrast(1.06)`); el único color sobre una foto es el rojo del hilo.",
+      "Do componer en asimetría sobre 12 columnas (8/4, 5/6, 7/4, 6/4) anclada a un borde, con un único corte a 900px donde todo pasa a `1 / -1`.",
+      "Do mover solo tres cosas: el hilo dibujándose, entradas de opacidad + 16px con escalonado de 60ms, y cambios de color o subrayado en hover; y renderizar el estado final con `prefers-reduced-motion`.",
+      "Do proteger el texto sobre video o foto con una capa de color plano o degradado negro (hero y fachada de Spotify); nunca confiar en la imagen."
+    ],
+    "donts": [
+      "Don't usar `box-shadow`, `backdrop-filter`, glass, glow ni degradados decorativos; los únicos degradados del sitio son las protecciones de texto sobre imagen.",
+      "Don't escribir texto, iconos ni bordes en #aa1c1a sobre negro (2.9:1), ni celeste sobre crema o rosa (1.2:1).",
+      "Don't usar Amoresa en botones, navegación, párrafos o etiquetas, ni más de una palabra por pantalla, ni por debajo de 40px, ni componer el logotipo como texto.",
+      "Don't simular el peso 500 ni una itálica: no existen en las fuentes cargadas.",
+      "Don't poner dos secciones Tensión seguidas, ni el rojo como fondo por defecto; el rojo es acento salvo por decisión editorial.",
+      "Don't dibujar varias líneas rojas sueltas, hilos sin continuidad entre secciones, ni hilos que pasen por delante del texto.",
+      "Don't encerrar contenido en tarjetas con borde, fondo y sombra a la vez; ni centrar por defecto una sección entera.",
+      "Don't añadir iconos glifo, librerías de iconos ni emojis; las únicas formas son la flecha lineal de 1.5px y el triángulo de play.",
+      "Don't usar `scale()` mayor que 1, rebotes, parallax ni loops visibles; el `translateY(-2px)` de la portada es el máximo desplazamiento en hover.",
+      "Don't cargar iframes al inicio ni el video del hero en móvil, con `saveData` o con `prefers-reduced-motion`."
+    ]
+  }
+}

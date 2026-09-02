@@ -1,0 +1,77 @@
+---
+import Thread from "./Thread.astro";
+const wa = "https://wa.me/18135686424?text=Hola%20Dra.%20Ruiz%2C%20tengo%20una%20propuesta%20de%20colaboraci%C3%B3n%20que%20me%20gustar%C3%ADa%20compartir%20contigo.";
+---
+
+<section
+  id="colaboraciones"
+  class="collab section"
+  data-surface="rubor"
+  data-tone="rosa"
+  aria-labelledby="collab-heading"
+>
+  <Thread class="collab__thread" draw="scrub" d="M 720 -10 C 720 300, 1160 420, 1140 763 C 1130 900, 400 760, 220 910" dm="M 40 -10 C 40 260, 70 420, 40 640 S 30 800, 40 910" dot={{ cx: 1140, cy: 763 }} anchor=".collab__body .btn" />
+
+  <div class="container collab__grid">
+    <h2 id="collab-heading" class="collab__quote h1" data-reveal>
+      Si tu propuesta nace de la sanación, los vínculos y el crecimiento emocional, quiero
+      <span class="script">escucharla</span>.
+    </h2>
+
+    <div class="collab__body">
+      <p class="kicker kicker--rule" data-reveal>Colaboraciones</p>
+      <p data-reveal style="--i:1">
+        Trabajo desde la psicología clínica, la autoestima y la sanación emocional, con especial atención a la
+        dependencia emocional, el apego y los vínculos afectivos.
+      </p>
+      <p data-reveal style="--i:2">
+        Si tienes una idea para un taller, una conferencia, un contenido o un programa que ayude a transformar
+        relaciones o a acompañar a personas en su bienestar, juntas podemos desarrollar algo profundo, humano y
+        realmente útil.
+      </p>
+      <ul class="chips" data-reveal style="--i:3">
+        <li>Dependencia emocional</li>
+        <li>Vínculos y apego</li>
+        <li>Autoestima y sanación</li>
+        <li>Relaciones y bienestar</li>
+      </ul>
+      <a class="btn btn--secondary" href={wa} target="_blank" rel="noopener noreferrer" data-reveal style="--i:4">Escríbeme por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .collab__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 56px;
+    align-items: start;
+  }
+  .collab__quote {
+    grid-column: 1 / span 8;
+    position: relative;
+    z-index: 2;
+    font-weight: 400;
+    line-height: 1.12;
+  }
+  .collab__quote .script {
+    color: var(--accent);
+    font-size: max(1.15em, 2.5rem);
+  }
+  .collab__body {
+    grid-column: 8 / span 5;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+    padding-top: clamp(0px, 3vw, 40px);
+  }
+  .collab__body p:not(.kicker) { color: var(--fg-muted); }
+  .collab__body .btn { margin-top: 8px; }
+  @media (max-width: 899px) {
+    .collab__quote,
+    .collab__body { grid-column: 1 / -1; padding-top: 0; }
+  }
+</style>

@@ -1,0 +1,242 @@
+---
+import { Image } from "astro:assets";
+import logoWhite from "../assets/short_logo_white.png";
+import logoRed from "../assets/short_logo_red.png";
+
+interface Props {
+  surface?: "noche" | "papel" | "rubor" | "tension";
+}
+const { surface = "noche" } = Astro.props;
+
+const links = [
+  { id: "bio", href: "/#bio", label: "Sobre mí" },
+  { id: "libro", href: "/#libro", label: "Libro" },
+  { id: "podcast", href: "/#podcast", label: "Podcast" },
+  { id: "eventos", href: "/#eventos", label: "Eventos" },
+  { id: "retiros", href: "/#retiros", label: "Retiros" },
+  { id: "contacto", href: "/#contacto", label: "Contacto" },
+];
+const socials = [
+  { href: "https://www.instagram.com/dramariaalejandraruiz/", label: "Instagram" },
+  { href: "https://www.youtube.com/@Pensandoenvozaltadraruiz/videos", label: "YouTube" },
+  { href: "https://www.linkedin.com/in/drmarialejandraruiz", label: "LinkedIn" },
+];
+---
+
+<header class="nav" id="nav" data-surface={surface} data-nav>
+  <div class="nav__inner">
+    <a href="/" class="nav__logo" aria-label="Dra. Ruiz — inicio">
+      <Image src={logoWhite} alt="" width={224} densities={[1, 2]} class="nav__logo-img nav__logo-img--light" loading="eager" />
+      <Image src={logoRed} alt="" width={224} densities={[1, 2]} class="nav__logo-img nav__logo-img--dark" loading="eager" />
+    </a>
+
+    <nav class="nav__links" aria-label="Secciones">
+      {links.map((l) => <a href={l.href} data-nav-link={l.id}>{l.label}</a>)}
+    </nav>
+
+    <div class="nav__end">
+      <a class="btn btn--primary btn--sm nav__cta" href="https://almaymente.io" target="_blank" rel="noopener noreferrer">Cursos</a>
+      <button class="nav__burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú" data-menu-toggle>
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" data-surface="noche" data-menu inert>
+  <svg class="thread menu__thread" viewBox="0 0 1440 900" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
+    <path d="M -20 620 C 260 500, 480 840, 760 700 S 1200 380, 1460 560" vector-effect="non-scaling-stroke" />
+  </svg>
+  <nav class="menu__nav container" aria-label="Menú móvil">
+    <ol class="menu__list">
+      {links.map((l, i) => (
+        <li style={`--i:${i}`}>
+          <a href={l.href} class="menu__link h2" data-menu-link>{l.label}</a>
+        </li>
+      ))}
+    </ol>
+    <div class="menu__foot">
+      <a class="btn btn--primary" href="https://almaymente.io" target="_blank" rel="noopener noreferrer">Ver los cursos</a>
+      <ul class="menu__social">
+        {socials.map((s) => <li><a class="link link--quiet" href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a></li>)}
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<style>
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    height: var(--nav-h);
+    background: transparent;
+    color: var(--fg);
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color var(--dur-fast) ease,
+      color var(--dur-fast) ease,
+      border-color var(--dur-fast) ease;
+  }
+  .nav.is-scrolled {
+    background: var(--bg);
+    border-bottom-color: var(--rule);
+  }
+  .nav__inner {
+    height: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+  }
+  .nav__logo {
+    display: block;
+    height: 30px;
+    width: auto;
+    justify-self: start;
+  }
+  .nav__logo-img {
+    height: 30px;
+    width: auto;
+  }
+  .nav__logo-img--dark { display: none; }
+  .nav[data-surface="papel"] .nav__logo-img--light,
+  .nav[data-surface="rubor"] .nav__logo-img--light { display: none; }
+  .nav[data-surface="papel"] .nav__logo-img--dark,
+  .nav[data-surface="rubor"] .nav__logo-img--dark { display: block; }
+
+  .nav__links {
+    display: flex;
+    gap: clamp(16px, 2.4vw, 36px);
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+  }
+  .nav__links a {
+    position: relative;
+    padding: 10px 0;
+    color: var(--fg-muted);
+    transition: color var(--dur-instant) ease;
+  }
+  .nav__links a:hover,
+  .nav__links a[aria-current="true"] {
+    color: var(--fg);
+  }
+  /* el punto de encuentro: activo lleva un punto rojo de 4px */
+  .nav__links a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    transform: translateX(-50%) scale(0);
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+  .nav__links a[aria-current="true"]::after {
+    transform: translateX(-50%) scale(1);
+  }
+  .nav__end {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .nav__burger {
+    display: none;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    align-content: center;
+    gap: 6px;
+  }
+  .nav__burger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform var(--dur-fast) var(--ease-inout);
+  }
+  .nav__burger[aria-expanded="true"] span:first-child { transform: translateY(3.75px) rotate(45deg); }
+  .nav__burger[aria-expanded="true"] span:last-child { transform: translateY(-3.75px) rotate(-45deg); }
+
+  /* ---- Menú móvil: pantalla completa en Noche, ítems en h2, un hilo cruzando ---- */
+  .menu {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transform: translateY(-100%);
+    visibility: hidden;
+    transition:
+      transform var(--dur-base) var(--ease-inout),
+      visibility 0s linear var(--dur-base);
+  }
+  .menu.is-open {
+    transform: none;
+    visibility: visible;
+    transition:
+      transform var(--dur-base) var(--ease-inout),
+      visibility 0s;
+  }
+  .menu__thread path {
+    stroke-width: 1.5;
+  }
+  .menu__nav {
+    position: relative;
+    z-index: 2;
+    padding-top: var(--nav-h);
+  }
+  .menu__list {
+    display: grid;
+    gap: 4px;
+  }
+  .menu__list li {
+    border-bottom: 1px solid var(--rule);
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+    transition-delay: 0s;
+  }
+  .menu.is-open .menu__list li {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(120ms + var(--i) * 60ms);
+  }
+  .menu__link {
+    display: block;
+    padding: 14px 0;
+  }
+  .menu__foot {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .menu__social {
+    display: flex;
+    gap: 20px;
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 899px) {
+    .nav__inner { grid-template-columns: 1fr auto; gap: 12px; }
+    .nav__links { display: none; }
+    .nav__burger { display: grid; }
+    .nav__end { gap: 6px; }
+    .nav__logo, .nav__logo-img { height: 26px; }
+  }
+  @media (min-width: 900px) {
+    .menu { display: none; }
+  }
+</style>

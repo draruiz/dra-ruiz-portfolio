@@ -1,616 +1,165 @@
 ---
-const paragraphs = [
-  "Psicóloga clínica nacida en Medellín, Colombia, con formación de pregrado en Rutgers University y doctorado en Florida. Su experiencia abarca desde intervenciones con menores en situación de vulnerabilidad hasta entornos de máxima seguridad en Estados Unidos.",
-  "Fundadora de Healthy Mind Specialists en Tampa, Florida, hoy lidera un equipo de terapeutas hispanohablantes que ha impactado a cientos de personas en más de 20 países. Autora, conferencista y voz activa en la divulgación de la salud mental.",
-  "Actualmente prepara su nuevo libro sobre heridas de la infancia y apego emocional, y trabaja en programas de mentoría internacional para formar terapeutas en Latinoamérica.",
+import { Image } from "astro:assets";
+import Thread from "./Thread.astro";
+
+const portrait =
+  "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/419fe35b-68e5-43f1-821d-872ec5796b00/public";
+
+const ruta = [
+  { k: "Medellín", v: "Nace en Colombia" },
+  { k: "Rutgers", v: "Pregrado en psicología" },
+  { k: "Florida", v: "Maestría y doctorado clínico" },
+  { k: "Tampa", v: "Funda Healthy Mind Specialists" },
+  { k: "Hoy", v: "Terapeutas en más de 20 países" },
 ];
 ---
 
-<section id='bio' class='bio-section' aria-labelledby='bio-heading'>
-  <div class='container bio-container'>
-    <!-- Línea dorada animada vertical -->
-    <div class='bio-gold-line' aria-hidden='true'>
-      <div class='bio-gold-line-inner'></div>
-    </div>
+<section id="bio" class="bio section" data-surface="rubor" aria-labelledby="bio-heading">
+  <Thread class="bio__thread" draw="scrub" d="M 80 -10 C 80 220, 300 480, 620 400 S 1010 430, 1000 659 C 995 800, 1250 800, 1360 910" dm="M 80 -10 C 80 200, 40 300, 40 520 S 56 780, 40 910" dot={{ cx: 1000, cy: 659 }} anchor=".bio__text .link" />
 
-    <header class='bio-header'>
-      <span class='section-subtitle'>Sobre Mí</span>
-      <h2 id='bio-heading' class='bio-title'>
-        Una vida dedicada a la <span class='text-gold'>mente humana</span>
+  <div class="container bio__grid">
+    <figure class="bio__figure arch" data-reveal>
+      <Image
+        src={portrait}
+        alt="Retrato en blanco y negro de la Dra. María Alejandra Ruiz"
+        width={640}
+        height={800}
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption class="caption">Dra. María Alejandra Ruiz · Tampa, Florida</figcaption>
+    </figure>
+
+    <div class="bio__text">
+      <p class="kicker kicker--rule" data-reveal>Sobre mí</p>
+      <h2 id="bio-heading" class="display-2" data-reveal style="--i:1">
+        Una vida dedicada a los <span class="script">vínculos</span>
       </h2>
-    </header>
-
-    <div class='bio-main'>
-      <figure class='bio-image-wrapper'>
-        <div class='bio-image-reveal'>
-          <div class='bio-image'>
-            <img
-              src='https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/419fe35b-68e5-43f1-821d-872ec5796b00/public'
-              alt='Retrato profesional de la Dra. Maria Alejandra Ruiz, psicóloga clínica especializada en bienestar emocional y apego'
-              width='400'
-              height='500'
-              loading='lazy'
-              decoding='async'
-            />
-          </div>
-        </div>
-        <div class='decorative-frame' aria-hidden='true'>
-          <span class='frame-corner frame-tl'></span>
-          <span class='frame-corner frame-tr'></span>
-          <span class='frame-corner frame-bl'></span>
-          <span class='frame-corner frame-br'></span>
-        </div>
-        <figcaption class='bio-image-caption'>
-          Dra. Maria Alejandra Ruiz — Psicóloga Clínica
-        </figcaption>
-      </figure>
-
-      <article class='bio-text' aria-label='Biografía de la Dra. Ruiz'>
-        {
-          paragraphs.map((paragraph, i) => (
-            <p class='bio-paragraph' data-paragraph={i}>
-              <span class='paragraph-number' aria-hidden='true'>
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span class='paragraph-content'>{paragraph}</span>
-            </p>
-          ))
-        }
-      </article>
+      <p class="body-lg" data-reveal style="--i:2">
+        Soy psicóloga clínica, nacida en Medellín, Colombia, con pregrado en Rutgers University y doctorado en
+        Florida. Mi experiencia va desde la intervención con menores en situación de vulnerabilidad hasta
+        entornos de máxima seguridad en Estados Unidos.
+      </p>
+      <p data-reveal style="--i:3">
+        Fundé Healthy Mind Specialists en Tampa, donde hoy lidero un equipo de terapeutas hispanohablantes
+        que ha acompañado a cientos de personas en más de 20 países. Escribo, doy conferencias y divulgo
+        salud mental en español.
+      </p>
+      <p data-reveal style="--i:4">
+        Preparo un nuevo libro sobre heridas de la infancia y apego emocional, y trabajo en programas de
+        mentoría internacional para formar terapeutas en Latinoamérica.
+      </p>
+      <a class="link" href="/about" data-reveal style="--i:5">Conocer mi historia completa</a>
     </div>
+  </div>
 
-    <div class='bio-cta'>
-      <a href='/about' class='btn bio-cta-btn'>
-        Conocer mi historia completa
-        <span class='btn-arrow' aria-hidden='true'>→</span>
-      </a>
-    </div>
-
-    <footer class='signature'>
-      <div class='signature-line' aria-hidden='true'></div>
-      <p class='signature-name'>Maria Alejandra Ruiz</p>
-      <span class='signature-title'
-        >Psicóloga Clínica · Autora · Conferencista</span
-      >
-    </footer>
+  <div class="container bio__ruta-wrap">
+    <ol class="ruta" aria-label="Ruta profesional" data-reveal>
+      <svg class="ruta__line" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <line x1="0" y1="1" x2="1000" y2="1" vector-effect="non-scaling-stroke" />
+      </svg>
+      {ruta.map((r) => (
+        <li>
+          <span class="ruta__k">{r.k}</span>
+          <span class="ruta__v body-sm">{r.v}</span>
+        </li>
+      ))}
+    </ol>
   </div>
 </section>
 
-<script>
-  import { gsap } from "gsap";
-
-  let hasAnimated = false;
-
-  const animateBio = () => {
-    if (hasAnimated) return;
-    hasAnimated = true;
-
-    const mm = gsap.matchMedia();
-
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const master = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-      // Subtitle badge
-      master.fromTo(
-        ".bio-section .section-subtitle",
-        { autoAlpha: 0, y: 20 },
-        { autoAlpha: 1, y: 0, duration: 0.5 },
-      );
-
-      // Heading
-      master.fromTo(
-        ".bio-title",
-        { autoAlpha: 0, y: 30 },
-        { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out" },
-        "-=0.2",
-      );
-
-      // Gold line
-      master.fromTo(
-        ".bio-gold-line-inner",
-        { scaleY: 0 },
-        { scaleY: 1, duration: 1.2, ease: "power2.inOut" },
-        0.2,
-      );
-
-      // Image reveal
-      master
-        .fromTo(
-          ".bio-image-reveal",
-          { clipPath: "inset(100% 0% 0% 0%)" },
-          {
-            clipPath: "inset(0% 0% 0% 0%)",
-            duration: 1.2,
-            ease: "power4.inOut",
-          },
-          0.4,
-        )
-        .fromTo(
-          ".bio-image img",
-          { scale: 1.3 },
-          { scale: 1.05, duration: 1.4, ease: "power3.out" },
-          0.4,
-        )
-        .fromTo(
-          ".frame-corner",
-          { autoAlpha: 0, scale: 0 },
-          {
-            autoAlpha: 1,
-            scale: 1,
-            duration: 0.5,
-            stagger: { amount: 0.3, from: "random" },
-            ease: "back.out(2)",
-          },
-          0.9,
-        )
-        .fromTo(
-          ".bio-image-caption",
-          { autoAlpha: 0, y: 10 },
-          { autoAlpha: 1, y: 0, duration: 0.5 },
-          1.1,
-        );
-
-      // Paragraphs
-      gsap.utils.toArray<HTMLElement>(".bio-paragraph").forEach((p, i) => {
-        master
-          .fromTo(
-            p.querySelector(".paragraph-number"),
-            { autoAlpha: 0, x: -20 },
-            { autoAlpha: 1, x: 0, duration: 0.4 },
-            0.8 + i * 0.2,
-          )
-          .fromTo(
-            p,
-            { "--bar-scale": "0" } as any,
-            { "--bar-scale": "1", duration: 0.6 } as any,
-            0.8 + i * 0.2,
-          )
-          .fromTo(
-            p.querySelector(".paragraph-content"),
-            { autoAlpha: 0, y: 20 },
-            { autoAlpha: 1, y: 0, duration: 0.6 },
-            0.9 + i * 0.2,
-          );
-      });
-
-      // CTA
-      master.fromTo(
-        ".bio-cta",
-        { autoAlpha: 0, y: 20 },
-        { autoAlpha: 1, y: 0, duration: 0.6 },
-        "-=0.3",
-      );
-
-      // Signature
-      master
-        .fromTo(
-          ".signature-line",
-          { scaleX: 0 },
-          { scaleX: 1, duration: 0.8, ease: "power3.inOut" },
-          "-=0.2",
-        )
-        .fromTo(
-          ".signature-name",
-          { autoAlpha: 0, y: 30, skewY: 3 },
-          { autoAlpha: 1, y: 0, skewY: 0, duration: 0.7 },
-          "-=0.4",
-        )
-        .fromTo(
-          ".signature-title",
-          { autoAlpha: 0, y: 15 },
-          { autoAlpha: 1, y: 0, duration: 0.5 },
-          "-=0.3",
-        );
-    });
-
-    mm.add("(prefers-reduced-motion: reduce)", () => {
-      gsap.set(
-        ".bio-header, .bio-image-wrapper, .bio-paragraph, .signature, .bio-gold-line-inner, .bio-cta, .section-subtitle, .paragraph-number, .paragraph-content, .bio-image-reveal, .bio-image-caption, .frame-corner, .signature-name, .signature-title, .signature-line",
-        {
-          autoAlpha: 1,
-          y: 0,
-          x: 0,
-          scale: 1,
-          clipPath: "none",
-          scaleX: 1,
-          scaleY: 1,
-        },
-      );
-    });
-  };
-
-  document.addEventListener("sectionEnter", ((e: CustomEvent) => {
-    if (e.detail.section === "bio") animateBio();
-  }) as EventListener);
-</script>
-
 <style>
-  .bio-section {
-    padding: 4rem 0 calc(var(--nav-height) + 2rem);
-    background: linear-gradient(
-      to bottom,
-      var(--bg-secondary) 0%,
-      var(--bg-primary) 50%,
-      var(--bg-secondary) 100%
-    );
+  .bio__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 48px;
+    align-items: start;
+  }
+  .bio__figure {
+    grid-column: 1 / span 5;
     position: relative;
-    overflow: visible;
-    min-height: 100%;
-  }
-
-  .bio-section::before {
-    content: "";
-    position: absolute;
-    top: -10%;
-    right: -5%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(
-      circle,
-      rgba(201, 169, 97, 0.08) 0%,
-      transparent 70%
-    );
-    filter: blur(80px);
-    pointer-events: none;
-  }
-
-  /* Línea dorada vertical decorativa */
-  .bio-gold-line {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    transform: translateX(-50%);
-    pointer-events: none;
     z-index: 0;
+    display: grid;
+    gap: 14px;
   }
-
-  .bio-gold-line-inner {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      var(--gold-primary),
-      var(--gold-secondary),
-      transparent
-    );
-    transform-origin: top center;
-    opacity: 0.15;
-  }
-
-  .bio-container {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 1;
-  }
-
-  .bio-header {
-    text-align: center;
-    margin-bottom: var(--spacing-md);
-  }
-
-  .bio-main {
-    display: block;
-  }
-
-  /* Imagen con reveal */
-  .bio-image-wrapper {
-    float: left;
-    width: 400px;
-    position: relative;
-    padding: 2rem;
-    margin: 0 var(--spacing-md) 1rem 0;
-    shape-outside: margin-box;
-  }
-
-  .bio-image-reveal {
+  .bio__text {
+    grid-column: 7 / -1;
     position: relative;
     z-index: 2;
-    overflow: hidden;
-    border-radius: var(--radius-lg);
-    will-change: clip-path;
+    display: grid;
+    gap: 24px;
+    padding-top: clamp(0px, 4vw, 56px);
+  }
+  .bio__text .display-2 {
+    margin-bottom: 8px;
+  }
+  .bio__text p:not(.kicker) {
+    color: var(--fg-muted);
+  }
+  .bio__text .body-lg {
+    color: var(--fg);
+  }
+  .bio__text .link {
+    justify-self: start;
   }
 
-  .bio-image {
-    overflow: hidden;
-    border-radius: var(--radius-lg);
-    box-shadow:
-      0 0 0 1px rgba(201, 169, 97, 0.2),
-      0 30px 60px rgba(0, 0, 0, 0.6),
-      0 0 80px rgba(201, 169, 97, 0.15);
-    transition: box-shadow var(--transition-premium);
-  }
-
-  .bio-image:hover {
-    box-shadow:
-      0 0 0 1px rgba(201, 169, 97, 0.4),
-      0 40px 80px rgba(0, 0, 0, 0.7),
-      0 0 120px rgba(201, 169, 97, 0.25);
-  }
-
-  .bio-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: grayscale(20%) contrast(110%);
-    transition: filter var(--transition-premium);
-  }
-
-  .bio-image:hover img {
-    filter: grayscale(0%) contrast(100%);
-  }
-
-  .bio-image-caption {
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-align: center;
-    margin-top: 1rem;
-    visibility: hidden;
-  }
-
-  /* Marco decorativo con esquinas */
-  .decorative-frame {
-    position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
-    right: 0.5rem;
-    bottom: 2.5rem;
-    pointer-events: none;
-    z-index: 3;
-  }
-
-  .frame-corner {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    border-color: var(--gold-primary);
-    border-style: solid;
-    border-width: 0;
-    opacity: 0.6;
-    visibility: hidden;
-  }
-
-  .frame-tl {
-    top: 0;
-    left: 0;
-    border-top-width: 2px;
-    border-left-width: 2px;
-    border-top-left-radius: 4px;
-  }
-
-  .frame-tr {
-    top: 0;
-    right: 0;
-    border-top-width: 2px;
-    border-right-width: 2px;
-    border-top-right-radius: 4px;
-  }
-
-  .frame-bl {
-    bottom: 0;
-    left: 0;
-    border-bottom-width: 2px;
-    border-left-width: 2px;
-    border-bottom-left-radius: 4px;
-  }
-
-  .frame-br {
-    bottom: 0;
-    right: 0;
-    border-bottom-width: 2px;
-    border-right-width: 2px;
-    border-bottom-right-radius: 4px;
-  }
-
-  .section-subtitle {
-    display: inline-block;
-    font-family: var(--font-body);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: var(--gold-primary);
-    margin-bottom: 1.5rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 0.5rem 1.5rem;
-    background: linear-gradient(
-      135deg,
-      rgba(201, 169, 97, 0.1),
-      rgba(201, 169, 97, 0.05)
-    );
-    border: 1px solid rgba(201, 169, 97, 0.2);
-    border-radius: 30px;
-    visibility: hidden;
-  }
-
-  .bio-title {
-    color: var(--text-primary);
-    margin-bottom: 3rem;
-    line-height: 1.2;
-  }
-
-  .text-gold {
-    background: linear-gradient(
-      135deg,
-      var(--gold-primary),
-      var(--gold-secondary)
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-style: italic;
-    font-weight: 600;
-  }
-
-  /* Texto bio con números y barras */
-  .bio-text {
-    color: var(--text-secondary);
-    font-size: 1.1rem;
-    line-height: 1.9;
-    font-weight: 300;
-  }
-
-  .bio-paragraph {
-    margin-bottom: 2.5rem;
+  /* Ruta: la costura del manual (línea de guiones 6 8 + puntos de encuentro) */
+  .bio__ruta-wrap {
     position: relative;
-    padding-left: 3.5rem;
-    --bar-scale: 0;
+    z-index: 2;
+    margin-top: clamp(64px, 8vw, 120px);
   }
-
-  .bio-paragraph::before {
+  .ruta {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    column-gap: var(--gap);
+    padding-top: 28px;
+  }
+  .ruta__line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 2px;
+    overflow: visible;
+  }
+  .ruta__line line {
+    stroke: var(--thread);
+    stroke-width: 1;
+    stroke-dasharray: 6 8;
+  }
+  .ruta li {
+    position: relative;
+    display: grid;
+    gap: 4px;
+  }
+  .ruta li::before {
     content: "";
     position: absolute;
-    left: 2rem;
-    top: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      var(--gold-primary),
-      var(--gold-secondary)
-    );
-    border-radius: 2px;
-    transform: scaleY(var(--bar-scale));
-    transform-origin: top center;
-  }
-
-  .paragraph-number {
-    position: absolute;
+    top: -32px;
     left: 0;
-    top: 0.1em;
-    font-family: var(--font-heading);
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--gold-primary);
-    opacity: 0.4;
-    letter-spacing: 1px;
-    visibility: hidden;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--thread);
+  }
+  .ruta__k {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .ruta__v {
+    color: var(--fg-muted);
   }
 
-  .paragraph-content {
-    visibility: hidden;
-  }
-
-  /* Firma */
-  .signature {
-    margin-top: 4rem;
-    padding: 2.5rem;
-    border-radius: var(--radius-md);
-    background: linear-gradient(
-      135deg,
-      rgba(201, 169, 97, 0.06),
-      rgba(201, 169, 97, 0.02)
-    );
-    border: 1px solid rgba(201, 169, 97, 0.1);
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-  }
-
-  .signature-line {
-    width: 80px;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      var(--gold-primary),
-      var(--gold-secondary)
-    );
-    margin: 0 auto 1.5rem;
-    transform-origin: center;
-  }
-
-  .signature-name {
-    font-family: var(--font-heading);
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    background: linear-gradient(
-      135deg,
-      var(--gold-primary),
-      var(--gold-secondary)
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-style: italic;
-    font-weight: 600;
-    margin: 0 0 0.5rem;
-    visibility: hidden;
-  }
-
-  .signature-title {
-    display: block;
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: var(--text-muted);
-    visibility: hidden;
-  }
-
-  /* CTA */
-  .bio-cta {
-    text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    visibility: hidden;
-  }
-
-  .bio-cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .btn-arrow {
-    display: inline-block;
-    transition: transform var(--transition-fast);
-  }
-
-  .bio-cta-btn:hover .btn-arrow {
-    transform: translateX(5px);
-  }
-
-  @media (max-width: 900px) {
-    .bio-image-wrapper {
-      float: none;
-      width: 100%;
-      max-width: 350px;
-      margin: 0 auto var(--spacing-md) auto;
-      padding: 1rem;
-    }
-
-    .bio-main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .bio-text {
-      text-align: left;
-    }
-
-    .bio-gold-line {
-      display: none;
-    }
-
-    .signature {
-      text-align: center;
-    }
-
-    .signature-name {
-      font-size: 2rem;
-    }
-
-    .bio-paragraph {
-      padding-left: 2.5rem;
-    }
-
-    .bio-paragraph::before {
-      left: 1.5rem;
-    }
+  @media (max-width: 899px) {
+    .bio__figure { grid-column: 1 / span 8; }
+    .bio__text { grid-column: 1 / -1; padding-top: 0; }
+    .ruta { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; padding-top: 0; }
+    .ruta__line { display: none; }
+    .ruta li { padding-left: 20px; }
+    .ruta li::before { top: 0.55em; left: 0; }
   }
 </style>
