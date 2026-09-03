@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import Thread from "./Thread.astro";
 
 const portrait =
-  "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/419fe35b-68e5-43f1-821d-872ec5796b00/public";
+  "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/5f4f545d-05a6-4754-9896-ff4b6cbd9000/public";
 
 const ruta = [
   { k: "Medellín", v: "Nace en Colombia" },
@@ -14,56 +14,84 @@ const ruta = [
 ];
 ---
 
-<section id="bio" class="bio section" data-surface="rubor" aria-labelledby="bio-heading">
-  <Thread class="bio__thread" draw="scrub" d="M 80 -10 C 80 220, 300 480, 620 400 S 1010 430, 1000 659 C 995 800, 1250 800, 1360 910" dm="M 80 -10 C 80 200, 40 300, 40 520 S 56 780, 40 910" dot={{ cx: 1000, cy: 659 }} anchor=".bio__text .link" />
+<section
+  id='bio'
+  class='bio section'
+  data-surface='rubor'
+  aria-labelledby='bio-heading'
+>
+  <Thread
+    class='bio__thread'
+    draw='scrub'
+    d='M 80 -10 C 80 220, 300 480, 620 400 S 1010 430, 1000 659 C 995 800, 1250 800, 1360 910'
+    dm='M 80 -10 C 80 200, 40 300, 40 520 S 56 780, 40 910'
+    dot={{ cx: 1000, cy: 659 }}
+    anchor='.bio__text .link'
+  />
 
-  <div class="container bio__grid">
-    <figure class="bio__figure arch" data-reveal>
+  <div class='container bio__grid'>
+    <figure class='bio__figure arch' data-reveal>
       <Image
         src={portrait}
-        alt="Retrato en blanco y negro de la Dra. María Alejandra Ruiz"
+        alt='Retrato en blanco y negro de la Dra. María Alejandra Ruiz'
         width={640}
         height={800}
-        loading="lazy"
-        decoding="async"
+        loading='lazy'
+        decoding='async'
       />
-      <figcaption class="caption">Dra. María Alejandra Ruiz · Tampa, Florida</figcaption>
+      <figcaption class='caption'>
+        Dra. María Alejandra Ruiz · Tampa, Florida
+      </figcaption>
     </figure>
 
-    <div class="bio__text">
-      <p class="kicker kicker--rule" data-reveal>Sobre mí</p>
-      <h2 id="bio-heading" class="display-2" data-reveal style="--i:1">
-        Una vida dedicada a los <span class="script">vínculos</span>
+    <div class='bio__text'>
+      <p class='kicker kicker--rule' data-reveal>Sobre mí</p>
+      <h2 id='bio-heading' class='display-2' data-reveal style='--i:1'>
+        Una vida dedicada a los <span class='script'>vínculos</span>
       </h2>
-      <p class="body-lg" data-reveal style="--i:2">
-        Soy psicóloga clínica, nacida en Medellín, Colombia, con pregrado en Rutgers University y doctorado en
-        Florida. Mi experiencia va desde la intervención con menores en situación de vulnerabilidad hasta
-        entornos de máxima seguridad en Estados Unidos.
+      <p class='body-lg' data-reveal style='--i:2'>
+        Soy psicóloga clínica, nacida en Medellín, Colombia, con pregrado en
+        Rutgers University y doctorado en Florida. Mi experiencia va desde la
+        intervención con menores en situación de vulnerabilidad hasta entornos
+        de máxima seguridad en Estados Unidos.
       </p>
-      <p data-reveal style="--i:3">
-        Fundé Healthy Mind Specialists en Tampa, donde hoy lidero un equipo de terapeutas hispanohablantes
-        que ha acompañado a cientos de personas en más de 20 países. Escribo, doy conferencias y divulgo
-        salud mental en español.
+      <p data-reveal style='--i:3'>
+        Fundé Healthy Mind Specialists en Tampa, donde hoy lidero un equipo de
+        terapeutas hispanohablantes que ha acompañado a cientos de personas en
+        más de 20 países. Escribo, doy conferencias y divulgo salud mental en
+        español.
       </p>
-      <p data-reveal style="--i:4">
-        Preparo un nuevo libro sobre heridas de la infancia y apego emocional, y trabajo en programas de
-        mentoría internacional para formar terapeutas en Latinoamérica.
+      <p data-reveal style='--i:4'>
+        Preparo un nuevo libro sobre heridas de la infancia y apego emocional, y
+        trabajo en programas de mentoría internacional para formar terapeutas en
+        Latinoamérica.
       </p>
-      <a class="link" href="/about" data-reveal style="--i:5">Conocer mi historia completa</a>
+      <a class='link' href='/about' data-reveal style='--i:5'
+        >Conocer mi historia completa</a
+      >
     </div>
   </div>
 
-  <div class="container bio__ruta-wrap">
-    <ol class="ruta" aria-label="Ruta profesional" data-reveal>
-      <svg class="ruta__line" viewBox="0 0 1000 2" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-        <line x1="0" y1="1" x2="1000" y2="1" vector-effect="non-scaling-stroke" />
+  <div class='container bio__ruta-wrap'>
+    <ol class='ruta' aria-label='Ruta profesional' data-reveal>
+      <svg
+        class='ruta__line'
+        viewBox='0 0 1000 2'
+        preserveAspectRatio='none'
+        aria-hidden='true'
+        focusable='false'
+      >
+        <line x1='0' y1='1' x2='1000' y2='1' vector-effect='non-scaling-stroke'
+        ></line>
       </svg>
-      {ruta.map((r) => (
-        <li>
-          <span class="ruta__k">{r.k}</span>
-          <span class="ruta__v body-sm">{r.v}</span>
-        </li>
-      ))}
+      {
+        ruta.map((r) => (
+          <li>
+            <span class='ruta__k'>{r.k}</span>
+            <span class='ruta__v body-sm'>{r.v}</span>
+          </li>
+        ))
+      }
     </ol>
   </div>
 </section>
@@ -155,11 +183,27 @@ const ruta = [
   }
 
   @media (max-width: 899px) {
-    .bio__figure { grid-column: 1 / span 8; }
-    .bio__text { grid-column: 1 / -1; padding-top: 0; }
-    .ruta { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; padding-top: 0; }
-    .ruta__line { display: none; }
-    .ruta li { padding-left: 20px; }
-    .ruta li::before { top: 0.55em; left: 0; }
+    .bio__figure {
+      grid-column: 1 / span 8;
+    }
+    .bio__text {
+      grid-column: 1 / -1;
+      padding-top: 0;
+    }
+    .ruta {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 40px;
+      padding-top: 0;
+    }
+    .ruta__line {
+      display: none;
+    }
+    .ruta li {
+      padding-left: 20px;
+    }
+    .ruta li::before {
+      top: 0.55em;
+      left: 0;
+    }
   }
 </style>

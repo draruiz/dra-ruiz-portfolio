@@ -1,11 +1,23 @@
 ---
 import heroVideo from "../assets/hero_video.mp4";
+import heroVideoMobile from "../assets/hero_video_mobile.mp4";
 import Thread from "./Thread.astro";
 ---
 
 <section id="inicio" class="hero" data-surface="noche" aria-label="Presentación">
   <div class="hero__media" aria-hidden="true">
-    <video class="hero__video" muted loop playsinline preload="none" data-src={heroVideo} poster="/hero-poster.jpg" tabindex="-1"></video>
+    <!-- La versión móvil es el mismo metraje recortado a vertical sobre el mismo punto
+         focal (62 %), así el encuadre coincide con el póster y pesa la cuarta parte. -->
+    <video
+      class="hero__video"
+      muted
+      loop
+      playsinline
+      preload="none"
+      data-src={heroVideo}
+      data-src-mobile={heroVideoMobile}
+      poster="/hero-poster.jpg"
+      tabindex="-1"></video>
   </div>
 
   <Thread class="hero__thread" draw="hero" width={1.5} d="M -20 170 C 300 70, 520 430, 820 340 C 1040 270, 1250 430, 1180 920" dot={{ cx: 1192, cy: 790 }} />
@@ -20,7 +32,7 @@ import Thread from "./Thread.astro";
     <div class="hero__aside">
       <p class="hero__role kicker" data-hero>Psicóloga clínica · Autora · Conferencista</p>
       <p class="hero__lede body-lg" data-hero>
-        Más de veinte años acompañando a personas y equipos a entender sus vínculos: apego, ansiedad y
+        Más de diez años acompañando a personas y equipos a entender sus vínculos: apego, ansiedad y
         dependencia emocional, con rigor clínico y en español.
       </p>
       <div class="hero__actions" data-hero>

@@ -1,9 +1,20 @@
 ---
 import Thread from "./Thread.astro";
+import retiroVideo from "../assets/retiro_video.mp4";
 const wa = "https://wa.me/18135686424?text=Hola%20Dra.%20Ruiz%2C%20me%20interesa%20informaci%C3%B3n%20sobre%20los%20retiros%20terap%C3%A9uticos.";
 ---
 
 <section id="retiros" class="retreats section" data-surface="tension" aria-labelledby="retreats-heading">
+  <!-- El video está grabado en vertical: a sangre como fondo en móvil, y en escritorio
+       como una pieza más del componente (arco mid-century en la columna izquierda). -->
+  <div class="retreats__stage" aria-hidden="true">
+    <div class="container retreats__stage-inner">
+      <div class="retreats__frame">
+        <video class="retreats__video" muted loop playsinline preload="none" data-src={retiroVideo} tabindex="-1"></video>
+      </div>
+    </div>
+  </div>
+
   <Thread class="retreats__thread" draw="scrub" d="M 220 -10 C 220 320, 500 620, 800 560 S 990 620, 985 761 C 980 880, 1200 830, 1200 910" dm="M 40 -10 C 40 300, 64 460, 40 680 S 30 820, 40 910" dot={{ cx: 985, cy: 761 }} anchor=".retreats__text .btn" />
 
   <div class="container retreats__grid">
@@ -39,6 +50,49 @@ const wa = "https://wa.me/18135686424?text=Hola%20Dra.%20Ruiz%2C%20me%20interesa
     display: grid;
     align-items: center;
   }
+
+  /* ---- La capa de video ---- */
+  .retreats__stage {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .retreats__stage-inner {
+    height: 100%;
+  }
+  .retreats__frame {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    /* fotograma del propio video: se ve mientras carga y también para quien nunca lo
+       recibe (reduced motion, ahorro de datos, 2G) */
+    background: url("/retiro-poster.jpg") center / cover no-repeat;
+  }
+  .retreats__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity var(--dur-slow) ease;
+  }
+  .retreats__video.is-playing {
+    opacity: 1;
+  }
+  /* Velo rojo: la lectura nunca depende del fotograma. En móvil el texto va encima del
+     video, así que el velo se mantiene por encima del 80 % (crema sobre rojo ≥ 4.5:1). */
+  .retreats__frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(170, 28, 26, 0.88) 0%,
+      rgba(170, 28, 26, 0.8) 40%,
+      rgba(170, 28, 26, 0.9) 100%
+    );
+  }
+
   .retreats__grid {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -75,7 +129,44 @@ const wa = "https://wa.me/18135686424?text=Hola%20Dra.%20Ruiz%2C%20me%20interesa
     border-top: 0;
   }
   .retreats__list > li { break-inside: avoid; border-top: 1px solid var(--rule); border-bottom: 0; }
+
+  @media (min-width: 900px) {
+    /* el video deja de ser fondo y ocupa su propia columna, con la palabra encima */
+    .retreats__stage-inner {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--gap);
+      align-items: center;
+    }
+    .retreats__frame {
+      grid-column: 1 / span 6;
+      justify-self: center;
+      height: min(74svh, 660px);
+      aspect-ratio: 9 / 16;
+      width: auto;
+      border-radius: var(--radius-arch);
+    }
+    /* en escritorio el video es una pieza autónoma: solo lleva el velo justo para que
+       la palabra en rosa se sostenga sobre cualquier fotograma */
+    .retreats__frame::after {
+      background: linear-gradient(
+        to top,
+        rgba(62, 13, 17, 0.45) 0%,
+        rgba(62, 13, 17, 0.08) 55%,
+        rgba(62, 13, 17, 0.26) 100%
+      );
+    }
+    .retreats__word {
+      justify-self: center;
+      text-align: center;
+      font-size: clamp(4.5rem, 8.5vw, 8.5rem);
+      margin-left: 0;
+    }
+  }
+
   @media (max-width: 899px) {
+    /* fondo a sangre: la capa de video ignora el gutter del contenedor */
+    .retreats__stage-inner { padding-inline: 0; }
     .retreats__word { grid-column: 1 / -1; font-size: clamp(5.5rem, 28vw, 11rem); }
     .retreats__text { grid-column: 1 / -1; }
     .retreats__list { columns: 1; }

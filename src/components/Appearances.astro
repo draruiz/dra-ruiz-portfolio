@@ -1,0 +1,135 @@
+---
+import Thread from "./Thread.astro";
+
+/* Colaboraciones en canales de terceros. La miniatura es una fachada: el iframe de
+   YouTube solo se carga al hacer click (motion.ts, [data-embed]). */
+const items = [
+  { id: "zD0xpHtr7K0", show: "RDE", meta: "En su canal" },
+  { id: "oY9e_cSnI7I", show: "Conquista tu mundo", meta: "con Jhonny Abraham" },
+  { id: "ph_zd9RyyFk", show: "Mejor Q' Ayer", meta: "En su canal" },
+  { id: "ohstq2U9LJ4", show: "Los Hispanos Unidos", meta: "En su canal" },
+  { id: "b2hx1f7p7Rc", show: "RCN Mundo", meta: "En su canal" },
+];
+---
+
+<section id="apariciones" class="appear section" data-surface="rubor" aria-labelledby="appear-heading">
+  <Thread class="appear__thread" draw="scrub" d="M 120 -10 C 120 200, 420 300, 720 260 S 1300 320, 1320 910" dm="M 40 -10 C 40 280, 66 480, 40 700 S 30 840, 40 910" />
+
+  <div class="container">
+    <header class="appear__head">
+      <p class="kicker kicker--rule" data-reveal>Otros canales</p>
+      <h2 id="appear-heading" class="display-2" data-reveal style="--i:1">
+        También me puedes <span class="script">encontrar</span> en
+      </h2>
+      <p class="body-lg appear__lede" data-reveal style="--i:2">
+        Entrevistas y conversaciones en programas y canales invitados, sobre vínculos, apego y salud mental.
+      </p>
+    </header>
+
+    <ul class="appear__grid">
+      {
+        items.map((it, i) => (
+          <li class="appear__item" data-reveal style={`--i:${Math.min(i, 4)}`}>
+            <button
+              class="facade facade--appear"
+              type="button"
+              data-embed="youtube"
+              data-id={it.id}
+              data-title={`${it.show} · conversación con la Dra. Ruiz`}
+              aria-label={`Reproducir la conversación en ${it.show}`}
+            >
+              <img
+                src={`https://i.ytimg.com/vi/${it.id}/hqdefault.jpg`}
+                alt=""
+                width="480"
+                height="360"
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="facade__play" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M8 5.5v13l11-6.5z" /></svg>
+              </span>
+            </button>
+            <h3 class="h3 appear__show">{it.show}</h3>
+            <p class="caption">{it.meta}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .appear__head {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 24px;
+    max-width: 52rem;
+    margin-bottom: clamp(48px, 6vw, 88px);
+  }
+  .appear__lede { color: var(--fg-muted); }
+
+  .appear__grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: clamp(36px, 4vw, 56px);
+  }
+  .appear__item {
+    grid-column: span 4;
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+  .appear__show { margin-top: 4px; }
+
+  /* Fachada: miniatura en B/N que recupera el color al pasar el cursor */
+  .facade--appear {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: block;
+    background: var(--negro);
+    border: 1px solid var(--rule);
+  }
+  .facade--appear img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05);
+    transition: filter var(--dur-slow) ease;
+  }
+  .facade--appear .facade__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--crema);
+    color: var(--rojo);
+    transition: transform 160ms var(--ease-out);
+  }
+  .facade--appear .facade__play svg { margin-left: 2px; }
+  .facade--appear:active .facade__play { transform: translate(-50%, -50%) scale(0.94); }
+  @media (hover: hover) and (pointer: fine) {
+    .facade--appear:hover img { filter: grayscale(0) contrast(1); }
+  }
+
+  @media (max-width: 1099px) {
+    .appear__item { grid-column: span 6; }
+  }
+  @media (max-width: 699px) {
+    .appear__item { grid-column: 1 / -1; }
+  }
+</style>

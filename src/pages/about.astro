@@ -1,11 +1,11 @@
 ---
 import { Image } from "astro:assets";
-import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
 import Thread from "../components/Thread.astro";
+import Layout from "../layouts/Layout.astro";
 
 const portrait =
-  "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/419fe35b-68e5-43f1-821d-872ec5796b00/public";
+  "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/5f4f545d-05a6-4754-9896-ff4b6cbd9000/public";
 
 const paragraphs = [
   "Soy psicóloga clínica. Mi camino en la psicología ha sido tan fascinante como las mentes que he acompañado hacia la autorreflexión y el crecimiento.",
@@ -20,80 +20,151 @@ const paragraphs = [
 ];
 
 const milestones = [
-  { k: "Medellín", v: "Nace en Colombia con la vocación de comprender la mente humana." },
-  { k: "Rutgers", v: "Pregrado en psicología y trabajo con el departamento de justicia." },
+  {
+    k: "Medellín",
+    v: "Nace en Colombia con la vocación de comprender la mente humana.",
+  },
+  {
+    k: "Rutgers",
+    v: "Pregrado en psicología y trabajo con el departamento de justicia.",
+  },
   { k: "Florida", v: "Maestría y doctorado en psicología clínica." },
+  { k: "Wisconsin", v: "Especialización en prisiones de máxima seguridad." },
   { k: "Tampa", v: "Funda Healthy Mind Specialists, la clínica de ansiedad." },
-  { k: "Global", v: "Equipo de terapeutas hispanohablantes en más de 20 países." },
+  {
+    k: "Global",
+    v: "Equipo de terapeutas hispanohablantes en más de 20 países.",
+  },
   { k: "Hoy", v: "Nuevo libro sobre heridas de infancia y apego emocional." },
 ];
 ---
 
 <Layout
-  title="Mi historia · Dra. María Alejandra Ruiz"
-  description="De Medellín a Tampa: la historia de la Dra. María Alejandra Ruiz, psicóloga clínica, autora y conferencista dedicada a los vínculos y la salud mental."
-  navSurface="papel"
+  title='Mi historia · Dra. María Alejandra Ruiz'
+  description='De Medellín a Tampa: la historia de la Dra. María Alejandra Ruiz, psicóloga clínica, autora y conferencista dedicada a los vínculos y la salud mental.'
+  navSurface='papel'
 >
-  <main id="contenido">
-    <section class="ahero section" data-surface="papel" aria-labelledby="about-heading">
-      <Thread class="ahero__thread" draw="hero" d="M -20 700 C 300 560, 520 820, 820 640 C 1000 520, 700 880, 300 910" dm="M -20 700 C 300 560, 520 820, 820 640 C 1000 520, 700 880, 40 910" />
-      <div class="container ahero__grid">
-        <p class="kicker kicker--rule" data-hero>Mi historia</p>
-        <h1 id="about-heading" class="display-1 ahero__title" data-hero>
-          Comprender y cuidar las <span class="script">conexiones</span> humanas
+  <main id='contenido'>
+    <section
+      class='ahero section'
+      data-surface='papel'
+      aria-labelledby='about-heading'
+    >
+      <Thread
+        class='ahero__thread'
+        draw='hero'
+        d='M -20 700 C 300 560, 520 820, 820 640 C 1000 520, 700 880, 300 910'
+        dm='M -20 700 C 300 560, 520 820, 820 640 C 1000 520, 700 880, 40 910'
+      />
+      <div class='container ahero__grid'>
+        <p class='kicker kicker--rule' data-hero>Mi historia</p>
+        <h1 id='about-heading' class='display-1 ahero__title' data-hero>
+          Comprender y cuidar las <span class='script'>conexiones</span> humanas
         </h1>
-        <p class="body-lg ahero__lede" data-hero>Psicóloga clínica · Autora · Conferencista · Medellín → Tampa</p>
+        <p class='body-lg ahero__lede' data-hero>
+          Psicóloga clínica · Autora · Conferencista · Medellín → Tampa
+        </p>
       </div>
     </section>
 
-    <section class="abio section" data-surface="papel" aria-labelledby="abio-heading">
-      <Thread class="abio__thread" draw="scrub" d="M 300 -10 C 300 200, 520 320, 480 520 S 80 700, 80 910" dm="M 40 -10 C 40 300, 88 500, 88 910" />
-      <div class="container abio__grid">
-        <figure class="abio__figure arch" data-reveal>
+    <section
+      class='abio section'
+      data-surface='papel'
+      aria-labelledby='abio-heading'
+    >
+      <Thread
+        class='abio__thread'
+        draw='scrub'
+        d='M 300 -10 C 300 200, 520 320, 480 520 S 80 700, 80 910'
+        dm='M 40 -10 C 40 300, 88 500, 88 910'
+      />
+      <div class='container abio__grid'>
+        <figure class='abio__figure arch' data-reveal>
           <Image
             src={portrait}
-            alt="Retrato en blanco y negro de la Dra. María Alejandra Ruiz"
+            alt='Retrato en blanco y negro de la Dra. María Alejandra Ruiz'
             width={640}
             height={800}
-            loading="eager"
-            decoding="async"
+            loading='eager'
+            decoding='async'
           />
-          <figcaption class="caption">Dra. María Alejandra Ruiz · Tampa, Florida</figcaption>
+          <figcaption class='caption'>
+            Dra. María Alejandra Ruiz · Tampa, Florida
+          </figcaption>
         </figure>
-        <div class="abio__text">
-          <h2 id="abio-heading" class="sr-only">Biografía completa</h2>
-          {paragraphs.map((p, i) => <p class={i === 0 ? "body-lg" : undefined} data-reveal>{p}</p>)}
+        <div class='abio__text'>
+          <h2 id='abio-heading' class='sr-only'>Biografía completa</h2>
+          {
+            paragraphs.map((p, i) => (
+              <p class={i === 0 ? "body-lg" : undefined} data-reveal>
+                {p}
+              </p>
+            ))
+          }
         </div>
       </div>
     </section>
 
-    <section class="ruta section" data-surface="rubor" aria-labelledby="ruta-heading">
-      <Thread class="ruta__thread" variant="stitch" draw="clip" width={1} d="M 80 -10 L 80 910" dm="M 88 -10 L 88 910" />
-      <div class="container ruta__grid">
-        <header class="ruta__head">
-          <p class="kicker kicker--rule" data-reveal>Ruta</p>
-          <h2 id="ruta-heading" class="display-2" data-reveal style="--i:1">Un camino de <span class="script">transformación</span></h2>
+    <section
+      class='ruta section'
+      data-surface='rubor'
+      aria-labelledby='ruta-heading'
+    >
+      <Thread
+        class='ruta__thread'
+        variant='stitch'
+        draw='clip'
+        width={1}
+        d='M 80 -10 L 80 910'
+        dm='M 88 -10 L 88 910'
+      />
+      <div class='container ruta__grid'>
+        <header class='ruta__head'>
+          <p class='kicker kicker--rule' data-reveal>Ruta</p>
+          <h2 id='ruta-heading' class='display-2' data-reveal style='--i:1'>
+            Un camino de <span class='script'>transformación</span>
+          </h2>
         </header>
-        <ol class="ruta__list">
-          {milestones.map((m, i) => (
-            <li data-reveal style={`--i:${Math.min(i, 5)}`}>
-              <span class="ruta__k h3">{m.k}</span>
-              <span class="ruta__v">{m.v}</span>
-            </li>
-          ))}
+        <ol class='ruta__list'>
+          {
+            milestones.map((m, i) => (
+              <li data-reveal style={`--i:${Math.min(i, 5)}`}>
+                <span class='ruta__k h3'>{m.k}</span>
+                <span class='ruta__v'>{m.v}</span>
+              </li>
+            ))
+          }
         </ol>
       </div>
     </section>
 
-    <section class="acta section" data-surface="noche" aria-labelledby="acta-heading">
-      <Thread class="acta__thread" draw="scrub" d="M 80 -10 C 80 260, 600 420, 1180 420" dm="M 88 -10 C 88 200, 40 300, 40 500" dot={{ cx: 1180, cy: 420 }} anchor=".acta__actions .btn--primary" />
-      <div class="container acta__grid">
-        <h2 id="acta-heading" class="display-2" data-reveal>¿Quieres saber más sobre mi trabajo?</h2>
-        <div class="acta__actions" data-reveal style="--i:1">
-          <a class="btn btn--primary" href="https://almaymente.io" target="_blank" rel="noopener noreferrer">Ver los cursos</a>
-          <a class="btn btn--secondary" href="/#libro">El libro</a>
-          <a class="btn btn--secondary" href="/#podcast">Podcast</a>
-          <a class="link" href="/#contacto">Contacto</a>
+    <section
+      class='acta section'
+      data-surface='noche'
+      aria-labelledby='acta-heading'
+    >
+      <Thread
+        class='acta__thread'
+        draw='scrub'
+        d='M 80 -10 C 80 260, 600 420, 1180 420'
+        dm='M 88 -10 C 88 200, 40 300, 40 500'
+        dot={{ cx: 1180, cy: 420 }}
+        anchor='.acta__actions .btn--primary'
+      />
+      <div class='container acta__grid'>
+        <h2 id='acta-heading' class='display-2' data-reveal>
+          ¿Quieres saber más sobre mi trabajo?
+        </h2>
+        <div class='acta__actions' data-reveal style='--i:1'>
+          <a
+            class='btn btn--primary'
+            href='https://almaymente.io'
+            target='_blank'
+            rel='noopener noreferrer'>Ver los cursos</a
+          >
+          <a class='btn btn--secondary' href='/#libro'>El libro</a>
+          <a class='btn btn--secondary' href='/#podcast'>Podcast</a>
+          <a class='link' href='/#contacto'>Contacto</a>
         </div>
       </div>
     </section>
@@ -124,7 +195,10 @@ const milestones = [
     transform: translateY(24px);
   }
   @media (prefers-reduced-motion: reduce) {
-    :global(.js) [data-hero] { opacity: 1; transform: none; }
+    :global(.js) [data-hero] {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   .abio {
@@ -212,7 +286,9 @@ const milestones = [
     display: grid;
     gap: 40px;
   }
-  .acta__grid .display-2 { max-width: 16ch; }
+  .acta__grid .display-2 {
+    max-width: 16ch;
+  }
   .acta__actions {
     display: flex;
     flex-wrap: wrap;
@@ -221,10 +297,26 @@ const milestones = [
   }
 
   @media (max-width: 899px) {
-    .abio__figure { grid-column: 1 / span 8; position: relative; top: auto; }
-    .abio__text { grid-column: 1 / -1; }
-    .ruta__head, .ruta__list { grid-column: 1 / -1; }
-    .ruta__list li { grid-template-columns: 1fr; row-gap: 6px; padding-left: 20px; }
-    .ruta__list li::before { left: 0; top: 30px; }
+    .abio__figure {
+      grid-column: 1 / span 8;
+      position: relative;
+      top: auto;
+    }
+    .abio__text {
+      grid-column: 1 / -1;
+    }
+    .ruta__head,
+    .ruta__list {
+      grid-column: 1 / -1;
+    }
+    .ruta__list li {
+      grid-template-columns: 1fr;
+      row-gap: 6px;
+      padding-left: 20px;
+    }
+    .ruta__list li::before {
+      left: 0;
+      top: 30px;
+    }
   }
 </style>

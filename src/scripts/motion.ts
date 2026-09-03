@@ -313,34 +313,75 @@ if (toc && tocDot) {
   }
 }
 
-/* ---------- Video del hero: carga diferida, solo escritorio, pausa fuera de pantalla ---------- */
-const video = document.querySelector<HTMLVideoElement>(".hero__video");
-if (video) {
-  const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-  const okToLoad =
-    !reduce && window.matchMedia("(min-width: 768px)").matches && !(conn && conn.saveData);
-  if (okToLoad && video.dataset.src) {
-    const start = () => {
-      video.src = video.dataset.src!;
-      video.load();
-      video
-        .play()
-        .then(() => video.classList.add("is-playing"))
-        .catch(() => {});
+/* ---------- Videos de fondo: carga diferida, silencio, reintento tras gesto ----------
+   Móvil incluido. Safari/iOS solo autoreproduce si el mute está puesto en el atributo y en
+   la propiedad; con Modo de Bajo Consumo rechaza el play() aunque todo esté bien, así que
+   esos videos quedan en `pending` y se reintentan en el primer gesto real del usuario. */
+const bgVideos = Array.from(document.querySelectorAll<HTMLVideoElement>("video[data-src]"));
+if (bgVideos.length) {
+  const conn = (navigator as Navigator & {
+    connection?: { saveData?: boolean; effectiveType?: string };
+  }).connection;
+  const thinPipe = !!conn && (conn.saveData === true || /^(slow-)?2g$/.test(conn.effectiveType ?? ""));
+  const pending = new Set<HTMLVideoElement>();
+
+  const inView = (el: Element) => {
+    const r = el.getBoundingClientRect();
+    return r.bottom > 0 && r.top < window.innerHeight;
+  };
+  const tryPlay = (v: HTMLVideoElement) => {
+    const p = v.play() as Promise<void> | undefined;
+    if (!p?.catch) return;
+    p.then(() => pending.delete(v)).catch(() => pending.add(v));
+  };
+  const retry = () => {
+    for (const v of pending) if (inView(v)) tryPlay(v);
+  };
+  for (const ev of ["pointerdown", "touchstart", "keydown"]) {
+    document.addEventListener(ev, retry, { passive: true });
+  }
+  const idle = (cb: () => void) => {
+    const w = window as Window & {
+      requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => void;
     };
-    if ("requestIdleCallback" in window) {
-      (window as Window & { requestIdleCallback: (cb: () => void, o?: { timeout: number }) => void })
-        .requestIdleCallback(start, { timeout: 2500 });
-    } else {
-      setTimeout(start, 1400);
-    }
+    if (w.requestIdleCallback) w.requestIdleCallback(cb, { timeout: 2500 });
+    else setTimeout(cb, 1200);
+  };
+
+  // en vertical y pantalla pequeña se prefiere la copia recortada, si la hay
+  const wantsMobile = window.matchMedia("(max-width: 767px) and (orientation: portrait)").matches;
+
+  for (const video of bgVideos) {
+    const src = (wantsMobile && video.dataset.srcMobile) || video.dataset.src;
+    if (!src || reduce || thinPipe) continue;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute("muted", "");
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+    video.addEventListener("playing", () => video.classList.add("is-playing"));
+
+    let started = false;
+    const start = () => {
+      started = true;
+      // se difiere a un hueco de inactividad para no competir con las fuentes ni el LCP
+      idle(() => {
+        video.src = src;
+        video.load();
+        tryPlay(video);
+      });
+    };
     new IntersectionObserver(
       ([e]) => {
-        if (!video.src) return;
-        if (e.isIntersecting) video.play().catch(() => {});
-        else video.pause();
+        if (e.isIntersecting) {
+          if (!started) start();
+          else if (video.src) tryPlay(video);
+        } else if (video.src) {
+          video.pause();
+        }
       },
-      { threshold: 0.05 },
+      { rootMargin: "300px 0px" },
     ).observe(video);
   }
 }
@@ -363,7 +404,7 @@ document.querySelectorAll<HTMLButtonElement>("[data-embed]").forEach((btn) => {
     } else {
       wrap.className = "embed embed--yt";
       iframe.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.id}?autoplay=1&rel=0`;
-      iframe.title = "Video del canal de la Dra. Ruiz en YouTube";
+      iframe.title = btn.dataset.title ?? "Video del canal de la Dra. Ruiz en YouTube";
       iframe.allow =
         "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
       iframe.referrerPolicy = "strict-origin-when-cross-origin";
