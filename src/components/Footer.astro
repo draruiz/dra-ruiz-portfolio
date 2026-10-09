@@ -25,7 +25,7 @@ const links = [
     </nav>
     <div class="footer__meta">
       <p class="caption">© {year} Dra. María Alejandra Ruiz. Todos los derechos reservados.</p>
-      <p class="caption">Tampa, Florida · Online</p>
+      <p class="caption">Tampa, Florida · Online · <a class="footer__legal" href="/privacidad">Política de privacidad</a></p>
     </div>
   </div>
 </footer>
@@ -70,6 +70,17 @@ const links = [
     gap: 8px 24px;
     padding-top: 24px;
     border-top: 1px solid var(--rule);
+  }
+  .footer__legal {
+    display: inline-block;
+    padding-block: 8px;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color var(--dur-instant) ease;
+  }
+  .footer__legal:hover {
+    color: var(--fg);
   }
   @media (max-width: 899px) {
     .footer__logo { grid-column: 1 / -1; max-width: 260px; }

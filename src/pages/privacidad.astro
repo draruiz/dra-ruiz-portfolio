@@ -1,0 +1,744 @@
+---
+import Footer from "../components/Footer.astro";
+import Thread from "../components/Thread.astro";
+import Layout from "../layouts/Layout.astro";
+
+const updated = { iso: "2026-10-09", label: "9 de octubre de 2026" };
+const email = "info@draalejandraruiz.com";
+// Razón social responsable de los datos (debe coincidir con el registro de la LLC)
+const entity = "Dra. María Alejandra Ruiz LLC";
+
+// Únicos canales de WhatsApp autorizados
+const whatsapp = [
+  { display: "+1 (813) 358-9297", href: "https://wa.me/18133589297" },
+  { display: "+1 (813) 568-6424", href: "https://wa.me/18135686424" },
+];
+
+const summary = [
+  {
+    t: "Cifrados y nunca vendidos",
+    d: "Tus datos se guardan cifrados en nuestra base de datos. No los vendemos ni los compartimos con fines comerciales.",
+  },
+  {
+    t: "No nos envíes información sensible",
+    d: "Para agendar e informarte solo necesitamos tus datos de contacto. Los detalles de tu proceso, mejor en sesión.",
+  },
+  {
+    t: "Dos WhatsApp oficiales",
+    d: "Cualquier otro número no es nuestro.",
+    wa: true,
+  },
+  {
+    t: "Tú decides",
+    d: "Puedes pedirnos una copia de tu información, corregirla o solicitar que la eliminemos.",
+  },
+];
+
+const sections = [
+  { id: "responsable", title: "Quiénes somos" },
+  { id: "datos", title: "Qué información recogemos" },
+  { id: "usos", title: "Para qué la usamos" },
+  { id: "seguridad", title: "Cómo la protegemos" },
+  { id: "compartir", title: "Con quién la compartimos" },
+  { id: "whatsapp", title: "Canales oficiales de WhatsApp" },
+  { id: "conservacion", title: "Cuánto tiempo la conservamos" },
+  { id: "derechos", title: "Tus derechos" },
+  { id: "menores", title: "Menores de edad" },
+  { id: "sitio-web", title: "Este sitio web" },
+  { id: "cambios", title: "Cambios a esta política" },
+  { id: "preguntas", title: "Contacto" },
+];
+const S = Object.fromEntries(
+  sections.map((s, i) => [s.id, { ...s, n: String(i + 1).padStart(2, "0") }]),
+);
+---
+
+<Layout
+  title='Política de privacidad · Dra. María Alejandra Ruiz'
+  description={`Cómo ${entity} protege tu información: datos cifrados, sin venta a terceros y canales oficiales de WhatsApp.`}
+  navSurface='papel'
+>
+  <main id='contenido'>
+    <section
+      class='phero section'
+      data-surface='papel'
+      aria-labelledby='privacidad-heading'
+    >
+      <Thread
+        class='phero__thread'
+        draw='hero'
+        d='M 1460 180 C 1180 300, 1300 620, 1000 640 C 840 650, 760 760, 780 910'
+        dm='M 1460 200 C 1300 420, 1440 700, 1200 860 S 600 890, 40 910'
+      />
+      <div class='container phero__grid'>
+        <p class='kicker kicker--rule' data-hero>Legal</p>
+        <h1 id='privacidad-heading' class='display-1 phero__title' data-hero>
+          Política de <span class='script'>privacidad</span>
+        </h1>
+        <p class='body-lg phero__lede' data-hero>
+          Lo que nos cuentas es parte de tu proceso, y lo cuidamos como tal.
+          Aquí te explicamos qué información recogemos, cómo la protegemos y qué
+          puedes decidir sobre ella.
+        </p>
+        <p class='caption phero__meta' data-hero>
+          <span>{entity} · Tampa, Florida</span>
+          <span
+            >Última actualización: <time datetime={updated.iso}
+              >{updated.label}</time
+            ></span
+          >
+        </p>
+      </div>
+    </section>
+
+    <section
+      class='resumen section'
+      data-surface='rubor'
+      aria-labelledby='resumen-heading'
+    >
+      <div class='container resumen__grid'>
+        <h2 id='resumen-heading' class='kicker kicker--rule' data-reveal>
+          En pocas palabras
+        </h2>
+        <ul class='resumen__list'>
+          {
+            summary.map((s, i) => (
+              <li data-reveal style={`--i:${i + 1}`}>
+                <span class='label'>{String(i + 1).padStart(2, "0")}</span>
+                <p class='h3'>{s.t}</p>
+                <p class='resumen__d'>
+                  {s.wa && (
+                    <>
+                      <span class='nowrap'>{whatsapp[0].display}</span> y{" "}
+                      <span class='nowrap'>{whatsapp[1].display}</span>.{" "}
+                    </>
+                  )}
+                  {s.d}
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class='pol section' data-surface='papel' aria-label='Política completa'>
+      <div class='container pol__grid'>
+        <nav class='pol__index' aria-labelledby='pol-index-heading'>
+          <p id='pol-index-heading' class='label'>Contenido</p>
+          <ol>
+            {
+              sections.map((s, i) => (
+                <li>
+                  <a href={`#${s.id}`} data-pol-link={s.id}>
+                    <span class='pol__index-n'>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {s.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+
+        <article class='pol__body'>
+          <section class='pol__sec' id='responsable' aria-labelledby='responsable-h'>
+            <h2 id='responsable-h' class='h3'>
+              <span class='pol__n'>{S.responsable.n}</span>{S.responsable.title}
+            </h2>
+            <p>
+              {entity}, con sede en Tampa, Florida, y atención en línea, es
+              responsable de la información personal que nos compartes por este
+              sitio web, por nuestros canales oficiales de WhatsApp, por correo
+              electrónico y durante tus procesos con nuestro equipo.
+            </p>
+            <p>
+              Ofrecemos mentoría de bienestar y coaching. No son servicios de
+              psicoterapia, diagnóstico ni tratamiento médico, y no reemplazan la
+              atención de un profesional de la salud.
+            </p>
+            <p>
+              Los cursos de Almaymente.io funcionan en su propia plataforma y se
+              rigen por su propia política de privacidad.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='datos' aria-labelledby='datos-h'>
+            <h2 id='datos-h' class='h3'>
+              <span class='pol__n'>{S.datos.n}</span>{S.datos.title}
+            </h2>
+            <p>Solo pedimos lo necesario para atenderte:</p>
+            <ul class='pol__list'>
+              <li>
+                <strong>Datos de contacto:</strong> nombre, teléfono, correo electrónico,
+                país y zona horaria, para responderte y agendar tus citas.
+              </li>
+              <li>
+                <strong>Datos de tus citas:</strong> fechas, modalidad (presencial
+                o en línea) y la persona del equipo que te acompaña.
+              </li>
+              <li>
+                <strong>Seguimiento de tu proceso:</strong> lo que decidas contarnos
+                en tus sesiones de mentoría o coaching y los apuntes que tomamos para
+                darte continuidad.
+              </li>
+              <li>
+                <strong>Datos de pago:</strong> los necesarios para cobrar y facturar
+                tus sesiones. Los pagos los procesa una plataforma especializada;
+                no guardamos el número completo de tu tarjeta.
+              </li>
+            </ul>
+            <p class='pol__note'>
+              <strong>Te pedimos no enviarnos información sensible.</strong> Por
+              WhatsApp o correo, evita compartir detalles de tu salud, diagnósticos,
+              medicamentos o datos de otras personas. Para agendar y darte
+              información solo necesitamos tus datos de contacto; lo personal de tu
+              proceso es mejor conversarlo en sesión.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='usos' aria-labelledby='usos-h'>
+            <h2 id='usos-h' class='h3'>
+              <span class='pol__n'>{S.usos.n}</span>{S.usos.title}
+            </h2>
+            <ul class='pol__list'>
+              <li>Agendar, confirmar y reprogramar tus citas.</li>
+              <li>Acompañarte en tus sesiones de mentoría o coaching y dar continuidad a tu proceso.</li>
+              <li>Responder tus preguntas y enviarte la información que nos pidas.</li>
+              <li>Gestionar pagos y facturación.</li>
+              <li>Cumplir con nuestras obligaciones legales y profesionales.</li>
+            </ul>
+            <p>Nunca usamos lo que nos cuentas en tus sesiones con fines publicitarios.</p>
+          </section>
+
+          <section class='pol__sec' id='seguridad' aria-labelledby='seguridad-h'>
+            <h2 id='seguridad-h' class='h3'>
+              <span class='pol__n'>{S.seguridad.n}</span>{S.seguridad.title}
+            </h2>
+            <p>
+              Toda la información que recibimos se guarda cifrada en nuestra base
+              de datos. Solo accede a ella el personal que la necesita para
+              atenderte, y todo nuestro equipo tiene un compromiso de
+              confidencialidad.
+            </p>
+            <p>
+              Ningún sistema es infalible. Si llegara a ocurrir un incidente de
+              seguridad que afecte tu información, te lo comunicaremos y
+              actuaremos como lo exige la ley.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='compartir' aria-labelledby='compartir-h'>
+            <h2 id='compartir-h' class='h3'>
+              <span class='pol__n'>{S.compartir.n}</span>{S.compartir.title}
+            </h2>
+            <p class='pol__lead'>
+              No vendemos, alquilamos ni compartimos tu información con terceros
+              con fines comerciales o publicitarios.
+            </p>
+            <p>Tu información solo puede salir de nuestras manos en estos casos:</p>
+            <ul class='pol__list'>
+              <li>
+                <strong>Con tu autorización expresa,</strong> por ejemplo, si nos
+                pides enviar un informe a tu médico o a otro profesional.
+              </li>
+              <li>
+                <strong>A proveedores que hacen posible el servicio,</strong> como
+                el alojamiento de datos, la agenda o los pagos. Solo reciben lo
+                indispensable para cumplir su función y están obligados a
+                mantenerlo en confidencialidad.
+              </li>
+              <li>
+                <strong>Cuando la ley lo exige:</strong> ante un riesgo serio e inminente
+                para tu vida o la de otra persona, ante sospecha de abuso o negligencia
+                hacia menores, personas mayores o personas vulnerables, o por orden
+                de un juez. Son los únicos límites a nuestra confidencialidad.
+              </li>
+            </ul>
+          </section>
+
+          <section class='pol__sec' id='whatsapp' aria-labelledby='whatsapp-h'>
+            <h2 id='whatsapp-h' class='h3'>
+              <span class='pol__n'>{S.whatsapp.n}</span>{S.whatsapp.title}
+            </h2>
+            <p>Estos son nuestros únicos números autorizados de WhatsApp:</p>
+            <ul class='pol__wa'>
+              {
+                whatsapp.map((w) => (
+                  <li>
+                    <a
+                      class='pol__wa-num'
+                      href={w.href}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      {w.display}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+            <p>
+              Por ellos agendamos citas, damos información sobre nuestros
+              servicios y atendemos todo lo relacionado con tus procesos de
+              mentoría y coaching.
+            </p>
+            <p class='pol__note'>
+              <strong>Cuidado con las suplantaciones.</strong> Si alguien te escribe
+              desde otro número o perfil diciendo ser de nuestro equipo o de la
+              Dra. Ruiz, no compartas tus datos ni hagas pagos. Escríbenos a uno de
+              estos dos números para confirmarlo.
+            </p>
+            <p>
+              WhatsApp es un servicio de Meta. Los mensajes viajan cifrados de
+              extremo a extremo, pero el uso de la aplicación también se rige por
+              la política de privacidad de WhatsApp. Por eso te pedimos no
+              enviarnos por este medio información sensible sobre tu salud o tu
+              proceso.
+            </p>
+            <p class='pol__note'>
+              <strong>WhatsApp no es un canal de emergencias.</strong> Si estás en
+              crisis o en peligro, en Estados Unidos llama o escribe al
+              <a href='tel:988'>988</a> (Línea de Prevención del Suicidio y Crisis,
+              con atención en español) o al <a href='tel:911'>911</a>. En otros
+              países, comunícate con el número de emergencias local.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='conservacion' aria-labelledby='conservacion-h'>
+            <h2 id='conservacion-h' class='h3'>
+              <span class='pol__n'>{S.conservacion.n}</span>{S.conservacion.title}
+            </h2>
+            <p>
+              Guardamos tu información mientras tengas un proceso activo con
+              nosotros o hasta que nos pidas eliminarla, salvo los registros que
+              la ley nos obliga a conservar, como los de pagos y facturación.
+              Pasado ese tiempo, la información se elimina de forma segura.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='derechos' aria-labelledby='derechos-h'>
+            <h2 id='derechos-h' class='h3'>
+              <span class='pol__n'>{S.derechos.n}</span>{S.derechos.title}
+            </h2>
+            <p>Puedes pedirnos en cualquier momento:</p>
+            <ul class='pol__list'>
+              <li>Acceder a tu información y recibir una copia.</li>
+              <li>Corregir datos inexactos o incompletos.</li>
+              <li>Eliminar tu información, salvo la que la ley nos obliga a conservar.</li>
+              <li>Retirar una autorización que nos hayas dado.</li>
+              <li>Dejar de recibir mensajes informativos.</li>
+            </ul>
+            <p>
+              Escríbenos a <a href={`mailto:${email}`}>{email}</a> o por
+              cualquiera de nuestros WhatsApp oficiales. Responderemos en un plazo
+              máximo de 30 días. Para proteger tu privacidad, podemos pedirte que
+              confirmes tu identidad antes de entregar o modificar información.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='menores' aria-labelledby='menores-h'>
+            <h2 id='menores-h' class='h3'>
+              <span class='pol__n'>{S.menores.n}</span>{S.menores.title}
+            </h2>
+            <p>
+              La atención a menores de 18 años requiere el consentimiento de su
+              madre, padre o tutor legal, quien podrá ejercer en su nombre los
+              derechos descritos en esta política, dentro de los límites que
+              establece la ley.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='sitio-web' aria-labelledby='sitio-web-h'>
+            <h2 id='sitio-web-h' class='h3'>
+              <span class='pol__n'>{S["sitio-web"].n}</span>{S["sitio-web"].title}
+            </h2>
+            <p>
+              draruiz.com no tiene formularios, no usa cookies propias ni
+              herramientas de analítica o publicidad.
+            </p>
+            <p>
+              Los videos de YouTube y los episodios de Spotify solo se cargan
+              cuando presionas reproducir; desde ese momento, esos servicios
+              pueden usar sus propias cookies según sus políticas. Lo mismo
+              aplica a los enlaces hacia Instagram, LinkedIn, Almaymente.io y
+              otras plataformas externas.
+            </p>
+            <p>
+              Como cualquier sitio, el servidor que lo aloja puede registrar
+              datos técnicos básicos, como la dirección IP y el tipo de
+              navegador, por motivos de seguridad.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='cambios' aria-labelledby='cambios-h'>
+            <h2 id='cambios-h' class='h3'>
+              <span class='pol__n'>{S.cambios.n}</span>{S.cambios.title}
+            </h2>
+            <p>
+              Si actualizamos esta política, publicaremos aquí la nueva versión
+              con su fecha. Si el cambio es importante, también te lo contaremos
+              por nuestros canales.
+            </p>
+          </section>
+        </article>
+      </div>
+    </section>
+
+    <section
+      id='preguntas'
+      class='pq section'
+      data-surface='noche'
+      aria-labelledby='pq-heading'
+    >
+      <Thread
+        class='pq__thread'
+        draw='scrub'
+        d='M 1460 120 C 1100 160, 1180 520, 760 560 S 200 700, -20 820'
+        dm='M 40 -10 L 40 910'
+      />
+      <div class='container pq__inner'>
+        <p class='kicker kicker--rule' data-reveal>
+          {S.preguntas.n} · {S.preguntas.title}
+        </p>
+        <h2 id='pq-heading' class='display-2 pq__title' data-reveal style='--i:1'>
+          ¿Preguntas sobre tu privacidad?
+        </h2>
+        <p class='body-lg pq__lede' data-reveal style='--i:2'>
+          Escríbenos por cualquiera de nuestros canales oficiales.
+        </p>
+        <a class='pq__mail' href={`mailto:${email}`} data-reveal style='--i:3'>
+          {email}
+        </a>
+        <div class='pq__grid'>
+          {
+            whatsapp.map((w, i) => (
+              <div data-reveal style={`--i:${i + 4}`}>
+                <p class='label'>WhatsApp oficial</p>
+                <a class='link' href={w.href} target='_blank' rel='noopener noreferrer'>
+                  {w.display}
+                </a>
+              </div>
+            ))
+          }
+          <div data-reveal style='--i:6'>
+            <p class='label'>Responsable</p>
+            <p>{entity} · Tampa, Florida</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Índice: marca la sección que se está leyendo
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-pol-link]"));
+  const targets = links
+    .map((a) => document.getElementById(a.dataset.polLink ?? ""))
+    .filter((el): el is HTMLElement => el !== null);
+  if (targets.length && "IntersectionObserver" in window) {
+    const setActive = (id: string) => {
+      for (const a of links) {
+        if (a.dataset.polLink === id) a.setAttribute("aria-current", "true");
+        else a.removeAttribute("aria-current");
+      }
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) if (e.isIntersecting) setActive(e.target.id);
+      },
+      { rootMargin: "-30% 0px -60% 0px" },
+    );
+    targets.forEach((t) => io.observe(t));
+  }
+</script>
+
+<style>
+  .phero {
+    padding-top: calc(var(--nav-h) + clamp(64px, 12vh, 140px));
+    padding-bottom: clamp(56px, 8vw, 112px);
+  }
+  .phero__grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 28px;
+  }
+  .phero__title {
+    max-width: 12ch;
+    font-size: clamp(3rem, 8.5vw, 7.5rem);
+  }
+  .phero__lede {
+    color: var(--fg-muted);
+    max-width: 36rem;
+  }
+  .phero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 24px;
+    max-width: none;
+  }
+  :global(.js) [data-hero] {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) [data-hero] {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .resumen {
+    padding-block: clamp(56px, 8vw, 112px);
+  }
+  .resumen__grid {
+    display: grid;
+    gap: clamp(32px, 4vw, 56px);
+  }
+  .resumen__list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 40px var(--gap);
+  }
+  .resumen__list li {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+  }
+  .resumen__list .label {
+    color: var(--accent);
+  }
+  .resumen__d {
+    color: var(--fg-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+  .nowrap {
+    white-space: nowrap;
+  }
+
+  .pol__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 48px;
+    align-items: start;
+  }
+  .pol__index {
+    grid-column: 1 / span 3;
+    position: sticky;
+    top: calc(var(--nav-h) + 32px);
+    display: grid;
+    gap: 16px;
+  }
+  .pol__index ol {
+    border-top: 1px solid var(--rule);
+  }
+  .pol__index a {
+    display: grid;
+    grid-template-columns: 2.25rem 1fr;
+    padding-block: 8px;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--fg-muted);
+    transition: color var(--dur-instant) ease;
+  }
+  .pol__index a:hover,
+  .pol__index a[aria-current="true"] {
+    color: var(--fg);
+  }
+  .pol__index-n {
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    line-height: 1.4rem;
+    color: var(--fg-faint);
+    transition: color var(--dur-instant) ease;
+  }
+  .pol__index a[aria-current="true"] .pol__index-n {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .pol__body {
+    grid-column: 5 / span 7;
+    display: grid;
+  }
+  .pol__sec {
+    display: grid;
+    gap: 20px;
+    padding-block: 40px;
+    border-top: 1px solid var(--rule);
+    scroll-margin-top: 24px;
+  }
+  .pol__sec:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+  .pol__sec:last-child {
+    padding-bottom: 0;
+  }
+  .pol__sec h2 {
+    margin-bottom: 4px;
+  }
+  .pol__n {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+  }
+  .pol__sec p,
+  .pol__list li {
+    color: var(--fg-muted);
+  }
+  .pol__sec strong {
+    color: var(--fg);
+  }
+  .pol__sec p a:not(.pol__wa-num) {
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .pol__sec p a:not(.pol__wa-num):hover {
+    color: var(--accent);
+  }
+  .pol__lead {
+    font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+    line-height: 1.45;
+    font-weight: 700;
+  }
+  .pol__sec p.pol__lead {
+    color: var(--fg);
+  }
+  .pol__list {
+    display: grid;
+    gap: 12px;
+    max-width: var(--measure);
+  }
+  .pol__list li {
+    position: relative;
+    padding-left: 22px;
+  }
+  .pol__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--thread);
+  }
+
+  .pol__wa {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    gap: 8px clamp(24px, 4vw, 56px);
+    padding-block: 8px;
+  }
+  .pol__wa-num {
+    display: inline-block;
+    font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    white-space: nowrap;
+    color: var(--fg);
+    padding-bottom: 4px;
+    background-image: linear-gradient(var(--thread), var(--thread));
+    background-size: 0% 2px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-size var(--dur-base) var(--ease-out);
+  }
+  .pol__wa-num:hover,
+  .pol__wa-num:focus-visible {
+    background-size: 100% 2px;
+  }
+  .pol__note {
+    padding: 2px 0 2px 20px;
+    border-left: 2px solid var(--thread);
+  }
+
+  .pq__inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 24px;
+  }
+  .pq__title {
+    max-width: 14ch;
+  }
+  .pq__lede {
+    color: var(--fg-muted);
+  }
+  .pq__mail {
+    justify-self: start;
+    margin-top: clamp(16px, 3vw, 40px);
+    font-size: clamp(1.375rem, 4vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+    padding-bottom: 0.08em;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 2px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-size var(--dur-base) var(--ease-out);
+  }
+  .pq__mail:hover,
+  .pq__mail:focus-visible {
+    background-size: 100% 2px;
+  }
+  .pq__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+    row-gap: 32px;
+    margin-top: clamp(32px, 5vw, 72px);
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .pq__grid > div {
+    grid-column: span 4;
+    display: grid;
+    gap: 10px;
+    justify-items: start;
+  }
+
+  @media (max-width: 1099px) {
+    .resumen__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 899px) {
+    .pol__index {
+      grid-column: 1 / -1;
+      position: relative;
+      top: auto;
+    }
+    .pol__body {
+      grid-column: 1 / -1;
+    }
+    .pq__grid > div {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 599px) {
+    .resumen__list {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .pol__wa {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
