@@ -3,9 +3,8 @@ import { Image } from "astro:assets";
 import Footer from "../components/Footer.astro";
 import Thread from "../components/Thread.astro";
 import Layout from "../layouts/Layout.astro";
+import { PORTRAIT_URL as portrait } from "../consts";
 
-const portrait =
-  "https://imagedelivery.net/B5r6pMfQRTYBHyjgaDFr8w/5f4f545d-05a6-4754-9896-ff4b6cbd9000/public";
 
 const paragraphs = [
   "Soy psicóloga clínica. Mi camino en la psicología ha sido tan fascinante como las mentes que he acompañado hacia la autorreflexión y el crecimiento.",
@@ -41,6 +40,7 @@ const milestones = [
 
 <Layout
   title='Mi historia · Dra. María Alejandra Ruiz'
+  pageType='ProfilePage'
   description='De Medellín a Tampa: la historia de la Dra. María Alejandra Ruiz, psicóloga clínica, autora y conferencista dedicada a los vínculos y la salud mental.'
   navSurface='papel'
 >

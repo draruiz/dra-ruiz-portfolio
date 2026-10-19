@@ -4,7 +4,7 @@ import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://draruiz.com",
+  site: "https://draalejandraruiz.com",
   integrations: [sitemap()],
   compressHTML: true,
   image: {

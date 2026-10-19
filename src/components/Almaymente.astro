@@ -1,5 +1,6 @@
 ---
 import Thread from "./Thread.astro";
+import { COURSES_HOST, COURSES_URL } from "../consts";
 
 /* Haz: el hilo principal entra por arriba, converge en el punto del CTA y tres ramas
    salen de las facetas hacia ese mismo punto (la marca con sus múltiples facetas). */
@@ -42,8 +43,8 @@ const branches = [
     </div>
 
     <div class="alma__cta" data-reveal style="--i:2">
-      <p class="label">almaymente.io</p>
-      <a class="btn btn--primary btn--lg" href="https://almaymente.io" target="_blank" rel="noopener noreferrer">Explorar los cursos</a>
+      <p class="label">{COURSES_HOST}</p>
+      <a class="btn btn--primary btn--lg" href={COURSES_URL} target="_blank" rel="noopener noreferrer">Explorar los cursos</a>
       <p class="body-sm muted">Cursos y herramientas creados desde la práctica clínica, en español.</p>
     </div>
   </div>

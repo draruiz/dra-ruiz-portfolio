@@ -2,58 +2,106 @@
 import "../styles/global.css";
 import Preloader from "../components/Preloader.astro";
 import Nav from "../components/Nav.astro";
+import { ALMA_Y_MENTE, PORTRAIT_URL } from "../consts";
 
 interface Props {
   title: string;
   description?: string;
+  /** Otra tarjeta para compartir (URL absoluta); por defecto, `public/og-image.jpg`. */
   ogImage?: string;
+  ogImageAlt?: string;
+  /** `ProfilePage` en las páginas sobre ella (inicio, "Mi historia"); `WebPage` en el resto. */
+  pageType?: "ProfilePage" | "WebPage";
   navSurface?: "noche" | "papel" | "rubor" | "tension";
 }
 
-const siteUrl = "https://draruiz.com";
+// El dominio sale de `site` (astro.config.mjs): canónica, tarjeta, sitemap y robots.txt lo comparten.
+if (!Astro.site) throw new Error("Falta `site` en astro.config.mjs");
+const siteUrl = new URL("/", Astro.site).href;
+const defaultOgImage = new URL("/og-image.jpg", Astro.site).href;
+
 const {
   title,
   description = "Dra. María Alejandra Ruiz, psicóloga clínica con más de 10 años de experiencia. Autora, conferencista y fundadora de Almaymente.io y Healthy Mind Specialists.",
-  ogImage = `${siteUrl}/og-image.jpg`,
+  ogImage = defaultOgImage,
+  ogImageAlt = "Dra. María Alejandra Ruiz: psicóloga clínica, autora y conferencista. Vínculos, apego y salud mental, en español.",
+  pageType = "WebPage",
   navSurface = "noche",
 } = Astro.props;
 
-const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 
-const ldPerson = {
+// Datos estructurados (schema.org): un solo grafo con `@id`, así buscadores y
+// asistentes de IA leen a una persona —la misma que almaymente.io nombra como
+// fundadora— con su clínica, su libro, su podcast y esta página. Solo hechos
+// que el sitio ya cuenta.
+const person = { "@id": `${siteUrl}#person` };
+const website = { "@id": `${siteUrl}#website` };
+const podcastUrl = "https://open.spotify.com/show/7EAPPcMUumoRKNNJd44f6k";
+const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Dra. María Alejandra Ruiz",
-  jobTitle: "Psicóloga Clínica",
-  url: siteUrl,
-  image: `${siteUrl}/og-image.jpg`,
-  description:
-    "Psicóloga clínica, autora y conferencista. Fundadora de Healthy Mind Specialists y CEO de Almaymente.io.",
-  knowsAbout: ["Psicología Clínica", "Apego", "Ansiedad", "Dependencia emocional", "Salud mental"],
-  sameAs: [
-    "https://www.instagram.com/dramariaalejandraruiz/",
-    "https://www.linkedin.com/in/drmarialejandraruiz",
-    "https://www.youtube.com/@Pensandoenvozaltadraruiz",
-    "https://open.spotify.com/show/7EAPPcMUumoRKNNJd44f6k",
+  "@graph": [
+    {
+      "@type": "Person",
+      ...person,
+      name: "Dra. María Alejandra Ruiz",
+      jobTitle: "Psicóloga clínica",
+      url: siteUrl,
+      image: PORTRAIT_URL,
+      description:
+        "Psicóloga clínica, autora y conferencista. Fundadora de Healthy Mind Specialists y CEO de Almaymente.io.",
+      knowsAbout: ["Psicología clínica", "Apego", "Ansiedad", "Dependencia emocional", "Salud mental"],
+      birthPlace: { "@type": "Place", name: "Medellín, Colombia" },
+      alumniOf: { "@type": "CollegeOrUniversity", name: "Rutgers University" },
+      worksFor: ALMA_Y_MENTE,
+      sameAs: [
+        "https://www.instagram.com/dramariaalejandraruiz/",
+        "https://www.linkedin.com/in/drmarialejandraruiz",
+        "https://www.youtube.com/@Pensandoenvozaltadraruiz",
+        podcastUrl,
+      ],
+    },
+    {
+      "@type": "MedicalOrganization",
+      name: "Healthy Mind Specialists",
+      description: "Clínica de ansiedad en Tampa, Florida.",
+      founder: person,
+      address: { "@type": "PostalAddress", addressLocality: "Tampa", addressRegion: "FL", addressCountry: "US" },
+    },
+    {
+      "@type": "WebSite",
+      ...website,
+      url: siteUrl,
+      name: "Dra. María Alejandra Ruiz",
+      inLanguage: "es",
+      publisher: person,
+      about: person,
+    },
+    {
+      "@type": pageType,
+      "@id": `${canonicalUrl}#webpage`,
+      url: canonicalUrl,
+      name: title,
+      description,
+      inLanguage: "es",
+      isPartOf: website,
+      ...(pageType === "ProfilePage" ? { mainEntity: person } : { about: person }),
+    },
+    {
+      "@type": "Book",
+      name: "El niño que fui, el adulto que elijo ser",
+      author: person,
+      bookEdition: "Segunda edición",
+      inLanguage: "es",
+    },
+    {
+      "@type": "PodcastSeries",
+      name: "Dilo Como Es",
+      url: podcastUrl,
+      inLanguage: "es",
+      author: person,
+    },
   ],
-  worksFor: { "@type": "Organization", name: "Almaymente.io", url: "https://almaymente.io" },
-};
-const ldSite = { "@context": "https://schema.org", "@type": "WebSite", name: "Dra. María Alejandra Ruiz", url: siteUrl };
-const ldBook = {
-  "@context": "https://schema.org",
-  "@type": "Book",
-  name: "El niño que fui, el adulto que elijo ser",
-  author: { "@type": "Person", name: "Dra. María Alejandra Ruiz" },
-  bookEdition: "Segunda edición",
-  inLanguage: "es",
-};
-const ldPodcast = {
-  "@context": "https://schema.org",
-  "@type": "PodcastSeries",
-  name: "Dilo Como Es",
-  url: "https://open.spotify.com/show/7EAPPcMUumoRKNNJd44f6k",
-  inLanguage: "es",
-  author: { "@type": "Person", name: "Dra. María Alejandra Ruiz" },
 };
 ---
 
@@ -64,7 +112,7 @@ const ldPodcast = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="author" content="Dra. María Alejandra Ruiz" />
     <meta name="theme-color" content="#000000" />
     <link rel="canonical" href={canonicalUrl} />
@@ -76,12 +124,23 @@ const ldPodcast = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    {
+      ogImage === defaultOgImage && (
+        <>
+          <meta property="og:image:type" content="image/jpeg" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+        </>
+      )
+    }
+    <meta property="og:locale" content="es_LA" />
     <meta property="og:site_name" content="Dra. María Alejandra Ruiz" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
     <meta name="generator" content={Astro.generator} />
 
     <link rel="preload" href="/fonts/century-gothic-700.woff" as="font" type="font/woff" crossorigin />
@@ -90,10 +149,7 @@ const ldPodcast = {
 
     <script is:inline>document.documentElement.classList.add("js");</script>
 
-    <script type="application/ld+json" set:html={JSON.stringify(ldPerson)} />
-    <script type="application/ld+json" set:html={JSON.stringify(ldSite)} />
-    <script type="application/ld+json" set:html={JSON.stringify(ldBook)} />
-    <script type="application/ld+json" set:html={JSON.stringify(ldPodcast)} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
     <!--

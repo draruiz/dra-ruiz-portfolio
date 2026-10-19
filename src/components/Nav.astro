@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import logoWhite from "../assets/short_logo_white.png";
 import logoRed from "../assets/short_logo_red.png";
+import { COURSES_URL } from "../consts";
 
 interface Props {
   surface?: "noche" | "papel" | "rubor" | "tension";
@@ -35,7 +36,7 @@ const socials = [
     </nav>
 
     <div class="nav__end">
-      <a class="btn btn--primary btn--sm nav__cta" href="https://almaymente.io" target="_blank" rel="noopener noreferrer">Cursos</a>
+      <a class="btn btn--primary btn--sm nav__cta" href={COURSES_URL} target="_blank" rel="noopener noreferrer">Cursos</a>
       <button class="nav__burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú" data-menu-toggle>
         <span></span><span></span>
       </button>
@@ -56,7 +57,7 @@ const socials = [
       ))}
     </ol>
     <div class="menu__foot">
-      <a class="btn btn--primary" href="https://almaymente.io" target="_blank" rel="noopener noreferrer">Ver los cursos</a>
+      <a class="btn btn--primary" href={COURSES_URL} target="_blank" rel="noopener noreferrer">Ver los cursos</a>
       <ul class="menu__social">
         {socials.map((s) => <li><a class="link link--quiet" href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a></li>)}
       </ul>

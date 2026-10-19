@@ -27,7 +27,7 @@ Psicóloga clínica con formación en EE. UU. (Rutgers; maestría y doctorado en
 
 - Idioma: español (es). Público hispanohablante de LatAm y EE. UU.
 - Canales de conversión reales: Almaymente.io (cursos), WhatsApp +1 813 568 6424, email info@draalejandraruiz.com, Buscalibre (libro), Spotify (show 7EAPPcMUumoRKNNJd44f6k), YouTube (@Pensandoenvozaltadraruiz), Instagram (@dramariaalejandraruiz), LinkedIn (drmarialejandraruiz).
-- Dominio de producción: https://draruiz.com (astro.config `site`).
+- Dominio de producción: https://draalejandraruiz.com (astro.config `site`; de ahí salen la canónica, la tarjeta, el sitemap y `robots.txt`).
 - Consumo mayoritariamente móvil desde redes sociales.
 
 ## Capabilities and Constraints

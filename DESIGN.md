@@ -268,7 +268,7 @@ Ritmo de la home tal como está construida: Noche (hero) → Papel (índice) →
 - **Body-sm** (400, 0.875rem, 1.6, +0.01em): metadatos, notas, enlaces de nav y footer.
 - **Kicker** (700, 0.75rem, 1, +0.22em, MAYÚSCULAS, color acento): etiqueta de sección, siempre antes del titular; con `kicker--rule` lleva delante un filete de 48px × 1px en `currentColor` (el hilo en miniatura). Patrón fijado por el manual §5.3; también se usa sin filete para el rol en el hero.
 - **Caption** (400, 0.6875rem, 1.4, +0.08em, caja normal, color secundario): números del índice, pies de retrato, ubicación y enlace "Índice" del hero, legales del footer. Ya no va en mayúsculas.
-- **Label** (700, 0.6875rem, 1.2, +0.2em, MAYÚSCULAS, color secundario): etiqueta de dato en bloque, el kicker sin filete y en color secundario: "WhatsApp / Ubicación / Redes" en Contacto, tags y marca de la fachada de Spotify, "almaymente.io" sobre el CTA.
+- **Label** (700, 0.6875rem, 1.2, +0.2em, MAYÚSCULAS, color secundario): etiqueta de dato en bloque, el kicker sin filete y en color secundario: "WhatsApp / Ubicación / Redes" en Contacto, tags y marca de la fachada de Spotify, "cursos.almaymente.io" sobre el CTA.
 - **Button** (700, 0.875rem, 1, +0.12em, MAYÚSCULAS): texto de botón.
 - **Script** (Amoresa 400, 1.04em del titular que la contiene, 1, tracking 0): una palabra dentro de display-1/display-2/h1, nunca por debajo de 40px (en la cita h1 de Colaboraciones sube a `max(1.15em, 2.5rem)`). Excepción de marca: la palabra "calma" sola, en rosa, a `clamp(6rem, 16vw, 15rem)` sobre Tensión.
 

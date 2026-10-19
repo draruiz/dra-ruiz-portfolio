@@ -2,6 +2,7 @@
 import heroVideo from "../assets/hero_video.mp4";
 import heroVideoMobile from "../assets/hero_video_mobile.mp4";
 import Thread from "./Thread.astro";
+import { COURSES_URL } from "../consts";
 ---
 
 <section id="inicio" class="hero" data-surface="noche" aria-label="Presentación">
@@ -36,7 +37,7 @@ import Thread from "./Thread.astro";
         dependencia emocional, con rigor clínico y en español.
       </p>
       <div class="hero__actions" data-hero>
-        <a class="btn btn--primary" href="https://almaymente.io" target="_blank" rel="noopener noreferrer">Ver los cursos</a>
+        <a class="btn btn--primary" href={COURSES_URL} target="_blank" rel="noopener noreferrer">Ver los cursos</a>
         <a class="link" href="https://wa.me/18135686424?text=Hola%20Dra.%20Ruiz%2C%20me%20gustar%C3%ADa%20ponerme%20en%20contacto%20con%20usted." target="_blank" rel="noopener noreferrer">Escríbeme</a>
       </div>
     </div>
