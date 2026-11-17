@@ -1,0 +1,289 @@
+/*
+ * Páginas legales (/privacidad, /terminos): portada, resumen "En pocas
+ * palabras", índice fijo con el cuerpo numerado y cierre de contacto.
+ * Todo cuelga de `main.legal` para no tocar el resto del sitio.
+ */
+.legal .phero {
+  padding-top: calc(var(--nav-h) + clamp(64px, 12vh, 140px));
+  padding-bottom: clamp(56px, 8vw, 112px);
+}
+.legal .phero__grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 28px;
+}
+.legal .phero__title {
+  max-width: 12ch;
+  font-size: clamp(3rem, 8.5vw, 7.5rem);
+}
+.legal .phero__lede {
+  color: var(--fg-muted);
+  max-width: 36rem;
+}
+.legal .phero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 24px;
+  max-width: none;
+}
+.js .legal [data-hero] {
+  opacity: 0;
+  transform: translateY(24px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .legal [data-hero] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.legal .resumen {
+  padding-block: clamp(56px, 8vw, 112px);
+}
+.legal .resumen__grid {
+  display: grid;
+  gap: clamp(32px, 4vw, 56px);
+}
+.legal .resumen__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 40px var(--gap);
+}
+.legal .resumen__list li {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+.legal .resumen__list .label {
+  color: var(--accent);
+}
+.legal .resumen__d {
+  color: var(--fg-muted);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+.legal .nowrap {
+  white-space: nowrap;
+}
+
+.legal .pol__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gap);
+  row-gap: 48px;
+  align-items: start;
+}
+.legal .pol__index {
+  grid-column: 1 / span 3;
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+  display: grid;
+  gap: 16px;
+}
+.legal .pol__index ol {
+  border-top: 1px solid var(--rule);
+}
+.legal .pol__index a {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  padding-block: 8px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--fg-muted);
+  transition: color var(--dur-instant) ease;
+}
+.legal .pol__index a:hover,
+.legal .pol__index a[aria-current="true"] {
+  color: var(--fg);
+}
+.legal .pol__index-n {
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  line-height: 1.4rem;
+  color: var(--fg-faint);
+  transition: color var(--dur-instant) ease;
+}
+.legal .pol__index a[aria-current="true"] .pol__index-n {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.legal .pol__body {
+  grid-column: 5 / span 7;
+  display: grid;
+}
+.legal .pol__sec {
+  display: grid;
+  gap: 20px;
+  padding-block: 40px;
+  border-top: 1px solid var(--rule);
+  scroll-margin-top: 24px;
+}
+.legal .pol__sec:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.legal .pol__sec:last-child {
+  padding-bottom: 0;
+}
+.legal .pol__sec h2 {
+  margin-bottom: 4px;
+}
+.legal .pol__n {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+}
+.legal .pol__sec p,
+.legal .pol__list li {
+  color: var(--fg-muted);
+}
+.legal .pol__sec strong {
+  color: var(--fg);
+}
+.legal .pol__sec p a:not(.pol__wa-num) {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.legal .pol__sec p a:not(.pol__wa-num):hover {
+  color: var(--accent);
+}
+.legal .pol__lead {
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  line-height: 1.45;
+  font-weight: 700;
+}
+.legal .pol__sec p.pol__lead {
+  color: var(--fg);
+}
+.legal .pol__list {
+  display: grid;
+  gap: 12px;
+  max-width: var(--measure);
+}
+.legal .pol__list li {
+  position: relative;
+  padding-left: 22px;
+}
+.legal .pol__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--thread);
+}
+
+.legal .pol__wa {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  gap: 8px clamp(24px, 4vw, 56px);
+  padding-block: 8px;
+}
+.legal .pol__wa-num {
+  display: inline-block;
+  font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--fg);
+  padding-bottom: 4px;
+  background-image: linear-gradient(var(--thread), var(--thread));
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size var(--dur-base) var(--ease-out);
+}
+.legal .pol__wa-num:hover,
+.legal .pol__wa-num:focus-visible {
+  background-size: 100% 2px;
+}
+.legal .pol__note {
+  padding: 2px 0 2px 20px;
+  border-left: 2px solid var(--thread);
+}
+
+.legal .pq__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 24px;
+}
+.legal .pq__title {
+  max-width: 14ch;
+}
+.legal .pq__lede {
+  color: var(--fg-muted);
+}
+.legal .pq__mail {
+  justify-self: start;
+  margin-top: clamp(16px, 3vw, 40px);
+  font-size: clamp(1.375rem, 4vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+  padding-bottom: 0.08em;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size var(--dur-base) var(--ease-out);
+}
+.legal .pq__mail:hover,
+.legal .pq__mail:focus-visible {
+  background-size: 100% 2px;
+}
+.legal .pq__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gap);
+  row-gap: 32px;
+  margin-top: clamp(32px, 5vw, 72px);
+  padding-top: 32px;
+  border-top: 1px solid var(--rule);
+}
+.legal .pq__grid > div {
+  grid-column: span 4;
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+@media (max-width: 1099px) {
+  .legal .resumen__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 899px) {
+  .legal .pol__index {
+    grid-column: 1 / -1;
+    position: relative;
+    top: auto;
+  }
+  .legal .pol__body {
+    grid-column: 1 / -1;
+  }
+  .legal .pq__grid > div {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 599px) {
+  .legal .resumen__list {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .legal .pol__wa {
+    grid-template-columns: 1fr;
+  }
+}

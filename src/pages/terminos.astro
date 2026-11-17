@@ -1,0 +1,428 @@
+---
+import Footer from "../components/Footer.astro";
+import Thread from "../components/Thread.astro";
+import Layout from "../layouts/Layout.astro";
+import { CONTACT_EMAIL as email, LEGAL_ENTITY as entity, WHATSAPP as whatsapp } from "../consts";
+import "../styles/legal.css";
+
+const updated = { iso: "2026-11-17", label: "17 de noviembre de 2026" };
+
+// Reglas de agenda: cada cifra aparece varias veces en la página.
+const RESCHEDULE_NOTICE_H = 12;
+const PAYMENT_WINDOW_H = 24;
+const WAIT_MIN = 15;
+
+const summary = [
+  {
+    t: "Tu pago confirma tu cita",
+    d: `La primera sesión se paga por adelantado. Desde la segunda, tienes ${PAYMENT_WINDOW_H} horas después de reservar para pagar.`,
+  },
+  {
+    t: "Un cambio sin explicaciones",
+    d: `Puedes reagendar cada cita una vez, avisando con ${RESCHEDULE_NOTICE_H} horas. Para un segundo cambio necesitas una excusa válida.`,
+  },
+  {
+    t: "55 minutos, en línea",
+    d: "Por Google Meet o Zoom. Ninguna sesión dura más de una hora.",
+  },
+  {
+    t: "Mentoría, no psicoterapia",
+    d: "Nuestro equipo está formado por psicólogos con licencia en Colombia. Las sesiones son de mentoría de bienestar o coaching.",
+  },
+];
+
+const sections = [
+  { id: "servicio", title: "Qué ofrecemos" },
+  { id: "primera-sesion", title: "Tu primera sesión" },
+  { id: "siguientes", title: "Desde la segunda sesión" },
+  { id: "reagendar", title: "Reagendar una cita" },
+  { id: "inasistencia", title: "Si no te conectas" },
+  { id: "reembolsos", title: "Reembolsos" },
+  { id: "duracion", title: "Duración de las sesiones" },
+  { id: "plataformas", title: "Google Meet y Zoom" },
+  { id: "confidencialidad", title: "Confidencialidad" },
+  { id: "emergencias", title: "Emergencias" },
+  { id: "menores", title: "Menores de edad" },
+  { id: "cambios", title: "Cambios a estos términos" },
+  { id: "preguntas", title: "Contacto" },
+];
+const S = Object.fromEntries(
+  sections.map((s, i) => [s.id, { ...s, n: String(i + 1).padStart(2, "0") }]),
+);
+---
+
+<Layout
+  title='Términos y condiciones · Dra. María Alejandra Ruiz'
+  description={`Cómo agendar, pagar y reagendar tus sesiones en línea con el equipo de la Dra. María Alejandra Ruiz: pago por adelantado, un reagendamiento por cita y sesiones de 55 minutos.`}
+  navSurface='papel'
+>
+  <main id='contenido' class='legal'>
+    <section
+      class='phero section'
+      data-surface='papel'
+      aria-labelledby='terminos-heading'
+    >
+      <Thread
+        class='phero__thread'
+        draw='hero'
+        d='M 1460 180 C 1180 300, 1300 620, 1000 640 C 840 650, 760 760, 780 910'
+        dm='M 1460 200 C 1300 420, 1440 700, 1200 860 S 600 890, 40 910'
+      />
+      <div class='container phero__grid'>
+        <p class='kicker kicker--rule' data-hero>Legal</p>
+        <h1 id='terminos-heading' class='display-1 phero__title' data-hero>
+          Términos y <span class='script'>condiciones</span>
+        </h1>
+        <p class='body-lg phero__lede' data-hero>
+          Cómo agendar, pagar, reagendar y tomar tus sesiones con el equipo de
+          la Dra. Ruiz. Son pocas reglas y existen para que tu espacio esté ahí
+          cuando lo necesites.
+        </p>
+        <p class='caption phero__meta' data-hero>
+          <span>{entity} · Tampa, Florida</span>
+          <span
+            >Última actualización: <time datetime={updated.iso}
+              >{updated.label}</time
+            ></span
+          >
+        </p>
+      </div>
+    </section>
+
+    <section
+      class='resumen section'
+      data-surface='rubor'
+      aria-labelledby='resumen-heading'
+    >
+      <div class='container resumen__grid'>
+        <h2 id='resumen-heading' class='kicker kicker--rule' data-reveal>
+          En pocas palabras
+        </h2>
+        <ul class='resumen__list'>
+          {
+            summary.map((s, i) => (
+              <li data-reveal style={`--i:${i + 1}`}>
+                <span class='label'>{String(i + 1).padStart(2, "0")}</span>
+                <p class='h3'>{s.t}</p>
+                <p class='resumen__d'>{s.d}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class='pol section' data-surface='papel' aria-label='Términos completos'>
+      <div class='container pol__grid'>
+        <nav class='pol__index' aria-labelledby='pol-index-heading'>
+          <p id='pol-index-heading' class='label'>Contenido</p>
+          <ol>
+            {
+              sections.map((s, i) => (
+                <li>
+                  <a href={`#${s.id}`} data-pol-link={s.id}>
+                    <span class='pol__index-n'>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {s.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+
+        <article class='pol__body'>
+          <section class='pol__sec' id='servicio' aria-labelledby='servicio-h'>
+            <h2 id='servicio-h' class='h3'>
+              <span class='pol__n'>{S.servicio.n}</span>{S.servicio.title}
+            </h2>
+            <p>
+              {entity}, con sede en Tampa, Florida, ofrece sesiones en línea con
+              el equipo de la Dra. María Alejandra Ruiz. Estos términos aplican a
+              todas las sesiones que agendes con nosotros.
+            </p>
+            <p class='pol__lead'>
+              Nuestras sesiones son de mentoría de bienestar o coaching, sin
+              importar el país desde el que te conectes.
+            </p>
+            <p>
+              Las imparten psicólogos con tarjeta profesional vigente en
+              Colombia. Aun así, en todas nuestras sesiones, te conectes desde
+              Colombia o desde cualquier otro país, el servicio que prestamos es
+              acompañamiento: no es psicoterapia, diagnóstico ni tratamiento, y
+              no reemplaza la atención de un profesional de la salud.
+            </p>
+            <p>
+              Si en algún momento vemos que lo que necesitas es atención
+              clínica, te lo diremos con claridad y te orientaremos para que
+              busques a un profesional de salud mental en tu país.
+            </p>
+            <p>
+              Al agendar y pagar una sesión, confirmas que leíste y aceptas estos
+              términos y nuestra <a href='/privacidad'>política de privacidad</a>.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='primera-sesion' aria-labelledby='primera-sesion-h'>
+            <h2 id='primera-sesion-h' class='h3'>
+              <span class='pol__n'>{S["primera-sesion"].n}</span>{S["primera-sesion"].title}
+            </h2>
+            <p class='pol__lead'>
+              Para reservar tu primera sesión debes pagarla por adelantado.
+            </p>
+            <p>
+              Tu cita queda confirmada cuando recibimos el pago. Antes de eso, el
+              espacio no está reservado y puede tomarlo otra persona. El valor de
+              la sesión y los medios de pago te los compartimos al momento de
+              agendar.
+            </p>
+            <p class='pol__note'>
+              <strong>Paga solo por los medios que te indiquemos</strong> desde
+              nuestros WhatsApp oficiales (<span class='nowrap'>{whatsapp[0].display}</span>
+              y <span class='nowrap'>{whatsapp[1].display}</span>) o desde
+              <a href={`mailto:${email}`}>{email}</a>. Si alguien te pide un pago
+              por otro canal, no lo hagas y escríbenos para confirmarlo.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='siguientes' aria-labelledby='siguientes-h'>
+            <h2 id='siguientes-h' class='h3'>
+              <span class='pol__n'>{S.siguientes.n}</span>{S.siguientes.title}
+            </h2>
+            <p>
+              Si ya eres consultante, puedes reservar tu siguiente espacio sin
+              pagar en ese momento. Tienes {PAYMENT_WINDOW_H} horas desde que
+              haces la reserva para pagar la sesión.
+            </p>
+            <ul class='pol__list'>
+              <li>Si pagas dentro de ese plazo, tu cita queda confirmada.</li>
+              <li>
+                Si pasan las {PAYMENT_WINDOW_H} horas sin que recibamos el pago,
+                liberamos el espacio y tendrás que volver a agendar.
+              </li>
+              <li>
+                Si tu sesión es en menos de {PAYMENT_WINDOW_H} horas, debes pagarla
+                antes de que empiece.
+              </li>
+            </ul>
+          </section>
+
+          <section class='pol__sec' id='reagendar' aria-labelledby='reagendar-h'>
+            <h2 id='reagendar-h' class='h3'>
+              <span class='pol__n'>{S.reagendar.n}</span>{S.reagendar.title}
+            </h2>
+            <p class='pol__lead'>
+              Cada cita confirmada se puede reagendar una vez, sin que tengas que
+              darnos una razón.
+            </p>
+            <ul class='pol__list'>
+              <li>
+                Avísanos con al menos {RESCHEDULE_NOTICE_H} horas de anticipación
+                por nuestros WhatsApp oficiales o por correo.
+              </li>
+              <li>
+                Elegimos juntos una nueva fecha según la disponibilidad del equipo.
+                Tu pago pasa a la nueva cita.
+              </li>
+              <li>
+                La nueva cita ya cuenta como reagendada: si necesitas moverla otra
+                vez, aplica lo que sigue.
+              </li>
+            </ul>
+            <p>
+              Después de ese primer cambio, solo podemos mover tu cita si tienes
+              una excusa válida. Sin ella, la cita se cancela, el pago no se
+              devuelve y debes pagar una nueva sesión para volver a agendar.
+            </p>
+            <p>
+              Son excusas válidas las situaciones de fuerza mayor que no dependen
+              de ti, como una incapacidad médica, una calamidad doméstica (por
+              ejemplo, la enfermedad grave o el fallecimiento de un familiar) o
+              una emergencia. Podemos pedirte un soporte. Con una excusa válida,
+              reprogramamos tu cita sin costo.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='inasistencia' aria-labelledby='inasistencia-h'>
+            <h2 id='inasistencia-h' class='h3'>
+              <span class='pol__n'>{S.inasistencia.n}</span>{S.inasistencia.title}
+            </h2>
+            <p>
+              Si no te conectas a una cita confirmada o nos avisas con menos de
+              {RESCHEDULE_NOTICE_H} horas, y no tienes una excusa válida:
+            </p>
+            <ul class='pol__list'>
+              <li>
+                <strong>Si aún no habías reagendado esa cita,</strong> la
+                reprogramamos y ese cambio cuenta como tu único reagendamiento.
+              </li>
+              <li>
+                <strong>Si ya la habías reagendado,</strong> la sesión se da por
+                tomada, el pago no se devuelve y debes pagar una nueva sesión para
+                volver a agendar.
+              </li>
+            </ul>
+            <p>
+              Te esperamos hasta {WAIT_MIN} minutos. Si no te conectas en ese
+              tiempo, la cita cuenta como inasistencia. Si llegas tarde, la sesión
+              termina a la hora prevista.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='reembolsos' aria-labelledby='reembolsos-h'>
+            <h2 id='reembolsos-h' class='h3'>
+              <span class='pol__n'>{S.reembolsos.n}</span>{S.reembolsos.title}
+            </h2>
+            <p class='pol__lead'>Las sesiones pagadas no son reembolsables.</p>
+            <p>
+              Si no puedes asistir, lo que podemos ofrecerte es reagendar según
+              las reglas anteriores.
+            </p>
+            <p>
+              Si somos nosotros quienes cancelamos o movemos tu cita, te
+              ofrecemos una nueva fecha sin costo, y ese cambio no cuenta como tu
+              reagendamiento.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='duracion' aria-labelledby='duracion-h'>
+            <h2 id='duracion-h' class='h3'>
+              <span class='pol__n'>{S.duracion.n}</span>{S.duracion.title}
+            </h2>
+            <p>
+              Cada sesión dura 55 minutos y en ningún caso se extiende más allá de
+              una hora. Empieza y termina a la hora acordada.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='plataformas' aria-labelledby='plataformas-h'>
+            <h2 id='plataformas-h' class='h3'>
+              <span class='pol__n'>{S.plataformas.n}</span>{S.plataformas.title}
+            </h2>
+            <p>
+              Todas las sesiones son en línea, por Google Meet o Zoom. Antes de tu
+              cita te enviamos el enlace por nuestros canales oficiales.
+            </p>
+            <p>Para aprovechar tu sesión:</p>
+            <ul class='pol__list'>
+              <li>
+                Conéctate desde un lugar privado y tranquilo, donde puedas hablar
+                con libertad.
+              </li>
+              <li>Revisa tu conexión, cámara y micrófono unos minutos antes.</li>
+              <li>No compartas el enlace con otras personas.</li>
+              <li>
+                Ninguna de las partes puede grabar la sesión sin la autorización
+                por escrito de la otra.
+              </li>
+            </ul>
+            <p>
+              Si la conexión falla por nuestra parte, reponemos el tiempo o
+              reprogramamos la sesión sin costo. Si falla por la tuya, retomamos
+              la sesión en el tiempo que quede.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='confidencialidad' aria-labelledby='confidencialidad-h'>
+            <h2 id='confidencialidad-h' class='h3'>
+              <span class='pol__n'>{S.confidencialidad.n}</span>{S.confidencialidad.title}
+            </h2>
+            <p>
+              Lo que hablas en sesión es confidencial. Cómo cuidamos tu
+              información, y los únicos casos en que la ley nos obliga a
+              compartirla, lo explicamos en nuestra
+              <a href='/privacidad#compartir'>política de privacidad</a>.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='emergencias' aria-labelledby='emergencias-h'>
+            <h2 id='emergencias-h' class='h3'>
+              <span class='pol__n'>{S.emergencias.n}</span>{S.emergencias.title}
+            </h2>
+            <p class='pol__note'>
+              <strong>Nuestras sesiones no son un servicio de atención en
+              crisis.</strong> Si estás en crisis o en peligro, en Estados Unidos
+              llama o escribe al <a href='tel:988'>988</a> (Línea de Prevención del
+              Suicidio y Crisis, con atención en español) o al
+              <a href='tel:911'>911</a>. En Colombia, llama al
+              <a href='tel:123'>123</a>. En otros países, comunícate con el número
+              de emergencias local.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='menores' aria-labelledby='menores-h'>
+            <h2 id='menores-h' class='h3'>
+              <span class='pol__n'>{S.menores.n}</span>{S.menores.title}
+            </h2>
+            <p>
+              Las sesiones con menores de 18 años requieren la autorización de su
+              madre, padre o tutor legal, quien acepta estos términos en su nombre
+              y responde por los pagos.
+            </p>
+          </section>
+
+          <section class='pol__sec' id='cambios' aria-labelledby='cambios-h'>
+            <h2 id='cambios-h' class='h3'>
+              <span class='pol__n'>{S.cambios.n}</span>{S.cambios.title}
+            </h2>
+            <p>
+              Si actualizamos estos términos, publicaremos aquí la nueva versión
+              con su fecha. Las citas que ya tengas confirmadas se rigen por los
+              términos vigentes cuando las agendaste.
+            </p>
+          </section>
+        </article>
+      </div>
+    </section>
+
+    <section
+      id='preguntas'
+      class='pq section'
+      data-surface='noche'
+      aria-labelledby='pq-heading'
+    >
+      <Thread
+        class='pq__thread'
+        draw='scrub'
+        d='M 1460 120 C 1100 160, 1180 520, 760 560 S 200 700, -20 820'
+        dm='M 40 -10 L 40 910'
+      />
+      <div class='container pq__inner'>
+        <p class='kicker kicker--rule' data-reveal>
+          {S.preguntas.n} · {S.preguntas.title}
+        </p>
+        <h2 id='pq-heading' class='display-2 pq__title' data-reveal style='--i:1'>
+          ¿Dudas sobre tu cita?
+        </h2>
+        <p class='body-lg pq__lede' data-reveal style='--i:2'>
+          Escríbenos por cualquiera de nuestros canales oficiales.
+        </p>
+        <a class='pq__mail' href={`mailto:${email}`} data-reveal style='--i:3'>
+          {email}
+        </a>
+        <div class='pq__grid'>
+          {
+            whatsapp.map((w, i) => (
+              <div data-reveal style={`--i:${i + 4}`}>
+                <p class='label'>WhatsApp oficial</p>
+                <a class='link' href={w.href} target='_blank' rel='noopener noreferrer'>
+                  {w.display}
+                </a>
+              </div>
+            ))
+          }
+          <div data-reveal style='--i:6'>
+            <p class='label'>Responsable</p>
+            <p>{entity} · Tampa, Florida</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  import "../scripts/legal-index";
+</script>
